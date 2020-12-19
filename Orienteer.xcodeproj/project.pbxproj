@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
+		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
+		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D0C547C22589C0D10073F292 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547C12589C0D10073F292 /* OrienteerApp.swift */; };
-		D0C547C42589C0D10073F292 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547C32589C0D10073F292 /* ContentView.swift */; };
+		D0C547C42589C0D10073F292 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547C32589C0D10073F292 /* SearchView.swift */; };
 		D0C547C62589C0D20073F292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C547C52589C0D20073F292 /* Assets.xcassets */; };
 		D0C547C92589C0D20073F292 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C547C82589C0D20073F292 /* Preview Assets.xcassets */; };
 		D0C547D42589C0D20073F292 /* OrienteerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547D32589C0D20073F292 /* OrienteerTests.swift */; };
 		D0C547DF2589C0D20073F292 /* OrienteerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547DE2589C0D20073F292 /* OrienteerUITests.swift */; };
+		D0C547F02589D2C90073F292 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547EF2589D2C90073F292 /* Location.swift */; };
+		D0C547FA2589D5820073F292 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547F92589D5820073F292 /* NavigationView.swift */; };
+		D0C547FF2589D77D0073F292 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547FE2589D77D0073F292 /* SearchResult.swift */; };
+		D0C548042589DC990073F292 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D023AF33258D754D00DDC691 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		D0C547BE2589C0D10073F292 /* Orienteer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orienteer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C547C12589C0D10073F292 /* OrienteerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerApp.swift; sourceTree = "<group>"; };
-		D0C547C32589C0D10073F292 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D0C547C32589C0D10073F292 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D0C547C52589C0D20073F292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0C547C82589C0D20073F292 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0C547CA2589C0D20073F292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +55,10 @@
 		D0C547DA2589C0D20073F292 /* OrienteerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrienteerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C547DE2589C0D20073F292 /* OrienteerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerUITests.swift; sourceTree = "<group>"; };
 		D0C547E02589C0D20073F292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0C547EF2589D2C90073F292 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D0C547F92589D5820073F292 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		D0C547FE2589D77D0073F292 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		D0C548032589DC990073F292 /* Geocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D05A0235258B15CB00289F0A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D05A0236258B15E200289F0A /* URLSession.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D0C547B52589C0D10073F292 = {
 			isa = PBXGroup;
 			children = (
@@ -96,9 +118,14 @@
 			isa = PBXGroup;
 			children = (
 				D0C547C12589C0D10073F292 /* OrienteerApp.swift */,
-				D0C547C32589C0D10073F292 /* ContentView.swift */,
+				D0C548032589DC990073F292 /* Geocoder.swift */,
+				D05A023B258B1CFB00289F0A /* UserLocation.swift */,
+				D0C547F52589D45F0073F292 /* Views */,
+				D05A0235258B15CB00289F0A /* Extensions */,
+				D0C547F42589D43C0073F292 /* Model */,
 				D0C547C52589C0D20073F292 /* Assets.xcassets */,
 				D0C547CA2589C0D20073F292 /* Info.plist */,
+				D023AF33258D754D00DDC691 /* Secrets.plist */,
 				D0C547C72589C0D20073F292 /* Preview Content */,
 			);
 			path = Orienteer;
@@ -128,6 +155,24 @@
 				D0C547E02589C0D20073F292 /* Info.plist */,
 			);
 			path = OrienteerUITests;
+			sourceTree = "<group>";
+		};
+		D0C547F42589D43C0073F292 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0C547EF2589D2C90073F292 /* Location.swift */,
+				D0C547FE2589D77D0073F292 /* SearchResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0C547F52589D45F0073F292 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D0C547C32589C0D10073F292 /* SearchView.swift */,
+				D0C547F92589D5820073F292 /* NavigationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0C547C92589C0D20073F292 /* Preview Assets.xcassets in Resources */,
+				D023AF34258D754D00DDC691 /* Secrets.plist in Resources */,
 				D0C547C62589C0D20073F292 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +305,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0C547C42589C0D10073F292 /* ContentView.swift in Sources */,
+				D0C547FF2589D77D0073F292 /* SearchResult.swift in Sources */,
+				D05A0237258B15E200289F0A /* URLSession.swift in Sources */,
+				D0C548042589DC990073F292 /* Geocoder.swift in Sources */,
+				D0C547C42589C0D10073F292 /* SearchView.swift in Sources */,
+				D0C547F02589D2C90073F292 /* Location.swift in Sources */,
+				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
+				D0C547FA2589D5820073F292 /* NavigationView.swift in Sources */,
 				D0C547C22589C0D10073F292 /* OrienteerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
