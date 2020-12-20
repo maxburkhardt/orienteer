@@ -16,12 +16,17 @@ struct GooglePlacesGeometry: Decodable {
     let location: GooglePlacesLocation
 }
 
-struct GooglePlacesCandidatePlace: Decodable {
+struct GooglePlacesPlace: Decodable {
     let geometry: GooglePlacesGeometry
     let name: String
     let formattedAddress: String
 }
 
 struct FindPlaceResponse: Decodable {
-    let candidates: Array<GooglePlacesCandidatePlace>
+    let candidates: Array<GooglePlacesPlace>
+}
+
+struct PlaceDetailsResponse: Decodable {
+    let result: GooglePlacesPlace
+    let status: String
 }

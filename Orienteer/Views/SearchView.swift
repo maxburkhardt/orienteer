@@ -22,36 +22,22 @@ struct SearchView: View {
             geocoder.placesAutocomplete(
                 search: self.searchInput,
                 userLocation: userLocation.lastLocation!,
-                session: autocompleteSession,
                 callback: { (resp: PlacesAutocompleteResponse) -> Void in
                     autocompleteResults = resp.predictions
                 }
             )
         })
-        VStack(alignment: .leading) {
-            Text("Select a destination")
-                .font(.title)
-                .multilineTextAlignment(.leading)
-                .padding(10.0)
-            HStack {
+        NavigationView {
+            VStack {
                 TextField("Where you're going", text: searchInputBinding)
-                Button(action: {
-                    geocoder.findPlaceFromText(
-                        search: searchInput,
-                        userLocation: userLocation.lastLocation!,
-                        callback: {(resp: FindPlaceResponse) -> Void in print(resp.candidates.first?.formattedAddress ?? "Not found")}
-                    )
-                }) {
-                    Text("Search")
+                    .padding(10.0)
+                List(autocompleteResults) { result in
+                    NavigationLink(destination: OrienteerView(destinationPlaceId: result.placeId, geocoder: geocoder)) {
+                        SearchResultView(candidatePlace: result)
+                    }
                 }
-                Spacer()
-                    .frame(width: 5)
             }
-            .padding(10.0)
-            List(autocompleteResults) { result in
-                SearchResultView(candidatePlace: result)
-            }
-            Spacer()
+            .navigationTitle("Find a destination")
         }
     }
 }

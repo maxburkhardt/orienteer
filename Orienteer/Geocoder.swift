@@ -9,7 +9,8 @@ import Foundation
 import CoreLocation
 
 class Geocoder {
-    private var apiKey = ""
+    private var apiKey: String
+    private var autocompleteSession: String
     
     init() {
         var secrets: NSDictionary?
@@ -20,10 +21,11 @@ class Geocoder {
             fatalError("Couldn't load secrets from Secrets.plist")
         }
         #if targetEnvironment(simulator)
-        apiKey = secrets!["SIMULATOR_GOOGLE_KEY"] as! String
+        self.apiKey = secrets!["SIMULATOR_GOOGLE_KEY"] as! String
         #else
-        apiKey = secrets!["APP_GOOGLE_KEY"] as! String
+        self.apiKey = secrets!["APP_GOOGLE_KEY"] as! String
         #endif
+        self.autocompleteSession = UUID().uuidString
     }
     
     private func reportError(message: String) {
@@ -67,17 +69,37 @@ class Geocoder {
         })
     }
     
-    func placesAutocomplete(search: String, userLocation: CLLocation, session: String, callback: @escaping (PlacesAutocompleteResponse) -> Void) {
+    func placesAutocomplete(search: String, userLocation: CLLocation, callback: @escaping (PlacesAutocompleteResponse) -> Void) {
         let params = [
             "input": search,
             "location": "\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)",
-            "sessiontoken": session,
+            "sessiontoken": self.autocompleteSession,
         ]
         self.makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: { (data: Data) -> Void in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let placesAutocompleteResponse: PlacesAutocompleteResponse = try! decoder.decode(PlacesAutocompleteResponse.self, from: data)
             callback(placesAutocompleteResponse)
+        })
+    }
+    
+    func placeDetails(placeId: String, callback: @escaping (GooglePlacesPlace) -> Void) {
+        let params = [
+            "place_id": placeId,
+            "sessiontoken": self.autocompleteSession,
+            "fields": "name,geometry,formatted_address",
+        ]
+        // Rotate the autocomplete session once the place is looked up
+        self.autocompleteSession = UUID().uuidString
+        self.makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/details/json", params: params, callback: { (data: Data) -> Void in
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let placeDetails: PlaceDetailsResponse = try! decoder.decode(PlaceDetailsResponse.self, from: data)
+            if placeDetails.status == "OK" {
+                callback(placeDetails.result)
+            } else {
+                print("Got error response from place lookup: \(placeDetails.result)")
+            }
         })
     }
 }
