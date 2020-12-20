@@ -11,18 +11,36 @@ struct SearchView: View {
     @ObservedObject var userLocation = UserLocation()
     @State private var searchInput = ""
     private var geocoder = Geocoder()
-    
+    private var autocompleteSession = UUID().uuidString
+    @State private var autocompleteResults = Array<PlacesAutocompletePrediction>()
     
     var body: some View {
+        let searchInputBinding = Binding<String>(get: {
+            self.searchInput
+        }, set: {
+            self.searchInput = $0
+            geocoder.placesAutocomplete(
+                search: self.searchInput,
+                userLocation: userLocation.lastLocation!,
+                session: autocompleteSession,
+                callback: { (resp: PlacesAutocompleteResponse) -> Void in
+                    autocompleteResults = resp.predictions
+                }
+            )
+        })
         VStack(alignment: .leading) {
             Text("Select a destination")
                 .font(.title)
                 .multilineTextAlignment(.leading)
                 .padding(10.0)
             HStack {
-                TextField("Where you're going", text: $searchInput)
+                TextField("Where you're going", text: searchInputBinding)
                 Button(action: {
-                    geocoder.searchForPlace(search: searchInput, location: userLocation.lastLocation)
+                    geocoder.findPlaceFromText(
+                        search: searchInput,
+                        userLocation: userLocation.lastLocation!,
+                        callback: {(resp: FindPlaceResponse) -> Void in print(resp.candidates.first?.formattedAddress ?? "Not found")}
+                    )
                 }) {
                     Text("Search")
                 }
@@ -30,6 +48,10 @@ struct SearchView: View {
                     .frame(width: 5)
             }
             .padding(10.0)
+            List(autocompleteResults) { result in
+                SearchResultView(candidatePlace: result)
+            }
+            Spacer()
         }
     }
 }
