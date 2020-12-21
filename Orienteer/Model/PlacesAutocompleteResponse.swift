@@ -9,7 +9,8 @@ import Foundation
 
 struct PlacesAutocompleteStructuredFormatting: Codable {
     let mainText: String
-    let secondaryText: String
+    // secondaryText does not appear to be populated for all places.
+    let secondaryText: String?
 }
 
 struct PlacesAutocompletePrediction: Codable, Identifiable {

@@ -19,7 +19,7 @@ struct SearchResultView: View {
                 Spacer()
             }
             HStack {
-                Text(candidatePlace.structuredFormatting.secondaryText)
+                Text(candidatePlace.structuredFormatting.secondaryText ?? "")
             }
         }
     }

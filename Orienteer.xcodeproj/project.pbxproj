@@ -14,6 +14,7 @@
 		D01F2EE2259132870042E091 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
 		D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
 		D01F2EF725913E250042E091 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
+		D01F2EFC2591502D0042E091 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
@@ -52,6 +53,7 @@
 		D01F2EE1259132870042E091 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDistance.swift; sourceTree = "<group>"; };
 		D01F2EF625913E250042E091 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesFromNorth.swift; sourceTree = "<group>"; };
 		D023AF33258D754D00DDC691 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				D05A0236258B15E200289F0A /* URLSession.swift */,
 				D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */,
 				D01F2EF625913E250042E091 /* Double.swift */,
+				D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				D0C547C42589C0D10073F292 /* SearchView.swift in Sources */,
 				D01F2EF725913E250042E091 /* Double.swift in Sources */,
 				D0037D6D258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift in Sources */,
+				D01F2EFC2591502D0042E091 /* DegreesFromNorth.swift in Sources */,
 				D01F2EDD25912FC20042E091 /* SettingsView.swift in Sources */,
 				D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */,
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
@@ -491,6 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Orienteer/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Orienteer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -512,6 +517,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Orienteer/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Orienteer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

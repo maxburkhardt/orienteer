@@ -20,11 +20,7 @@ class Geocoder {
         if secrets == nil {
             fatalError("Couldn't load secrets from Secrets.plist")
         }
-        #if targetEnvironment(simulator)
-        self.apiKey = secrets!["SIMULATOR_GOOGLE_KEY"] as! String
-        #else
         self.apiKey = secrets!["APP_GOOGLE_KEY"] as! String
-        #endif
         self.autocompleteSession = UUID().uuidString
     }
     
@@ -43,7 +39,9 @@ class Geocoder {
             reportError(message: "Failed to construct Places query to \(urlBase)")
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { (result) in
+        var request = URLRequest(url: url)
+        request.setValue(Bundle.main.bundleIdentifier, forHTTPHeaderField: "x-ios-bundle-identifier")
+        let task = URLSession.shared.dataTask(with: request) { (result) in
             switch result {
             case .success((_, let data)):
                 callback(data)

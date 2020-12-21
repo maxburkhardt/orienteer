@@ -14,7 +14,7 @@ struct OrienteerView: View {
     @ObservedObject var userLocation: UserLocation
     @EnvironmentObject var userSettings: UserSettings
     @State private var destinationPlace: GooglePlacesPlace? = nil
-    private var bearing: Double? {
+    private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
     }
     private var distance: CLLocationDistance? {
@@ -24,10 +24,10 @@ struct OrienteerView: View {
     var body: some View {
         VStack {
             Image(systemName: "location.north.line")
-                .rotationEffect(bearing != nil ? Angle(degrees: bearing!) : .zero)
+                .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
                 .font(.system(size: 60))
                 .padding(.bottom, 20.0)
-            Text(bearing != nil ? "\(bearing!)" : "")
+            Text(bearing != nil ? bearing!.toCardinalOrdinal() : "")
             Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
