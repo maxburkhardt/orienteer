@@ -21,5 +21,5 @@ struct PlacesAutocompletePrediction: Codable, Identifiable {
 }
 
 struct PlacesAutocompleteResponse: Codable {
-    let predictions: Array<PlacesAutocompletePrediction>
+    let predictions: [PlacesAutocompletePrediction]
 }

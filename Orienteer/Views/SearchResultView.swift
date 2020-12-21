@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchResultView: View {
     var candidatePlace: PlacesAutocompletePrediction
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {

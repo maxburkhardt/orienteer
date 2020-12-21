@@ -5,8 +5,8 @@
 //  Created by Maximilian Burkhardt on 12/21/20.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 extension CLLocationDistance {
     func convertToHumanReadable(settings: UserSettings) -> String {
@@ -19,7 +19,7 @@ extension CLLocationDistance {
             }
         default:
             if self < 1000 {
-                return "\(self.rounded(toPlaces: 2)) m"
+                return "\(rounded(toPlaces: 2)) m"
             } else {
                 return "\((self / 1000).rounded(toPlaces: 2)) km"
             }

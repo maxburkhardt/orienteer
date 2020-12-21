@@ -11,9 +11,9 @@ struct SearchView: View {
     @ObservedObject var userLocation = UserLocation()
     var geocoder = Geocoder()
     @State private var searchInput = ""
-    @State private var autocompleteResults = Array<PlacesAutocompletePrediction>()
+    @State private var autocompleteResults = [PlacesAutocompletePrediction]()
     @State private var settingsDisplayed = false
-    
+
     var body: some View {
         let searchInputBinding = Binding<String>(get: {
             self.searchInput
@@ -40,10 +40,10 @@ struct SearchView: View {
                     Button(action: { self.settingsDisplayed = true }, label: {
                         Text("Settings")
                     })
-                    .sheet(isPresented: self.$settingsDisplayed, content: {
-                        SettingsView(onDismiss: { self.settingsDisplayed = false })
-                    })
-                    .padding(10.0)
+                        .sheet(isPresented: self.$settingsDisplayed, content: {
+                            SettingsView(onDismiss: { self.settingsDisplayed = false })
+                        })
+                        .padding(10.0)
                     Spacer()
                     Button(action: {}, label: {
                         Text("History")
@@ -52,7 +52,6 @@ struct SearchView: View {
             }
             .navigationTitle("Find a destination")
         }
-        
     }
 }
 

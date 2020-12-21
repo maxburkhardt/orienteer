@@ -5,8 +5,8 @@
 //  Created by Maximilian Burkhardt on 12/18/20.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 struct GooglePlacesLocation: Decodable {
     let lat: Double
@@ -27,7 +27,7 @@ struct GooglePlacesPlace: Decodable {
 }
 
 struct FindPlaceResponse: Decodable {
-    let candidates: Array<GooglePlacesPlace>
+    let candidates: [GooglePlacesPlace]
 }
 
 struct PlaceDetailsResponse: Decodable {

@@ -5,8 +5,8 @@
 //  Created by Maximilian Burkhardt on 12/20/20.
 //
 
-import SwiftUI
 import CoreLocation
+import SwiftUI
 
 struct OrienteerView: View {
     var destinationPlaceId: String
@@ -17,10 +17,11 @@ struct OrienteerView: View {
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
     }
+
     private var distance: CLLocationDistance? {
         destinationPlace != nil ? userLocation.distanceTo(destination: destinationPlace!.coordinates) : nil
     }
-    
+
     var body: some View {
         VStack {
             Image(systemName: "location.north.line")
@@ -31,8 +32,8 @@ struct OrienteerView: View {
             Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
-        .onAppear() {
-            geocoder.placeDetails(placeId: destinationPlaceId, callback: {(place: GooglePlacesPlace) -> Void in
+        .onAppear {
+            geocoder.placeDetails(placeId: destinationPlaceId, callback: { (place: GooglePlacesPlace) -> Void in
                 destinationPlace = place
             })
         }

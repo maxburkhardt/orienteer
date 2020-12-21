@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var onDismiss: () -> ()
+    var onDismiss: () -> Void
     @EnvironmentObject var userSettings: UserSettings
-    
+
     var body: some View {
         VStack {
             Text("Settings")
@@ -37,6 +37,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(onDismiss: { do { } }).environmentObject(UserSettings())
+        SettingsView(onDismiss: { do {} }).environmentObject(UserSettings())
     }
 }
