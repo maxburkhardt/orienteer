@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct OrienteerApp: App {
+    @StateObject var userSettings = UserSettings()
+    
     var body: some Scene {
         WindowGroup {
-            SearchView()
+            SearchView().environmentObject(userSettings)
         }
     }
 }

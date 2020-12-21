@@ -12,11 +12,12 @@ struct OrienteerView: View {
     var destinationPlaceId: String
     var geocoder: Geocoder
     @ObservedObject var userLocation: UserLocation
+    @EnvironmentObject var userSettings: UserSettings
     @State private var destinationPlace: GooglePlacesPlace? = nil
     private var bearing: Double? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
     }
-    private var distance: Double? {
+    private var distance: CLLocationDistance? {
         destinationPlace != nil ? userLocation.distanceTo(destination: destinationPlace!.coordinates) : nil
     }
     
@@ -27,7 +28,7 @@ struct OrienteerView: View {
                 .font(.system(size: 60))
                 .padding(.bottom, 20.0)
             Text(bearing != nil ? "\(bearing!)" : "")
-            Text(distance != nil ? "\(distance!) m" : "")
+            Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear() {
@@ -41,5 +42,6 @@ struct OrienteerView: View {
 struct OrienteerView_Previews: PreviewProvider {
     static var previews: some View {
         OrienteerView(destinationPlaceId: "ChIJIQBpAG2ahYAR_6128GcTUEo", geocoder: Geocoder(), userLocation: UserLocation())
+            .environmentObject(UserSettings())
     }
 }

@@ -10,6 +10,10 @@
 		D0037D6D258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
 		D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D71258FC11800CD9B6A /* SearchResultView.swift */; };
 		D0037D80258FC6F000CD9B6A /* OrienteerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D7F258FC6F000CD9B6A /* OrienteerView.swift */; };
+		D01F2EDD25912FC20042E091 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EDC25912FC20042E091 /* SettingsView.swift */; };
+		D01F2EE2259132870042E091 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
+		D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
+		D01F2EF725913E250042E091 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
 		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
@@ -44,6 +48,10 @@
 		D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesAutocompleteResponse.swift; sourceTree = "<group>"; };
 		D0037D71258FC11800CD9B6A /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		D0037D7F258FC6F000CD9B6A /* OrienteerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerView.swift; sourceTree = "<group>"; };
+		D01F2EDC25912FC20042E091 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D01F2EE1259132870042E091 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationDistance.swift; sourceTree = "<group>"; };
+		D01F2EF625913E250042E091 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		D023AF33258D754D00DDC691 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
@@ -92,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				D05A0236258B15E200289F0A /* URLSession.swift */,
+				D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */,
+				D01F2EF625913E250042E091 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -122,6 +132,7 @@
 				D0C547C12589C0D10073F292 /* OrienteerApp.swift */,
 				D0C548032589DC990073F292 /* Geocoder.swift */,
 				D05A023B258B1CFB00289F0A /* UserLocation.swift */,
+				D01F2EE1259132870042E091 /* UserSettings.swift */,
 				D0C547F52589D45F0073F292 /* Views */,
 				D05A0235258B15CB00289F0A /* Extensions */,
 				D0C547F42589D43C0073F292 /* Model */,
@@ -174,6 +185,7 @@
 				D0C547C32589C0D10073F292 /* SearchView.swift */,
 				D0037D71258FC11800CD9B6A /* SearchResultView.swift */,
 				D0037D7F258FC6F000CD9B6A /* OrienteerView.swift */,
+				D01F2EDC25912FC20042E091 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,11 +324,15 @@
 				D05A0237258B15E200289F0A /* URLSession.swift in Sources */,
 				D0C548042589DC990073F292 /* Geocoder.swift in Sources */,
 				D0C547C42589C0D10073F292 /* SearchView.swift in Sources */,
+				D01F2EF725913E250042E091 /* Double.swift in Sources */,
 				D0037D6D258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift in Sources */,
+				D01F2EDD25912FC20042E091 /* SettingsView.swift in Sources */,
+				D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */,
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
 				D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */,
 				D0C547C22589C0D10073F292 /* OrienteerApp.swift in Sources */,
+				D01F2EE2259132870042E091 /* UserSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

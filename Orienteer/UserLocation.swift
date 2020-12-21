@@ -33,7 +33,7 @@ class UserLocation: NSObject, ObservableObject {
     }
     
     // Returns distance to a location in meters
-    func distanceTo(destination: CLLocation) -> Double {
+    func distanceTo(destination: CLLocation) -> CLLocationDistance {
         return self.lastLocation?.distance(from: destination) ?? 0
     }
     

@@ -12,6 +12,7 @@ struct SearchView: View {
     var geocoder = Geocoder()
     @State private var searchInput = ""
     @State private var autocompleteResults = Array<PlacesAutocompletePrediction>()
+    @State private var settingsDisplayed = false
     
     var body: some View {
         let searchInputBinding = Binding<String>(get: {
@@ -36,9 +37,13 @@ struct SearchView: View {
                     }
                 }
                 HStack {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: { self.settingsDisplayed = true }, label: {
                         Text("Settings")
-                    }).padding(10.0)
+                    })
+                    .sheet(isPresented: self.$settingsDisplayed, content: {
+                        SettingsView(onDismiss: { self.settingsDisplayed = false })
+                    })
+                    .padding(10.0)
                     Spacer()
                     Button(action: {}, label: {
                         Text("History")
