@@ -15,7 +15,7 @@ struct PlacesAutocompleteStructuredFormatting: Codable {
 struct PlacesAutocompletePrediction: Codable, Identifiable {
     let description: String
     let placeId: String
-    var id: String { placeId }
+    var id: String { "googleplace:\(placeId)" }
     let structuredFormatting: PlacesAutocompleteStructuredFormatting
 }
 

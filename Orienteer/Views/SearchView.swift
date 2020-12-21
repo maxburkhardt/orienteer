@@ -9,9 +9,8 @@ import SwiftUI
 
 struct SearchView: View {
     @ObservedObject var userLocation = UserLocation()
+    var geocoder = Geocoder()
     @State private var searchInput = ""
-    private var geocoder = Geocoder()
-    private var autocompleteSession = UUID().uuidString
     @State private var autocompleteResults = Array<PlacesAutocompletePrediction>()
     
     var body: some View {
@@ -32,13 +31,23 @@ struct SearchView: View {
                 TextField("Where you're going", text: searchInputBinding)
                     .padding(10.0)
                 List(autocompleteResults) { result in
-                    NavigationLink(destination: OrienteerView(destinationPlaceId: result.placeId, geocoder: geocoder)) {
+                    NavigationLink(destination: OrienteerView(destinationPlaceId: result.placeId, geocoder: geocoder, userLocation: userLocation)) {
                         SearchResultView(candidatePlace: result)
                     }
+                }
+                HStack {
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Text("Settings")
+                    }).padding(10.0)
+                    Spacer()
+                    Button(action: {}, label: {
+                        Text("History")
+                    }).padding(10.0)
                 }
             }
             .navigationTitle("Find a destination")
         }
+        
     }
 }
 

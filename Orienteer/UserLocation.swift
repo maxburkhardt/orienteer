@@ -32,6 +32,23 @@ class UserLocation: NSObject, ObservableObject {
         }
     }
     
+    // Returns distance to a location in meters
+    func distanceTo(destination: CLLocation) -> Double {
+        return self.lastLocation?.distance(from: destination) ?? 0
+    }
+    
+    // Returns a bearing to a destination in degrees from true north
+    func bearingTo(destination: CLLocation) -> Double {
+        if self.lastLocation == nil {
+            return 0
+        }
+        let x = cos(destination.coordinate.latitude) * sin(destination.coordinate.longitude - self.lastLocation!.coordinate.longitude)
+        let y = cos(self.lastLocation!.coordinate.latitude) * sin(destination.coordinate.latitude) -
+            sin(self.lastLocation!.coordinate.latitude) * cos(destination.coordinate.latitude) * cos(destination.coordinate.longitude -
+                                                                                                        self.lastLocation!.coordinate.longitude)
+        return atan2(x, y) * 180.0 / .pi
+    }
+    
     var statusString: String {
         guard let status = locationStatus else {
             return "unknown"
