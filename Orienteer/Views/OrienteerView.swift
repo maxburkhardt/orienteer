@@ -59,6 +59,8 @@ struct OrienteerView: View {
                 historyFetch.predicate = NSPredicate(format: "id == %@", destinationPlaceId)
                 do {
                     let fetchedPlace = try viewContext.fetch(historyFetch).first
+                    fetchedPlace?.timestamp = Date()
+                    try viewContext.save()
                     destinationPlace = fetchedPlace
                 } catch {
                     fatalError("Unable to load place from local storage")
@@ -86,7 +88,8 @@ struct OrienteerView: View {
 
 struct OrienteerView_Previews: PreviewProvider {
     static var previews: some View {
-        OrienteerView(destinationPlaceType: "googleplace", destinationPlaceId: "ChIJIQBpAG2ahYAR_6128GcTUEo", geocoder: Geocoder(), userLocation: UserLocation())
+        OrienteerView(destinationPlaceType: "history", destinationPlaceId: "F8CDB8FA-84C5-4CB1-9651-118D44D5BEE0", geocoder: Geocoder(), userLocation: UserLocation())
             .environmentObject(UserSettings())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

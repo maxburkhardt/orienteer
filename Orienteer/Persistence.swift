@@ -19,6 +19,7 @@ struct PersistenceController {
             newItem.latitude = 37.77
             newItem.longitude = -122.5
             newItem.timestamp = Date()
+            newItem.id = UUID(uuidString: "F8CDB8FA-84C5-4CB1-9651-118D44D5BEE\(i)")
         }
         do {
             try viewContext.save()
