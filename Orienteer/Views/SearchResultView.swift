@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct SearchResultView: View {
-    var candidatePlace: PlacesAutocompletePrediction
+    var name: String
+    var subtitle: String?
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(candidatePlace.structuredFormatting.mainText)
-                    .font(.body)
+                Text(name)
                     .fontWeight(.bold)
                 Spacer()
             }
             HStack {
-                Text(candidatePlace.structuredFormatting.secondaryText ?? "")
+                Text(subtitle ?? "")
             }
         }
     }
@@ -27,6 +27,6 @@ struct SearchResultView: View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(candidatePlace: PlacesAutocompletePrediction(description: "Test Place", placeId: "AAA", structuredFormatting: PlacesAutocompleteStructuredFormatting(mainText: "Test Place", secondaryText: "1st St, San Francisco, CA")))
+        SearchResultView(name: "Test Place", subtitle: "1st St, San Francisco, CA")
     }
 }

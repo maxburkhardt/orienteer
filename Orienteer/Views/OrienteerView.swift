@@ -9,11 +9,13 @@ import CoreLocation
 import SwiftUI
 
 struct OrienteerView: View {
+    var destinationPlaceType: String
     var destinationPlaceId: String
     var geocoder: Geocoder
     @ObservedObject var userLocation: UserLocation
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var userSettings: UserSettings
-    @State private var destinationPlace: GooglePlacesPlace? = nil
+    @State private var destinationPlace: NavigablePlace? = nil
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
     }
@@ -33,16 +35,37 @@ struct OrienteerView: View {
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
-            geocoder.placeDetails(placeId: destinationPlaceId, callback: { (place: GooglePlacesPlace) -> Void in
-                destinationPlace = place
-            })
+            switch destinationPlaceType {
+            case "googleplace":
+                geocoder.placeDetails(placeId: destinationPlaceId, callback: { (place: GooglePlacesPlace) -> Void in
+                    let savedPlace = NavigablePlace(context: viewContext)
+                    savedPlace.name = place.name
+                    savedPlace.address = place.formattedAddress
+                    savedPlace.latitude = place.coordinates.coordinate.latitude
+                    savedPlace.longitude = place.coordinates.coordinate.longitude
+                    savedPlace.timestamp = Date()
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        let nsError = error as NSError
+                        fatalError("Failed to save navigable place: \(nsError)")
+                    }
+                    destinationPlace = savedPlace
+                })
+            case "coordinates":
+                // TODO:
+                // destinationPlace = NavigablePlace(id: destinationPlaceId, name: "Entered Coordinates", address: nil, coordinates: <#T##CLLocation#>)
+                break
+            default:
+                fatalError("Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView")
+            }
         }
     }
 }
 
 struct OrienteerView_Previews: PreviewProvider {
     static var previews: some View {
-        OrienteerView(destinationPlaceId: "ChIJIQBpAG2ahYAR_6128GcTUEo", geocoder: Geocoder(), userLocation: UserLocation())
+        OrienteerView(destinationPlaceType: "googleplace", destinationPlaceId: "ChIJIQBpAG2ahYAR_6128GcTUEo", geocoder: Geocoder(), userLocation: UserLocation())
             .environmentObject(UserSettings())
     }
 }

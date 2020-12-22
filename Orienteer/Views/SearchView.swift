@@ -13,6 +13,8 @@ struct SearchView: View {
     @State private var searchInput = ""
     @State private var autocompleteResults = [PlacesAutocompletePrediction]()
     @State private var settingsDisplayed = false
+    @State private var historyDisplayed = false
+    @Environment(\.managedObjectContext) var moc
 
     var body: some View {
         let searchInputBinding = Binding<String>(get: {
@@ -32,10 +34,11 @@ struct SearchView: View {
                 TextField("Where you're going", text: searchInputBinding)
                     .padding(10.0)
                 List(autocompleteResults) { result in
-                    NavigationLink(destination: OrienteerView(destinationPlaceId: result.placeId, geocoder: geocoder, userLocation: userLocation)) {
-                        SearchResultView(candidatePlace: result)
+                    NavigationLink(destination: OrienteerView(destinationPlaceType: "googleplace", destinationPlaceId: result.placeId, geocoder: geocoder, userLocation: userLocation)) {
+                        SearchResultView(name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)
                     }
                 }
+                .listStyle(PlainListStyle())
                 HStack {
                     Button(action: { self.settingsDisplayed = true }, label: {
                         Text("Settings")
@@ -45,9 +48,14 @@ struct SearchView: View {
                         })
                         .padding(10.0)
                     Spacer()
-                    Button(action: {}, label: {
+                    Button(action: { self.historyDisplayed = true }, label: {
                         Text("History")
-                    }).padding(10.0)
+                    })
+                        .sheet(isPresented: self.$historyDisplayed, content: {
+                            HistoryView(onDismiss: { self.historyDisplayed = false })
+                                .environment(\.managedObjectContext, self.moc)
+                        })
+                        .padding(10.0)
                 }
             }
             .navigationTitle("Find a destination")

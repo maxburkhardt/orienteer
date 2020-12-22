@@ -10,10 +10,13 @@ import SwiftUI
 @main
 struct OrienteerApp: App {
     @StateObject var userSettings = UserSettings()
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            SearchView().environmentObject(userSettings)
+            SearchView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(userSettings)
         }
     }
 }
