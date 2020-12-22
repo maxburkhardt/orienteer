@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+struct SearchResultListEntry: Identifiable {
+    let type: String
+    let id: String
+    let name: String
+    let subtitle: String?
+}
+
 struct SearchView: View {
     @ObservedObject var userLocation = UserLocation()
     var geocoder = Geocoder()
@@ -17,6 +24,20 @@ struct SearchView: View {
     @State private var historySelectedEntryId: UUID? = nil
     @State private var historyNavigationActive = false
     @Environment(\.managedObjectContext) var viewContext
+
+    private var searchResults: [SearchResultListEntry] {
+        var results = [SearchResultListEntry]()
+        let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
+        let matchResult = coordinateRegex.matches(in: searchInput, range: NSMakeRange(0, searchInput.utf16.count))
+        if !matchResult.isEmpty {
+            let latitude = searchInput[Range(matchResult[0].range(at: 1), in: searchInput)!]
+            let longitude = searchInput[Range(matchResult[0].range(at: 2), in: searchInput)!]
+            results.append(SearchResultListEntry(type: "coordinates", id: "\(latitude),\(longitude)", name: "Coordinate location", subtitle: "Manually entered"))
+        }
+        return results + autocompleteResults.map { result in
+            SearchResultListEntry(type: "googleplace", id: result.placeId, name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)
+        }
+    }
 
     var body: some View {
         let searchInputBinding = Binding<String>(get: {
@@ -36,9 +57,9 @@ struct SearchView: View {
                 TextField("Where you're going", text: searchInputBinding)
                     .padding(10.0)
                 NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
-                List(autocompleteResults) { result in
-                    NavigationLink(destination: OrienteerView(destinationPlaceType: "googleplace", destinationPlaceId: result.placeId, geocoder: geocoder, userLocation: userLocation)) {
-                        SearchResultView(name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)
+                List(searchResults) { result in
+                    NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
+                        SearchResultView(name: result.name, subtitle: result.subtitle)
                     }
                 }
                 .listStyle(PlainListStyle())

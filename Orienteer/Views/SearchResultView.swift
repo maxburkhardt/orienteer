@@ -22,6 +22,7 @@ struct SearchResultView: View {
                 Text(subtitle ?? "")
             }
         }
+        .contentShape(Rectangle())
     }
 }
 
