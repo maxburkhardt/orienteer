@@ -10,9 +10,10 @@ import SwiftUI
 
 struct HistoryView: View {
     var onDismiss: () -> Void
+    var onSelect: (UUID) -> Void
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \NavigablePlace.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \NavigablePlace.timestamp, ascending: false)],
         animation: .default
     )
     private var places: FetchedResults<NavigablePlace>
@@ -24,7 +25,7 @@ struct HistoryView: View {
                 .padding(.bottom, 5.0)
             List {
                 ForEach(places) { place in
-                    SearchResultView(name: place.name ?? "Unknown place", subtitle: visitedFormatter.string(from: place.timestamp ?? Date.distantPast))
+                    SearchResultView(name: place.name ?? "Unknown place", subtitle: visitedFormatter.string(from: place.timestamp ?? Date.distantPast)).onTapGesture { onSelect(place.id!) }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -63,7 +64,7 @@ private let visitedFormatter: DateFormatter = {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView(onDismiss: { do {} })
+        HistoryView(onDismiss: { do {} }, onSelect: { _ in do {} })
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

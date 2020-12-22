@@ -5,6 +5,7 @@
 //  Created by Maximilian Burkhardt on 12/20/20.
 //
 
+import CoreData
 import CoreLocation
 import SwiftUI
 
@@ -44,6 +45,7 @@ struct OrienteerView: View {
                     savedPlace.latitude = place.coordinates.coordinate.latitude
                     savedPlace.longitude = place.coordinates.coordinate.longitude
                     savedPlace.timestamp = Date()
+                    savedPlace.id = UUID()
                     do {
                         try viewContext.save()
                     } catch {
@@ -52,10 +54,29 @@ struct OrienteerView: View {
                     }
                     destinationPlace = savedPlace
                 })
+            case "history":
+                let historyFetch = NSFetchRequest<NavigablePlace>(entityName: "NavigablePlace")
+                historyFetch.predicate = NSPredicate(format: "id == %@", destinationPlaceId)
+                do {
+                    let fetchedPlace = try viewContext.fetch(historyFetch).first
+                    destinationPlace = fetchedPlace
+                } catch {
+                    fatalError("Unable to load place from local storage")
+                }
             case "coordinates":
-                // TODO:
-                // destinationPlace = NavigablePlace(id: destinationPlaceId, name: "Entered Coordinates", address: nil, coordinates: <#T##CLLocation#>)
-                break
+                let savedPlace = NavigablePlace(context: viewContext)
+                savedPlace.name = "Coordinate location"
+                savedPlace.latitude = Double(destinationPlaceId.split(separator: ",").first!)!
+                savedPlace.longitude = Double(destinationPlaceId.split(separator: ",").last!)!
+                savedPlace.timestamp = Date()
+                savedPlace.id = UUID()
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Failed to save navigable place: \(nsError)")
+                }
+                destinationPlace = savedPlace
             default:
                 fatalError("Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView")
             }

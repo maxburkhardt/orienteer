@@ -14,7 +14,9 @@ struct SearchView: View {
     @State private var autocompleteResults = [PlacesAutocompletePrediction]()
     @State private var settingsDisplayed = false
     @State private var historyDisplayed = false
-    @Environment(\.managedObjectContext) var moc
+    @State private var historySelectedEntryId: UUID? = nil
+    @State private var historyNavigationActive = false
+    @Environment(\.managedObjectContext) var viewContext
 
     var body: some View {
         let searchInputBinding = Binding<String>(get: {
@@ -33,6 +35,7 @@ struct SearchView: View {
             VStack {
                 TextField("Where you're going", text: searchInputBinding)
                     .padding(10.0)
+                NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
                 List(autocompleteResults) { result in
                     NavigationLink(destination: OrienteerView(destinationPlaceType: "googleplace", destinationPlaceId: result.placeId, geocoder: geocoder, userLocation: userLocation)) {
                         SearchResultView(name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)
@@ -52,8 +55,15 @@ struct SearchView: View {
                         Text("History")
                     })
                         .sheet(isPresented: self.$historyDisplayed, content: {
-                            HistoryView(onDismiss: { self.historyDisplayed = false })
-                                .environment(\.managedObjectContext, self.moc)
+                            HistoryView(
+                                onDismiss: { self.historyDisplayed = false },
+                                onSelect: { id in
+                                    historySelectedEntryId = id
+                                    historyDisplayed = false
+                                    historyNavigationActive = true
+                                }
+                            )
+                            .environment(\.managedObjectContext, self.viewContext)
                         })
                         .padding(10.0)
                 }
