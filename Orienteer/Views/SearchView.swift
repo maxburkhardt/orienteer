@@ -55,6 +55,7 @@ struct SearchView: View {
         NavigationView {
             VStack {
                 TextField("Where you're going", text: searchInputBinding)
+                    .modifier(TextFieldClearButton(text: searchInputBinding))
                     .padding(10.0)
                 NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
                 List(searchResults) { result in

@@ -18,6 +18,7 @@
 		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
+		D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */; };
 		D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
 		D0A50C6325927A5E008DE0FA /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
 		D0C547C22589C0D10073F292 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C547C12589C0D10073F292 /* OrienteerApp.swift */; };
@@ -61,6 +62,7 @@
 		D023AF33258D754D00DDC691 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
 		D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPlaceResponse.swift; sourceTree = "<group>"; };
 		D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigablePlace.swift; sourceTree = "<group>"; };
 		D0C547BE2589C0D10073F292 /* Orienteer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orienteer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 				D0037D7F258FC6F000CD9B6A /* OrienteerView.swift */,
 				D01F2EDC25912FC20042E091 /* SettingsView.swift */,
 				D0E8BC30259193C000061E0F /* HistoryView.swift */,
+				D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */,
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
+				D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */,
 				D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */,
 				D0A50C6325927A5E008DE0FA /* NavigablePlace.swift in Sources */,
 				D0C547C22589C0D10073F292 /* OrienteerApp.swift in Sources */,
