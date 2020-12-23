@@ -26,6 +26,13 @@ struct SettingsView: View {
                 Text("Imperial").tag(DistanceUnits.imperial)
             }
             .pickerStyle(SegmentedPickerStyle())
+            .padding(.bottom, 10.0)
+            Toggle(isOn: $userSettings.history) {
+                Text("Save History")
+            }
+            Text("If history saving is disabled, destinations will still show in the history view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
+                .font(.caption)
+                .foregroundColor(Color.gray)
             Spacer()
             Button(action: { onDismiss() }, label: {
                 Text("Done")

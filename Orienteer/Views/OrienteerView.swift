@@ -73,7 +73,9 @@ struct OrienteerView: View {
                     savedPlace.timestamp = Date()
                     savedPlace.id = UUID()
                     do {
-                        try viewContext.save()
+                        if userSettings.history {
+                            try viewContext.save()
+                        }
                     } catch {
                         let nsError = error as NSError
                         fatalError("Failed to save navigable place: \(nsError)")
@@ -86,7 +88,9 @@ struct OrienteerView: View {
                 do {
                     let fetchedPlace = try viewContext.fetch(historyFetch).first
                     fetchedPlace?.timestamp = Date()
-                    try viewContext.save()
+                    if userSettings.history {
+                        try viewContext.save()
+                    }
                     destinationPlace = fetchedPlace
                 } catch {
                     fatalError("Unable to load place from local storage")
@@ -99,7 +103,9 @@ struct OrienteerView: View {
                 savedPlace.timestamp = Date()
                 savedPlace.id = UUID()
                 do {
-                    try viewContext.save()
+                    if userSettings.history {
+                        try viewContext.save()
+                    }
                 } catch {
                     let nsError = error as NSError
                     fatalError("Failed to save navigable place: \(nsError)")
