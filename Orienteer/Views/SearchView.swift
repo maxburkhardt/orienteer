@@ -23,6 +23,7 @@ struct SearchView: View {
     @State private var historyDisplayed = false
     @State private var historySelectedEntryId: UUID? = nil
     @State private var historyNavigationActive = false
+    private var autocompleteRequestCount = SynchronizedCounter()
     @Environment(\.managedObjectContext) var viewContext
 
     private var searchResults: [SearchResultListEntry] {
@@ -46,10 +47,11 @@ struct SearchView: View {
             self.searchInput = $0
             geocoder.placesAutocomplete(
                 search: self.searchInput,
-                userLocation: userLocation.lastLocation!,
+                userLocation: userLocation.lastLocation,
                 callback: { (resp: PlacesAutocompleteResponse) -> Void in
                     autocompleteResults = resp.predictions
-                }
+                },
+                requestCounter: autocompleteRequestCount
             )
         })
         NavigationView {
@@ -72,6 +74,8 @@ struct SearchView: View {
                             SettingsView(onDismiss: { self.settingsDisplayed = false })
                         })
                         .padding(10.0)
+                    Spacer()
+                    ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
                     Spacer()
                     Button(action: { self.historyDisplayed = true }, label: {
                         Text("History")

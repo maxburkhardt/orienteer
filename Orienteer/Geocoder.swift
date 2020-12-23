@@ -11,8 +11,9 @@ import Foundation
 class Geocoder {
     private var apiKey: String
     private var autocompleteSession: String
+    private var errorHandler: (String) -> Void
 
-    init() {
+    init(errorHandler: @escaping (String) -> Void = { message in print(message) }) {
         var secrets: NSDictionary?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist") {
             secrets = NSDictionary(contentsOfFile: path)
@@ -22,10 +23,7 @@ class Geocoder {
         }
         apiKey = secrets!["APP_GOOGLE_KEY"] as! String
         autocompleteSession = UUID().uuidString
-    }
-
-    private func reportError(message: String) {
-        print(message)
+        self.errorHandler = errorHandler
     }
 
     private func makePlacesApiCall(urlBase: String, params: [String: String], callback: @escaping (Data) -> Void) {
@@ -36,7 +34,7 @@ class Geocoder {
         }
         let queryString = params.joined(separator: "&")
         guard let url = URL(string: "\(urlBase)?\(queryString)") else {
-            reportError(message: "Failed to construct Places query to \(urlBase)")
+            errorHandler("Failed to construct Places query to \(urlBase)")
             return
         }
         var request = URLRequest(url: url)
@@ -46,37 +44,26 @@ class Geocoder {
             case let .success((_, data)):
                 callback(data)
             case let .failure(error):
-                self.reportError(message: error.localizedDescription)
+                self.errorHandler(error.localizedDescription)
             }
         }
         task.resume()
     }
 
-    func findPlaceFromText(search: String, userLocation: CLLocation, callback: @escaping (FindPlaceResponse) -> Void) {
-        let params = [
+    func placesAutocomplete(search: String, userLocation: CLLocation?, callback: @escaping (PlacesAutocompleteResponse) -> Void, requestCounter: SynchronizedCounter) {
+        var params = [
             "input": search,
-            "inputtype": "textquery",
-            "locationBias": "point:\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)",
-            "fields": "name,geometry,formatted_address",
-        ]
-        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/findplacefromtext/json", params: params, callback: { (data: Data) -> Void in
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let foundPlaceResponse: FindPlaceResponse = try! decoder.decode(FindPlaceResponse.self, from: data)
-            callback(foundPlaceResponse)
-        })
-    }
-
-    func placesAutocomplete(search: String, userLocation: CLLocation, callback: @escaping (PlacesAutocompleteResponse) -> Void) {
-        let params = [
-            "input": search,
-            "location": "\(userLocation.coordinate.latitude),\(userLocation.coordinate.longitude)",
             "sessiontoken": autocompleteSession,
         ]
+        if let location = userLocation {
+            params["location"] = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+        }
+        requestCounter.increment()
         makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: { (data: Data) -> Void in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let placesAutocompleteResponse: PlacesAutocompleteResponse = try! decoder.decode(PlacesAutocompleteResponse.self, from: data)
+            requestCounter.decrement()
             callback(placesAutocompleteResponse)
         })
     }
