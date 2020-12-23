@@ -33,7 +33,7 @@ struct OrienteerView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "location.north.line")
+            Image(systemName: "location.circle")
                 .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
                 .font(.system(size: 100))
                 .padding(.bottom, 20.0)
