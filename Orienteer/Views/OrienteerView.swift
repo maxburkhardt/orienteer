@@ -17,6 +17,8 @@ struct OrienteerView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var userSettings: UserSettings
     @State private var destinationPlace: NavigablePlace? = nil
+    @State private var orientation = UIDevice.current.orientation
+
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
     }
@@ -24,6 +26,10 @@ struct OrienteerView: View {
     private var distance: CLLocationDistance? {
         destinationPlace != nil ? userLocation.distanceTo(destination: destinationPlace!.coordinates) : nil
     }
+
+    private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
+        .makeConnectable()
+        .autoconnect()
 
     var body: some View {
         VStack {
@@ -55,6 +61,7 @@ struct OrienteerView: View {
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
+            userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
             switch destinationPlaceType {
             case "googleplace":
                 geocoder.placeDetails(placeId: destinationPlaceId, callback: { (place: GooglePlacesPlace) -> Void in
@@ -102,6 +109,13 @@ struct OrienteerView: View {
                 fatalError("Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView")
             }
         }
+        .onReceive(orientationChanged, perform: { _ in
+            let newOrientation = UIDevice.current.orientation
+            if newOrientation != UIDeviceOrientation.portraitUpsideDown {
+                self.orientation = newOrientation
+                userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
+            }
+        })
     }
 }
 

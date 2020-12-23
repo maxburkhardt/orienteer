@@ -59,6 +59,10 @@ class UserLocation: NSObject, ObservableObject {
         return positiveDegreesBearing
     }
 
+    func updateOrientation(newOrientation: CLDeviceOrientation) {
+        locationManager.headingOrientation = newOrientation
+    }
+
     var statusString: String {
         guard let status = locationStatus else {
             return "unknown"

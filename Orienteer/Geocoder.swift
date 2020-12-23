@@ -26,7 +26,7 @@ class Geocoder {
         self.errorHandler = errorHandler
     }
 
-    private func makePlacesApiCall(urlBase: String, params: [String: String], callback: @escaping (Data) -> Void) {
+    private func makePlacesApiCall(urlBase: String, params: [String: String], callback: @escaping (Data) -> Void, requestCounter: SynchronizedCounter? = nil) {
         let authorizedParams = params.merging(["key": apiKey]) { _, new in new }
         var params = [String]()
         for (paramKey, paramValue) in authorizedParams {
@@ -40,6 +40,7 @@ class Geocoder {
         var request = URLRequest(url: url)
         request.setValue(Bundle.main.bundleIdentifier, forHTTPHeaderField: "x-ios-bundle-identifier")
         let task = URLSession.shared.dataTask(with: request) { result in
+            requestCounter?.decrement()
             switch result {
             case let .success((_, data)):
                 callback(data)
@@ -47,6 +48,7 @@ class Geocoder {
                 self.errorHandler(error.localizedDescription)
             }
         }
+        requestCounter?.increment()
         task.resume()
     }
 
@@ -56,16 +58,14 @@ class Geocoder {
             "sessiontoken": autocompleteSession,
         ]
         if let location = userLocation {
-            params["location"] = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+            params["location"] = "\(location.coordinate.latitude.rounded(toPlaces: 1)),\(location.coordinate.longitude.rounded(toPlaces: 1))"
         }
-        requestCounter.increment()
         makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: { (data: Data) -> Void in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             let placesAutocompleteResponse: PlacesAutocompleteResponse = try! decoder.decode(PlacesAutocompleteResponse.self, from: data)
-            requestCounter.decrement()
             callback(placesAutocompleteResponse)
-        })
+        }, requestCounter: requestCounter)
     }
 
     func placeDetails(placeId: String, callback: @escaping (GooglePlacesPlace) -> Void) {
