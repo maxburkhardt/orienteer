@@ -15,6 +15,7 @@ struct OrienteerView: View {
     var geocoder: Geocoder
     @ObservedObject var userLocation: UserLocation
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.verticalSizeClass) private var sizeClass
     @EnvironmentObject var userSettings: UserSettings
     @State private var destinationPlace: NavigablePlace? = nil
     @State private var orientation = UIDevice.current.orientation
@@ -33,30 +34,17 @@ struct OrienteerView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "location.circle")
-                .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
-                .font(.system(size: 100))
-                .padding(.bottom, 20.0)
-            Text(bearing != nil ? bearing!.toCardinalOrdinal() : "")
-                .font(.largeTitle)
-                .bold()
-            Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
-                .font(.title)
-            HStack {
-                Text("Location accuracy:")
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-                Text("±\(userLocation.lastLocation?.horizontalAccuracy.convertToHumanReadable(settings: userSettings) ?? "Not available")")
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-            }
-            HStack {
-                Text("Compass accuracy:")
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-                Text("±\(userLocation.lastHeading?.headingAccuracy.rounded(toPlaces: 2) ?? 360.0, specifier: "%.2f")°")
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
+            if sizeClass != .compact {
+                // Portrait layout
+                OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                    .padding(.bottom, 40.0)
+                OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+            } else {
+                HStack {
+                    OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                        .padding(.trailing, 40.0)
+                    OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                }
             }
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
