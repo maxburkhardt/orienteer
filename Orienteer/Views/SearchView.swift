@@ -33,7 +33,7 @@ struct SearchView: View {
         if !matchResult.isEmpty {
             let latitude = searchInput[Range(matchResult[0].range(at: 1), in: searchInput)!]
             let longitude = searchInput[Range(matchResult[0].range(at: 2), in: searchInput)!]
-            results.append(SearchResultListEntry(type: "coordinates", id: "\(latitude),\(longitude)", name: "Coordinate location", subtitle: "Manually entered"))
+            results.append(SearchResultListEntry(type: "coordinates", id: "\(latitude),\(longitude)", name: searchInput, subtitle: "Manually entered"))
         }
         return results + autocompleteResults.map { result in
             SearchResultListEntry(type: "googleplace", id: result.placeId, name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)

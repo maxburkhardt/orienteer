@@ -29,10 +29,29 @@ struct OrienteerView: View {
         VStack {
             Image(systemName: "location.north.line")
                 .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
-                .font(.system(size: 60))
+                .font(.system(size: 100))
                 .padding(.bottom, 20.0)
             Text(bearing != nil ? bearing!.toCardinalOrdinal() : "")
+                .font(.largeTitle)
+                .bold()
             Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
+                .font(.title)
+            HStack {
+                Text("Location accuracy:")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+                Text("±\(userLocation.lastLocation?.horizontalAccuracy.convertToHumanReadable(settings: userSettings) ?? "Not available")")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+            }
+            HStack {
+                Text("Compass accuracy:")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+                Text("±\(userLocation.lastHeading?.headingAccuracy.rounded(toPlaces: 2) ?? 360.0, specifier: "%.2f")°")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+            }
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
@@ -67,7 +86,7 @@ struct OrienteerView: View {
                 }
             case "coordinates":
                 let savedPlace = NavigablePlace(context: viewContext)
-                savedPlace.name = "Coordinate location"
+                savedPlace.name = destinationPlaceId
                 savedPlace.latitude = Double(destinationPlaceId.split(separator: ",").first!)!
                 savedPlace.longitude = Double(destinationPlaceId.split(separator: ",").last!)!
                 savedPlace.timestamp = Date()
