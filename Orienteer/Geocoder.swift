@@ -9,11 +9,14 @@ import CoreLocation
 import Foundation
 
 class Geocoder {
+    private var errorHandlerStack: [(String) -> Void]
     private var apiKey: String
     private var autocompleteSession: String
-    private var errorHandler: (String) -> Void
+    var errorHandler: (String) -> Void {
+        errorHandlerStack.first!
+    }
 
-    init(errorHandler: @escaping (String) -> Void = { message in print(message) }) {
+    init() {
         var secrets: NSDictionary?
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist") {
             secrets = NSDictionary(contentsOfFile: path)
@@ -23,7 +26,8 @@ class Geocoder {
         }
         apiKey = secrets!["APP_GOOGLE_KEY"] as! String
         autocompleteSession = UUID().uuidString
-        self.errorHandler = errorHandler
+        // Initialize the error handler stack with a basic "print" handler
+        errorHandlerStack = [{ message in print(message) }]
     }
 
     private func makePlacesApiCall<T: Decodable>(urlBase: String, params: [String: String], callback: @escaping (T) -> Void, requestCounter: SynchronizedCounter? = nil) {
@@ -49,7 +53,7 @@ class Geocoder {
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     response = try decoder.decode(T.self, from: data)
                 } catch {
-                    self.errorHandler("Geocoding API decode error: \(error)")
+                    self.errorHandler("Geocoding API decode error: \(error.localizedDescription)")
                 }
                 if let decodedResponse = response {
                     callback(decodedResponse)
@@ -84,5 +88,17 @@ class Geocoder {
         // Rotate the autocomplete session once the place is looked up
         autocompleteSession = UUID().uuidString
         makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/details/json", params: params, callback: callback)
+    }
+
+    func pushErrorHandler(handler: @escaping (String) -> Void) {
+        errorHandlerStack.insert(handler, at: 0)
+    }
+
+    func popErrorHandler() {
+        guard errorHandlerStack.count > 1 else {
+            print("Refusing to pop last error handler.")
+            return
+        }
+        errorHandlerStack.removeFirst()
     }
 }

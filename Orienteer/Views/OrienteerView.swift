@@ -19,6 +19,7 @@ struct OrienteerView: View {
     @EnvironmentObject var userSettings: UserSettings
     @State private var destinationPlace: NavigablePlace? = nil
     @State private var orientation = UIDevice.current.orientation
+    @State private var alertMessage = ""
 
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
@@ -33,6 +34,11 @@ struct OrienteerView: View {
         .autoconnect()
 
     var body: some View {
+        let showAlertBinding = Binding<Bool>(get: {
+            alertMessage != ""
+        }, set: { _ in
+            alertMessage = ""
+        })
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
@@ -49,6 +55,7 @@ struct OrienteerView: View {
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
+            geocoder.pushErrorHandler(handler: { message in alertMessage = message })
             userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
             switch destinationPlaceType {
             case "googleplace":
@@ -111,6 +118,12 @@ struct OrienteerView: View {
                 userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
             }
         })
+        .onDisappear {
+            geocoder.popErrorHandler()
+        }
+        .alert(isPresented: showAlertBinding) {
+            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
