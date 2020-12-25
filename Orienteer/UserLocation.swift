@@ -49,12 +49,12 @@ class UserLocation: NSObject, ObservableObject {
         if lastLocation == nil {
             return 0
         }
-        let x = cos(destination.coordinate.latitude) * sin(destination.coordinate.longitude - lastLocation!.coordinate.longitude)
-        let y = cos(lastLocation!.coordinate.latitude) * sin(destination.coordinate.latitude) -
-            sin(lastLocation!.coordinate.latitude) * cos(destination.coordinate.latitude) * cos(destination.coordinate.longitude -
-                lastLocation!.coordinate.longitude)
+        let dest = (destination.coordinate.latitude, destination.coordinate.longitude)
+        let src = (lastLocation!.coordinate.latitude, lastLocation!.coordinate.longitude)
+        let x = cos(dest.0.toRadians()) * sin((dest.1 - src.1).toRadians())
+        let y = cos(src.0.toRadians()) * sin(dest.0.toRadians()) - sin(src.0.toRadians()) * cos(dest.0.toRadians()) * cos((dest.1 - src.1).toRadians())
         let radiansBearing = atan2(x, y)
-        let degreesBearing = radiansBearing * 180.0 / .pi
+        let degreesBearing = radiansBearing.toDegrees()
         let positiveDegreesBearing = (degreesBearing + 360.0).truncatingRemainder(dividingBy: 360.0)
         return positiveDegreesBearing
     }
