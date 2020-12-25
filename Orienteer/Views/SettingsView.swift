@@ -12,7 +12,7 @@ struct SettingsView: View {
     @EnvironmentObject var userSettings: UserSettings
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Settings")
                 .font(.title)
                 .fontWeight(.bold)
@@ -30,13 +30,23 @@ struct SettingsView: View {
             Toggle(isOn: $userSettings.history) {
                 Text("Save History")
             }
-            Text("If history saving is disabled, destinations will still show in the history view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
+            Text("If Save History is disabled, destinations will still show in the history view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
+                .font(.caption)
+                .foregroundColor(Color.gray)
+            Toggle(isOn: $userSettings.locationSearch) {
+                Text("Location-based search")
+            }
+            Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
                 .font(.caption)
                 .foregroundColor(Color.gray)
             Spacer()
-            Button(action: { onDismiss() }, label: {
-                Text("Done")
-            })
+            HStack {
+                Spacer()
+                Button(action: { onDismiss() }, label: {
+                    Text("Done")
+                })
+                Spacer()
+            }
         }
         .padding(10.0)
     }

@@ -25,6 +25,7 @@ struct SearchView: View {
     @State private var historyNavigationActive = false
     private var autocompleteRequestCount = SynchronizedCounter()
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var userSettings: UserSettings
 
     private var searchResults: [SearchResultListEntry] {
         var results = [SearchResultListEntry]()
@@ -51,7 +52,8 @@ struct SearchView: View {
                 callback: { (resp: PlacesAutocompleteResponse) -> Void in
                     autocompleteResults = resp.predictions
                 },
-                requestCounter: autocompleteRequestCount
+                requestCounter: autocompleteRequestCount,
+                userSettings: userSettings
             )
         })
         NavigationView {

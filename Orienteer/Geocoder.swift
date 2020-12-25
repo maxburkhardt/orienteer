@@ -43,7 +43,7 @@ class Geocoder {
             requestCounter?.decrement()
             switch result {
             case let .success((_, data)):
-                var response: T? = nil
+                var response: T?
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -62,13 +62,15 @@ class Geocoder {
         task.resume()
     }
 
-    func placesAutocomplete(search: String, userLocation: CLLocation?, callback: @escaping (PlacesAutocompleteResponse) -> Void, requestCounter: SynchronizedCounter) {
+    func placesAutocomplete(search: String, userLocation: CLLocation?, callback: @escaping (PlacesAutocompleteResponse) -> Void, requestCounter: SynchronizedCounter, userSettings: UserSettings) {
         var params = [
             "input": search,
             "sessiontoken": autocompleteSession,
         ]
-        if let location = userLocation {
-            params["location"] = "\(location.coordinate.latitude.rounded(toPlaces: 1)),\(location.coordinate.longitude.rounded(toPlaces: 1))"
+        if userSettings.locationSearch {
+            if let location = userLocation {
+                params["location"] = "\(location.coordinate.latitude.rounded(toPlaces: 1)),\(location.coordinate.longitude.rounded(toPlaces: 1))"
+            }
         }
         makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: callback, requestCounter: requestCounter)
     }

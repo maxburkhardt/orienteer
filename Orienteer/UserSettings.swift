@@ -16,6 +16,7 @@ class UserSettings: ObservableObject {
     private let userDefaults: UserDefaults
     private let UNITS_STORAGE_KEY = "units"
     private let HISTORY_STORAGE_KEY = "history"
+    private let LOCATION_SEARCH_KEY = "locationsearch"
 
     @Published var units = DistanceUnits.metric {
         didSet {
@@ -29,6 +30,12 @@ class UserSettings: ObservableObject {
         }
     }
 
+    @Published var locationSearch = true {
+        didSet {
+            userDefaults.set(locationSearch, forKey: LOCATION_SEARCH_KEY)
+        }
+    }
+
     init() {
         userDefaults = UserDefaults()
         if let savedUnits = userDefaults.value(forKey: UNITS_STORAGE_KEY) as? String {
@@ -36,6 +43,9 @@ class UserSettings: ObservableObject {
         }
         if let savedHistory = userDefaults.value(forKey: HISTORY_STORAGE_KEY) as? Bool {
             history = savedHistory
+        }
+        if let savedLocationSearch = userDefaults.value(forKey: LOCATION_SEARCH_KEY) as? Bool {
+            locationSearch = savedLocationSearch
         }
     }
 }
