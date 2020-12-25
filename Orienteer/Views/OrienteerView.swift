@@ -52,7 +52,8 @@ struct OrienteerView: View {
             userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
             switch destinationPlaceType {
             case "googleplace":
-                geocoder.placeDetails(placeId: destinationPlaceId, callback: { (place: GooglePlacesPlace) -> Void in
+                geocoder.placeDetails(placeId: destinationPlaceId, callback: { (placeResponse: PlaceDetailsResponse) -> Void in
+                    let place = placeResponse.result
                     let savedPlace = NavigablePlace(context: viewContext)
                     savedPlace.name = place.name
                     savedPlace.address = place.formattedAddress

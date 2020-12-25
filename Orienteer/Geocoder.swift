@@ -26,7 +26,7 @@ class Geocoder {
         self.errorHandler = errorHandler
     }
 
-    private func makePlacesApiCall(urlBase: String, params: [String: String], callback: @escaping (Data) -> Void, requestCounter: SynchronizedCounter? = nil) {
+    private func makePlacesApiCall<T: Decodable>(urlBase: String, params: [String: String], callback: @escaping (T) -> Void, requestCounter: SynchronizedCounter? = nil) {
         let authorizedParams = params.merging(["key": apiKey]) { _, new in new }
         var params = [String]()
         for (paramKey, paramValue) in authorizedParams {
@@ -43,7 +43,17 @@ class Geocoder {
             requestCounter?.decrement()
             switch result {
             case let .success((_, data)):
-                callback(data)
+                var response: T? = nil
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    response = try decoder.decode(T.self, from: data)
+                } catch {
+                    self.errorHandler("Geocoding API decode error: \(error)")
+                }
+                if let decodedResponse = response {
+                    callback(decodedResponse)
+                }
             case let .failure(error):
                 self.errorHandler(error.localizedDescription)
             }
@@ -60,15 +70,10 @@ class Geocoder {
         if let location = userLocation {
             params["location"] = "\(location.coordinate.latitude.rounded(toPlaces: 1)),\(location.coordinate.longitude.rounded(toPlaces: 1))"
         }
-        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: { (data: Data) -> Void in
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let placesAutocompleteResponse: PlacesAutocompleteResponse = try! decoder.decode(PlacesAutocompleteResponse.self, from: data)
-            callback(placesAutocompleteResponse)
-        }, requestCounter: requestCounter)
+        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: callback, requestCounter: requestCounter)
     }
 
-    func placeDetails(placeId: String, callback: @escaping (GooglePlacesPlace) -> Void) {
+    func placeDetails(placeId: String, callback: @escaping (PlaceDetailsResponse) -> Void) {
         let params = [
             "place_id": placeId,
             "sessiontoken": autocompleteSession,
@@ -76,15 +81,6 @@ class Geocoder {
         ]
         // Rotate the autocomplete session once the place is looked up
         autocompleteSession = UUID().uuidString
-        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/details/json", params: params, callback: { (data: Data) -> Void in
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let placeDetails: PlaceDetailsResponse = try! decoder.decode(PlaceDetailsResponse.self, from: data)
-            if placeDetails.status == "OK" {
-                callback(placeDetails.result)
-            } else {
-                print("Got error response from place lookup: \(placeDetails.result)")
-            }
-        })
+        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/details/json", params: params, callback: callback)
     }
 }
