@@ -17,7 +17,14 @@ struct HistoryView: View {
         animation: .default
     )
     private var places: FetchedResults<NavigablePlace>
+    @State private var alertMessage = ""
+
     var body: some View {
+        let showAlertBinding = Binding<Bool>(get: {
+            alertMessage != ""
+        }, set: { _ in
+            alertMessage = ""
+        })
         VStack {
             Text("History")
                 .font(.title)
@@ -37,6 +44,9 @@ struct HistoryView: View {
             }
         }
         .padding(10.0)
+        .alert(isPresented: showAlertBinding) {
+            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -46,10 +56,8 @@ struct HistoryView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                alertMessage = nsError.localizedDescription
             }
         }
     }

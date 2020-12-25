@@ -26,10 +26,10 @@ struct SearchView: View {
     private var autocompleteRequestCount = SynchronizedCounter()
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var userSettings: UserSettings
+    private let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
 
     private var searchResults: [SearchResultListEntry] {
         var results = [SearchResultListEntry]()
-        let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
         let matchResult = coordinateRegex.matches(in: searchInput, range: NSMakeRange(0, searchInput.utf16.count))
         if !matchResult.isEmpty {
             let latitude = searchInput[Range(matchResult[0].range(at: 1), in: searchInput)!]

@@ -74,7 +74,7 @@ struct OrienteerView: View {
                         }
                     } catch {
                         let nsError = error as NSError
-                        fatalError("Failed to save navigable place: \(nsError)")
+                        alertMessage = "Failed to save navigable place: \(nsError)"
                     }
                     destinationPlace = savedPlace
                 })
@@ -89,7 +89,7 @@ struct OrienteerView: View {
                     }
                     destinationPlace = fetchedPlace
                 } catch {
-                    fatalError("Unable to load place from local storage")
+                    alertMessage = "Unable to load place from local storage"
                 }
             case "coordinates":
                 let savedPlace = NavigablePlace(context: viewContext)
@@ -104,11 +104,11 @@ struct OrienteerView: View {
                     }
                 } catch {
                     let nsError = error as NSError
-                    fatalError("Failed to save navigable place: \(nsError)")
+                    alertMessage = "Failed to save navigable place: \(nsError)"
                 }
                 destinationPlace = savedPlace
             default:
-                fatalError("Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView")
+                alertMessage = "Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView"
             }
         }
         .onReceive(orientationChanged, perform: { _ in
