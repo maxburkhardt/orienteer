@@ -30,6 +30,9 @@ struct SearchView: View {
 
     private var searchResults: [SearchResultListEntry] {
         var results = [SearchResultListEntry]()
+        if searchInput == "" {
+            return results
+        }
         let matchResult = coordinateRegex.matches(in: searchInput, range: NSMakeRange(0, searchInput.utf16.count))
         if !matchResult.isEmpty {
             let latitude = searchInput[Range(matchResult[0].range(at: 1), in: searchInput)!]
@@ -60,7 +63,8 @@ struct SearchView: View {
             VStack {
                 TextField("Where you're going", text: searchInputBinding)
                     .modifier(TextFieldClearButton(text: searchInputBinding))
-                    .padding(10.0)
+                    .padding(.vertical, 10.0)
+                    .padding(.horizontal, 17.0)
                 NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
                 List(searchResults) { result in
                     NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
@@ -75,7 +79,8 @@ struct SearchView: View {
                         .sheet(isPresented: self.$settingsDisplayed, content: {
                             SettingsView(onDismiss: { self.settingsDisplayed = false })
                         })
-                        .padding(10.0)
+                        .padding(.vertical, 10.0)
+                        .padding(.horizontal, 17.0)
                     Spacer()
                     ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
                     Spacer()
@@ -93,7 +98,8 @@ struct SearchView: View {
                             )
                             .environment(\.managedObjectContext, self.viewContext)
                         })
-                        .padding(10.0)
+                        .padding(.vertical, 10.0)
+                        .padding(.horizontal, 17.0)
                 }
             }
             .navigationTitle("Find a destination")

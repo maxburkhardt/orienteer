@@ -16,7 +16,7 @@ struct SettingsView: View {
             Text("Settings")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.bottom, 5.0)
+                .padding(.vertical, 10.0)
             HStack {
                 Text("Distance Units")
                 Spacer()
@@ -30,7 +30,7 @@ struct SettingsView: View {
             Toggle(isOn: $userSettings.history) {
                 Text("Save History")
             }
-            Text("If Save History is disabled, destinations will still show in the history view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
+            Text("If Save History is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
                 .font(.caption)
                 .foregroundColor(Color.gray)
             Toggle(isOn: $userSettings.locationSearch) {

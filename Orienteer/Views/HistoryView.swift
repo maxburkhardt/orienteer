@@ -25,11 +25,11 @@ struct HistoryView: View {
         }, set: { _ in
             alertMessage = ""
         })
-        VStack {
+        VStack(alignment: .leading) {
             Text("History")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.bottom, 5.0)
+                .padding(.vertical, 10.0)
             List {
                 ForEach(places) { place in
                     SearchResultView(name: place.name ?? "Unknown place", subtitle: visitedFormatter.string(from: place.timestamp ?? Date.distantPast)).onTapGesture { onSelect(place.id!) }
@@ -38,9 +38,11 @@ struct HistoryView: View {
             }
             .listStyle(PlainListStyle())
             HStack {
+                Spacer()
                 Button(action: { deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex)) }, label: {
                     Text("Clear History")
                 })
+                Spacer()
             }
         }
         .padding(10.0)
