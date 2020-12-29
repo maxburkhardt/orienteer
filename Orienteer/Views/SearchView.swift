@@ -129,6 +129,7 @@ struct SearchView: View {
                 Text("Could not load location authorization status.")
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

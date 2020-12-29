@@ -116,7 +116,8 @@ struct OrienteerView: View {
         }
         .onReceive(orientationChanged, perform: { _ in
             let newOrientation = UIDevice.current.orientation
-            if newOrientation != UIDeviceOrientation.portraitUpsideDown {
+            // We support "fully inverted" on iPad, but not on iPhone, where it's disabled
+            if newOrientation != UIDeviceOrientation.portraitUpsideDown || UIDevice.current.userInterfaceIdiom == .pad {
                 self.orientation = newOrientation
                 userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
             }
