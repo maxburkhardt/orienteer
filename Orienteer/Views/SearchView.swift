@@ -75,6 +75,7 @@ struct SearchView: View {
                                 .padding(.vertical, 10.0)
                                 .padding(.horizontal, 17.0)
                             ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
+                                .padding(.trailing, 7.0)
                         }
                         NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
                         List(searchResults) { result in
