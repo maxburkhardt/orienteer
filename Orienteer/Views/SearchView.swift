@@ -18,6 +18,7 @@ struct SearchResultListEntry: Identifiable {
 struct SearchView: View {
     @ObservedObject var userLocation: UserLocation
     @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var userSettings: UserSettings
     var geocoder = Geocoder()
     @State private var searchInput = ""
@@ -68,10 +69,13 @@ struct SearchView: View {
             if let locationAuthStatus = userLocation.locationStatus {
                 if locationAuthStatus == CLAuthorizationStatus.authorizedWhenInUse {
                     VStack {
-                        TextField("Where you're going", text: searchInputBinding)
-                            .modifier(TextFieldClearButton(text: searchInputBinding))
-                            .padding(.vertical, 10.0)
-                            .padding(.horizontal, 17.0)
+                        HStack {
+                            TextField("Where you're going", text: searchInputBinding)
+                                .modifier(TextFieldClearButton(text: searchInputBinding))
+                                .padding(.vertical, 10.0)
+                                .padding(.horizontal, 17.0)
+                            ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
+                        }
                         NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
                         List(searchResults) { result in
                             NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
@@ -79,9 +83,10 @@ struct SearchView: View {
                             }
                         }
                         .listStyle(PlainListStyle())
+
                         HStack {
                             Button(action: { self.settingsDisplayed = true }, label: {
-                                Text("Settings")
+                                Image(systemName: "gearshape.fill")
                             })
                                 .sheet(isPresented: self.$settingsDisplayed, content: {
                                     SettingsView(onDismiss: { self.settingsDisplayed = false })
@@ -89,10 +94,10 @@ struct SearchView: View {
                                 .padding(.vertical, 10.0)
                                 .padding(.horizontal, 17.0)
                             Spacer()
-                            ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
+                            Image(colorScheme == .dark ? "PoweredByGoogleDark" : "PoweredByGoogleLight")
                             Spacer()
                             Button(action: { self.historyDisplayed = true }, label: {
-                                Text("History")
+                                Image(systemName: "book.fill")
                             })
                                 .sheet(isPresented: self.$historyDisplayed, content: {
                                     HistoryView(
