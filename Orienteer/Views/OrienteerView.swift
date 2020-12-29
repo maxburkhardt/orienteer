@@ -57,6 +57,9 @@ struct OrienteerView: View {
         .onAppear {
             geocoder.pushErrorHandler(handler: { message in alertMessage = message })
             userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
+            if userSettings.disableScreenDim {
+                UIApplication.shared.isIdleTimerDisabled = true
+            }
             switch destinationPlaceType {
             case "googleplace":
                 geocoder.placeDetails(placeId: destinationPlaceId, callback: { (placeResponse: PlaceDetailsResponse) -> Void in
@@ -120,6 +123,7 @@ struct OrienteerView: View {
         })
         .onDisappear {
             geocoder.popErrorHandler()
+            UIApplication.shared.isIdleTimerDisabled = false
         }
         .alert(isPresented: showAlertBinding) {
             Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))

@@ -17,6 +17,7 @@ class UserSettings: ObservableObject {
     private let UNITS_STORAGE_KEY = "units"
     private let HISTORY_STORAGE_KEY = "history"
     private let LOCATION_SEARCH_KEY = "locationsearch"
+    private let SCREEN_DIM_KEY = "screendim"
 
     @Published var units = DistanceUnits.metric {
         didSet {
@@ -36,6 +37,12 @@ class UserSettings: ObservableObject {
         }
     }
 
+    @Published var disableScreenDim = false {
+        didSet {
+            userDefaults.set(disableScreenDim, forKey: SCREEN_DIM_KEY)
+        }
+    }
+
     init() {
         userDefaults = UserDefaults()
         if let savedUnits = userDefaults.value(forKey: UNITS_STORAGE_KEY) as? String {
@@ -46,6 +53,9 @@ class UserSettings: ObservableObject {
         }
         if let savedLocationSearch = userDefaults.value(forKey: LOCATION_SEARCH_KEY) as? Bool {
             locationSearch = savedLocationSearch
+        }
+        if let savedDisableScreenDim = userDefaults.value(forKey: SCREEN_DIM_KEY) as? Bool {
+            disableScreenDim = savedDisableScreenDim
         }
     }
 }

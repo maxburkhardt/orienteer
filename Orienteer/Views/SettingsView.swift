@@ -17,28 +17,42 @@ struct SettingsView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.vertical, 10.0)
-            HStack {
-                Text("Distance Units")
-                Spacer()
+            Group {
+                HStack {
+                    Text("Distance Units")
+                    Spacer()
+                }
+                Picker("Distance Units", selection: $userSettings.units) {
+                    Text("Metric").tag(DistanceUnits.metric)
+                    Text("Imperial").tag(DistanceUnits.imperial)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.bottom, 10.0)
             }
-            Picker("Distance Units", selection: $userSettings.units) {
-                Text("Metric").tag(DistanceUnits.metric)
-                Text("Imperial").tag(DistanceUnits.imperial)
+            Group {
+                Toggle(isOn: $userSettings.disableScreenDim) {
+                    Text("Keep screen on")
+                }
+                Text("Orienteer can keep your device's screen on while in the navigation view.")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding(.bottom, 10.0)
-            Toggle(isOn: $userSettings.history) {
-                Text("Save History")
+            Group {
+                Toggle(isOn: $userSettings.history) {
+                    Text("Save history")
+                }
+                Text("If saving is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. Without location history, Orienteer will be more reliant on network access to load destination data.")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
             }
-            Text("If Save History is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. If Save History is disabled, Orienteer will be more reliant on network access to load destination data.")
-                .font(.caption)
-                .foregroundColor(Color.gray)
-            Toggle(isOn: $userSettings.locationSearch) {
-                Text("Location-based search")
+            Group {
+                Toggle(isOn: $userSettings.locationSearch) {
+                    Text("Location-based search")
+                }
+                Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
             }
-            Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
-                .font(.caption)
-                .foregroundColor(Color.gray)
             Spacer()
             HStack {
                 Spacer()
