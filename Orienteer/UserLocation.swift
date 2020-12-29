@@ -11,9 +11,11 @@ import Foundation
 
 class UserLocation: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
+    private var previewMode = false
 
-    override init() {
+    init(previewMode: Bool = false) {
         super.init()
+        self.previewMode = previewMode
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -63,26 +65,16 @@ class UserLocation: NSObject, ObservableObject {
         locationManager.headingOrientation = newOrientation
     }
 
-    var statusString: String {
-        guard let status = locationStatus else {
-            return "unknown"
-        }
-
-        switch status {
-        case .notDetermined: return "notDetermined"
-        case .authorizedWhenInUse: return "authorizedWhenInUse"
-        case .restricted: return "restricted"
-        case .denied: return "denied"
-        default: return "unknown"
-        }
-    }
-
     let objectWillChange = PassthroughSubject<Void, Never>()
 }
 
 extension UserLocation: CLLocationManagerDelegate {
     func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
+        if !previewMode {
+            locationStatus = status
+        } else {
+            locationStatus = CLAuthorizationStatus.authorizedWhenInUse
+        }
     }
 
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

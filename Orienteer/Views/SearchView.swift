@@ -5,6 +5,7 @@
 //  Created by Maximilian Burkhardt on 12/15/20.
 //
 
+import CoreLocation
 import SwiftUI
 
 struct SearchResultListEntry: Identifiable {
@@ -15,7 +16,9 @@ struct SearchResultListEntry: Identifiable {
 }
 
 struct SearchView: View {
-    @ObservedObject var userLocation = UserLocation()
+    @ObservedObject var userLocation: UserLocation
+    @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject var userSettings: UserSettings
     var geocoder = Geocoder()
     @State private var searchInput = ""
     @State private var autocompleteResults = [PlacesAutocompletePrediction]()
@@ -24,9 +27,11 @@ struct SearchView: View {
     @State private var historySelectedEntryId: UUID? = nil
     @State private var historyNavigationActive = false
     private var autocompleteRequestCount = SynchronizedCounter()
-    @Environment(\.managedObjectContext) var viewContext
-    @EnvironmentObject var userSettings: UserSettings
     private let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
+
+    init(userLocation: UserLocation) {
+        self.userLocation = userLocation
+    }
 
     private var searchResults: [SearchResultListEntry] {
         var results = [SearchResultListEntry]()
@@ -60,55 +65,75 @@ struct SearchView: View {
             )
         })
         NavigationView {
-            VStack {
-                TextField("Where you're going", text: searchInputBinding)
-                    .modifier(TextFieldClearButton(text: searchInputBinding))
-                    .padding(.vertical, 10.0)
-                    .padding(.horizontal, 17.0)
-                NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
-                List(searchResults) { result in
-                    NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
-                        SearchResultView(name: result.name, subtitle: result.subtitle)
+            if let locationAuthStatus = userLocation.locationStatus {
+                if locationAuthStatus == CLAuthorizationStatus.authorizedWhenInUse {
+                    VStack {
+                        TextField("Where you're going", text: searchInputBinding)
+                            .modifier(TextFieldClearButton(text: searchInputBinding))
+                            .padding(.vertical, 10.0)
+                            .padding(.horizontal, 17.0)
+                        NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
+                        List(searchResults) { result in
+                            NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
+                                SearchResultView(name: result.name, subtitle: result.subtitle)
+                            }
+                        }
+                        .listStyle(PlainListStyle())
+                        HStack {
+                            Button(action: { self.settingsDisplayed = true }, label: {
+                                Text("Settings")
+                            })
+                                .sheet(isPresented: self.$settingsDisplayed, content: {
+                                    SettingsView(onDismiss: { self.settingsDisplayed = false })
+                                })
+                                .padding(.vertical, 10.0)
+                                .padding(.horizontal, 17.0)
+                            Spacer()
+                            ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
+                            Spacer()
+                            Button(action: { self.historyDisplayed = true }, label: {
+                                Text("History")
+                            })
+                                .sheet(isPresented: self.$historyDisplayed, content: {
+                                    HistoryView(
+                                        onDismiss: { self.historyDisplayed = false },
+                                        onSelect: { id in
+                                            historySelectedEntryId = id
+                                            historyDisplayed = false
+                                            historyNavigationActive = true
+                                        }
+                                    )
+                                    .environment(\.managedObjectContext, self.viewContext)
+                                })
+                                .padding(.vertical, 10.0)
+                                .padding(.horizontal, 17.0)
+                        }
+                    }
+                    .navigationTitle("Find a destination")
+                } else if locationAuthStatus == CLAuthorizationStatus.notDetermined {
+                    VStack {
+                        Image(systemName: "mappin.and.ellipse")
+                            .font(.system(size: 100))
+                            .padding(.bottom, 20.0)
+                        Text("Please authorize Orienteer to allow it to use location services.")
+                    }
+                } else {
+                    VStack {
+                        Image(systemName: "xmark.octagon")
+                            .font(.system(size: 100))
+                            .padding(.bottom, 20.0)
+                        Text("Orienteer requires location access to function.")
                     }
                 }
-                .listStyle(PlainListStyle())
-                HStack {
-                    Button(action: { self.settingsDisplayed = true }, label: {
-                        Text("Settings")
-                    })
-                        .sheet(isPresented: self.$settingsDisplayed, content: {
-                            SettingsView(onDismiss: { self.settingsDisplayed = false })
-                        })
-                        .padding(.vertical, 10.0)
-                        .padding(.horizontal, 17.0)
-                    Spacer()
-                    ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
-                    Spacer()
-                    Button(action: { self.historyDisplayed = true }, label: {
-                        Text("History")
-                    })
-                        .sheet(isPresented: self.$historyDisplayed, content: {
-                            HistoryView(
-                                onDismiss: { self.historyDisplayed = false },
-                                onSelect: { id in
-                                    historySelectedEntryId = id
-                                    historyDisplayed = false
-                                    historyNavigationActive = true
-                                }
-                            )
-                            .environment(\.managedObjectContext, self.viewContext)
-                        })
-                        .padding(.vertical, 10.0)
-                        .padding(.horizontal, 17.0)
-                }
+            } else {
+                Text("Could not load location authorization status.")
             }
-            .navigationTitle("Find a destination")
         }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(userLocation: UserLocation(previewMode: true))
     }
 }
