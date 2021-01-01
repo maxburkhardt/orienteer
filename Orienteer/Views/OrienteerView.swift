@@ -33,6 +33,25 @@ struct OrienteerView: View {
         .makeConnectable()
         .autoconnect()
 
+    private func savePlace(name: String, address: String?, latitude: Double, longitude: Double) -> NavigablePlace {
+        let savedPlace = NavigablePlace(context: viewContext)
+        savedPlace.name = name
+        savedPlace.address = address
+        savedPlace.latitude = latitude
+        savedPlace.longitude = longitude
+        savedPlace.timestamp = Date()
+        savedPlace.id = UUID()
+        do {
+            if userSettings.history {
+                try viewContext.save()
+            }
+        } catch {
+            let nsError = error as NSError
+            alertMessage = "Failed to save navigable place: \(nsError)"
+        }
+        return savedPlace
+    }
+
     var body: some View {
         let showAlertBinding = Binding<Bool>(get: {
             alertMessage != ""
@@ -64,22 +83,29 @@ struct OrienteerView: View {
             case "googleplace":
                 geocoder.placeDetails(placeId: destinationPlaceId, callback: { (placeResponse: PlaceDetailsResponse) -> Void in
                     let place = placeResponse.result
-                    let savedPlace = NavigablePlace(context: viewContext)
-                    savedPlace.name = place.name
-                    savedPlace.address = place.formattedAddress
-                    savedPlace.latitude = place.coordinates.coordinate.latitude
-                    savedPlace.longitude = place.coordinates.coordinate.longitude
-                    savedPlace.timestamp = Date()
-                    savedPlace.id = UUID()
+                    // First, check to see if we've been to this place before (to avoid history duplicates)
+                    let duplicateFetch = NSFetchRequest<NavigablePlace>(entityName: "NavigablePlace")
+                    duplicateFetch.predicate = NSPredicate(format: "name == %@ && latitude == %@ && longitude == %@", place.name, String(place.coordinates.coordinate.latitude), String(place.coordinates.coordinate.longitude))
                     do {
-                        if userSettings.history {
-                            try viewContext.save()
+                        let duplicates = try viewContext.fetch(duplicateFetch)
+                        print("Duplicates found: \(duplicates.count)")
+                        if let duplicate = duplicates.first {
+                            // There was a previous place with the same name and coordinates, so just use that
+                            duplicate.timestamp = Date()
+                            if userSettings.history {
+                                try viewContext.save()
+                            }
+                            destinationPlace = duplicate
+                        } else {
+                            // There was not a previous place with these attributes, so create a new one
+                            destinationPlace = savePlace(name: place.name, address: place.formattedAddress, latitude: place.coordinates.coordinate.latitude, longitude: place.coordinates.coordinate.longitude)
                         }
                     } catch {
+                        // We weren't able to check for duplicates for some reason, so let's just forge ahead with a new NavigablePlace
                         let nsError = error as NSError
-                        alertMessage = "Failed to save navigable place: \(nsError)"
+                        print("Failed to check for duplicates: \(nsError)")
+                        destinationPlace = savePlace(name: place.name, address: place.formattedAddress, latitude: place.coordinates.coordinate.latitude, longitude: place.coordinates.coordinate.longitude)
                     }
-                    destinationPlace = savedPlace
                 })
             case "history":
                 let historyFetch = NSFetchRequest<NavigablePlace>(entityName: "NavigablePlace")
@@ -95,21 +121,7 @@ struct OrienteerView: View {
                     alertMessage = "Unable to load place from local storage"
                 }
             case "coordinates":
-                let savedPlace = NavigablePlace(context: viewContext)
-                savedPlace.name = destinationPlaceId
-                savedPlace.latitude = Double(destinationPlaceId.split(separator: ",").first!)!
-                savedPlace.longitude = Double(destinationPlaceId.split(separator: ",").last!)!
-                savedPlace.timestamp = Date()
-                savedPlace.id = UUID()
-                do {
-                    if userSettings.history {
-                        try viewContext.save()
-                    }
-                } catch {
-                    let nsError = error as NSError
-                    alertMessage = "Failed to save navigable place: \(nsError)"
-                }
-                destinationPlace = savedPlace
+                destinationPlace = savePlace(name: destinationPlaceId, address: nil, latitude: Double(destinationPlaceId.split(separator: ",").first!)!, longitude: Double(destinationPlaceId.split(separator: ",").last!)!)
             default:
                 alertMessage = "Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView"
             }
