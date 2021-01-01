@@ -16,6 +16,33 @@
 		D01F2EF725913E250042E091 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
 		D01F2EFC2591502D0042E091 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
+		D03AAB34259FC3EF004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03AAB33259FC3EF004C4C99 /* Assets.xcassets */; };
+		D03AAB3B259FC3EF004C4C99 /* WatchOrienteer Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */; };
+		D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */; };
+		D03AAB46259FC3F0004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03AAB45259FC3F0004C4C99 /* Assets.xcassets */; };
+		D03AAB49259FC3F0004C4C99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03AAB48259FC3F0004C4C99 /* Preview Assets.xcassets */; };
+		D03AAB4D259FC3F0004C4C99 /* WatchOrienteer.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D03AAB66259FC51E004C4C99 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
+		D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
+		D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BC282591736D00061E0F /* Persistence.swift */; };
+		D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
+		D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
+		D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C547C52589C0D20073F292 /* Assets.xcassets */; };
+		D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
+		D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
+		D03AAB71259FC51E004C4C99 /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
+		D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
+		D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
+		D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
+		D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
+		D03AAB81259FC6AE004C4C99 /* PlaceHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BBE0259171F200061E0F /* PlaceHistory.xcdatamodeld */; };
+		D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
+		D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */; };
+		D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
+		D03AABBA259FD139004C4C99 /* OrienteerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */; };
+		D03AABBB259FD139004C4C99 /* OrienteerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */; };
@@ -39,6 +66,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D03AAB3C259FC3EF004C4C99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D03AAB39259FC3EF004C4C99;
+			remoteInfo = "WatchOrienteer Extension";
+		};
+		D03AAB4B259FC3F0004C4C99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D03AAB30259FC3EE004C4C99;
+			remoteInfo = WatchOrienteer;
+		};
 		D0C547D02589C0D20073F292 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
@@ -55,6 +96,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D03AAB4E259FC3F0004C4C99 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				D03AAB4D259FC3F0004C4C99 /* WatchOrienteer.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D03AAB51259FC3F0004C4C99 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D03AAB3B259FC3EF004C4C99 /* WatchOrienteer Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesAutocompleteResponse.swift; sourceTree = "<group>"; };
 		D0037D71258FC11800CD9B6A /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
@@ -65,6 +131,18 @@
 		D01F2EF625913E250042E091 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesFromNorth.swift; sourceTree = "<group>"; };
 		D023AF33258D754D00DDC691 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchOrienteer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03AAB33259FC3EF004C4C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D03AAB35259FC3EF004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOrienteer Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyView.swift; sourceTree = "<group>"; };
+		D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		D03AAB45259FC3F0004C4C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D03AAB48259FC3F0004C4C99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D03AAB4A259FC3F0004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrienteerApp.swift; path = ../../../.Trash/OrienteerApp.swift; sourceTree = "<group>"; };
+		D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionProvider.swift; sourceTree = "<group>"; };
+		D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerViewModel.swift; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
@@ -94,6 +172,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D03AAB37259FC3EF004C4C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0C547BB2589C0D10073F292 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,6 +203,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D03AAB32259FC3EE004C4C99 /* WatchOrienteer */ = {
+			isa = PBXGroup;
+			children = (
+				D03AAB33259FC3EF004C4C99 /* Assets.xcassets */,
+				D03AAB35259FC3EF004C4C99 /* Info.plist */,
+			);
+			path = WatchOrienteer;
+			sourceTree = "<group>";
+		};
+		D03AAB3E259FC3EF004C4C99 /* WatchOrienteer Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */,
+				D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */,
+				D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */,
+				D03AAB45259FC3F0004C4C99 /* Assets.xcassets */,
+				D03AAB4A259FC3F0004C4C99 /* Info.plist */,
+				D03AAB47259FC3F0004C4C99 /* Preview Content */,
+			);
+			path = "WatchOrienteer Extension";
+			sourceTree = "<group>";
+		};
+		D03AAB47259FC3F0004C4C99 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D03AAB48259FC3F0004C4C99 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D05A0235258B15CB00289F0A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +253,8 @@
 				D0C547C02589C0D10073F292 /* Orienteer */,
 				D0C547D22589C0D20073F292 /* OrienteerTests */,
 				D0C547DD2589C0D20073F292 /* OrienteerUITests */,
+				D03AAB32259FC3EE004C4C99 /* WatchOrienteer */,
+				D03AAB3E259FC3EF004C4C99 /* WatchOrienteer Extension */,
 				D0C547BF2589C0D10073F292 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,6 +265,8 @@
 				D0C547BE2589C0D10073F292 /* Orienteer.app */,
 				D0C547CF2589C0D20073F292 /* OrienteerTests.xctest */,
 				D0C547DA2589C0D20073F292 /* OrienteerUITests.xctest */,
+				D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */,
+				D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +280,8 @@
 				D01F2EE1259132870042E091 /* UserSettings.swift */,
 				D0E8BC282591736D00061E0F /* Persistence.swift */,
 				D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */,
+				D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */,
+				D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */,
 				D0C547F52589D45F0073F292 /* Views */,
 				D05A0235258B15CB00289F0A /* Extensions */,
 				D0C547F42589D43C0073F292 /* Model */,
@@ -226,6 +347,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D03AAB30259FC3EE004C4C99 /* WatchOrienteer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D03AAB55259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer" */;
+			buildPhases = (
+				D03AAB2F259FC3EE004C4C99 /* Resources */,
+				D03AAB51259FC3F0004C4C99 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D03AAB3D259FC3EF004C4C99 /* PBXTargetDependency */,
+			);
+			name = WatchOrienteer;
+			productName = WatchOrienteer;
+			productReference = D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D03AAB54259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer Extension" */;
+			buildPhases = (
+				D03AAB36259FC3EF004C4C99 /* Sources */,
+				D03AAB37259FC3EF004C4C99 /* Frameworks */,
+				D03AAB38259FC3EF004C4C99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchOrienteer Extension";
+			productName = "WatchOrienteer Extension";
+			productReference = D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		D0C547BD2589C0D10073F292 /* Orienteer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0C547E32589C0D20073F292 /* Build configuration list for PBXNativeTarget "Orienteer" */;
@@ -233,10 +388,12 @@
 				D0C547BA2589C0D10073F292 /* Sources */,
 				D0C547BB2589C0D10073F292 /* Frameworks */,
 				D0C547BC2589C0D10073F292 /* Resources */,
+				D03AAB4E259FC3F0004C4C99 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D03AAB4C259FC3F0004C4C99 /* PBXTargetDependency */,
 			);
 			name = Orienteer;
 			productName = Orienteer;
@@ -288,6 +445,12 @@
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					D03AAB30259FC3EE004C4C99 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					D03AAB39259FC3EF004C4C99 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					D0C547BD2589C0D10073F292 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -317,11 +480,32 @@
 				D0C547BD2589C0D10073F292 /* Orienteer */,
 				D0C547CE2589C0D20073F292 /* OrienteerTests */,
 				D0C547D92589C0D20073F292 /* OrienteerUITests */,
+				D03AAB30259FC3EE004C4C99 /* WatchOrienteer */,
+				D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D03AAB2F259FC3EE004C4C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D03AAB34259FC3EF004C4C99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D03AAB38259FC3EF004C4C99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */,
+				D03AAB49259FC3F0004C4C99 /* Preview Assets.xcassets in Resources */,
+				D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */,
+				D03AAB46259FC3F0004C4C99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0C547BC2589C0D10073F292 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,10 +533,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D03AAB36259FC3EF004C4C99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D03AAB71259FC51E004C4C99 /* NavigablePlace.swift in Sources */,
+				D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */,
+				D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */,
+				D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */,
+				D03AAB81259FC6AE004C4C99 /* PlaceHistory.xcdatamodeld in Sources */,
+				D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */,
+				D03AABBB259FD139004C4C99 /* OrienteerViewModel.swift in Sources */,
+				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
+				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
+				D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */,
+				D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */,
+				D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */,
+				D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */,
+				D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */,
+				D03AAB66259FC51E004C4C99 /* OrienteerCompassView.swift in Sources */,
+				D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */,
+				D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */,
+				D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0C547BA2589C0D10073F292 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03AABBA259FD139004C4C99 /* OrienteerViewModel.swift in Sources */,
 				D0037D80258FC6F000CD9B6A /* OrienteerView.swift in Sources */,
 				D05A0237258B15E200289F0A /* URLSession.swift in Sources */,
 				D07E01C32592BF04007BC9A6 /* SynchronizedCounter.swift in Sources */,
@@ -367,6 +577,7 @@
 				D0E8BBE2259171F200061E0F /* PlaceHistory.xcdatamodeld in Sources */,
 				D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */,
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
+				D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */,
 				D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
 				D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */,
@@ -399,6 +610,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D03AAB3D259FC3EF004C4C99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */;
+			targetProxy = D03AAB3C259FC3EF004C4C99 /* PBXContainerItemProxy */;
+		};
+		D03AAB4C259FC3F0004C4C99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D03AAB30259FC3EE004C4C99 /* WatchOrienteer */;
+			targetProxy = D03AAB4B259FC3F0004C4C99 /* PBXContainerItemProxy */;
+		};
 		D0C547D12589C0D20073F292 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0C547BD2589C0D10073F292 /* Orienteer */;
@@ -412,6 +633,94 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D03AAB4F259FC3F0004C4C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				IBSC_MODULE = WatchOrienteer_Extension;
+				INFOPLIST_FILE = WatchOrienteer/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		D03AAB50259FC3F0004C4C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				IBSC_MODULE = WatchOrienteer_Extension;
+				INFOPLIST_FILE = WatchOrienteer/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
+		D03AAB52259FC3F0004C4C99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WatchOrienteer Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Debug;
+		};
+		D03AAB53259FC3F0004C4C99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WatchOrienteer Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
 		D0C547E12589C0D20073F292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -659,6 +968,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D03AAB54259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D03AAB52259FC3F0004C4C99 /* Debug */,
+				D03AAB53259FC3F0004C4C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D03AAB55259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D03AAB4F259FC3F0004C4C99 /* Debug */,
+				D03AAB50259FC3F0004C4C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D0C547B92589C0D10073F292 /* Build configuration list for PBXProject "Orienteer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
