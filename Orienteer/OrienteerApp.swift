@@ -12,10 +12,11 @@ struct OrienteerApp: App {
     @StateObject var userSettings = UserSettings()
     @StateObject var userLocation = UserLocation()
     let persistenceController = PersistenceController.shared
+    let geocoder = Geocoder()
 
     var body: some Scene {
         WindowGroup {
-            SearchView(userLocation: userLocation)
+            SearchView(userLocation: userLocation, geocoder: geocoder)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(userSettings)
         }

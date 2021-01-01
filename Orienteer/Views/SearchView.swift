@@ -20,7 +20,7 @@ struct SearchView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var userSettings: UserSettings
-    var geocoder = Geocoder()
+    var geocoder: Geocoder
     @State private var searchInput = ""
     @State private var autocompleteResults = [PlacesAutocompletePrediction]()
     @State private var settingsDisplayed = false
@@ -30,8 +30,9 @@ struct SearchView: View {
     private var autocompleteRequestCount = SynchronizedCounter()
     private let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
 
-    init(userLocation: UserLocation) {
+    init(userLocation: UserLocation, geocoder: Geocoder) {
         self.userLocation = userLocation
+        self.geocoder = geocoder
     }
 
     private var searchResults: [SearchResultListEntry] {
@@ -141,6 +142,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(userLocation: UserLocation(previewMode: true))
+        SearchView(userLocation: UserLocation(previewMode: true), geocoder: Geocoder())
     }
 }

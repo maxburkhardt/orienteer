@@ -41,8 +41,6 @@
 		D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */; };
 		D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
-		D03AABBA259FD139004C4C99 /* OrienteerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */; };
-		D03AABBB259FD139004C4C99 /* OrienteerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */; };
@@ -142,7 +140,6 @@
 		D03AAB4A259FC3F0004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrienteerApp.swift; path = ../../../.Trash/OrienteerApp.swift; sourceTree = "<group>"; };
 		D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionProvider.swift; sourceTree = "<group>"; };
-		D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerViewModel.swift; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
@@ -281,7 +278,6 @@
 				D0E8BC282591736D00061E0F /* Persistence.swift */,
 				D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */,
 				D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */,
-				D03AABB9259FD139004C4C99 /* OrienteerViewModel.swift */,
 				D0C547F52589D45F0073F292 /* Views */,
 				D05A0235258B15CB00289F0A /* Extensions */,
 				D0C547F42589D43C0073F292 /* Model */,
@@ -543,7 +539,6 @@
 				D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */,
 				D03AAB81259FC6AE004C4C99 /* PlaceHistory.xcdatamodeld in Sources */,
 				D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */,
-				D03AABBB259FD139004C4C99 /* OrienteerViewModel.swift in Sources */,
 				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
 				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
 				D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */,
@@ -562,7 +557,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03AABBA259FD139004C4C99 /* OrienteerViewModel.swift in Sources */,
 				D0037D80258FC6F000CD9B6A /* OrienteerView.swift in Sources */,
 				D05A0237258B15E200289F0A /* URLSession.swift in Sources */,
 				D07E01C32592BF04007BC9A6 /* SynchronizedCounter.swift in Sources */,
