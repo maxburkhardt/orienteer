@@ -18,6 +18,7 @@ struct HistoryView: View {
     )
     private var places: FetchedResults<NavigablePlace>
     @State private var alertMessage = ""
+    @State private var showingConfirmation = false
 
     var body: some View {
         let showAlertBinding = Binding<Bool>(get: {
@@ -39,7 +40,7 @@ struct HistoryView: View {
             .listStyle(PlainListStyle())
             HStack {
                 Spacer()
-                Button(action: { deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex)) }, label: {
+                Button(action: { showingConfirmation = true }, label: {
                     Text("Clear History")
                 })
                 Spacer()
@@ -48,6 +49,11 @@ struct HistoryView: View {
         .padding(10.0)
         .alert(isPresented: showAlertBinding) {
             Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
+        .alert(isPresented: $showingConfirmation) {
+            Alert(title: Text("Are you sure you want to clear history?"), message: Text("This action cannot be undone."), primaryButton: .destructive(Text("Yes, clear")) {
+                deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex))
+            }, secondaryButton: .cancel())
         }
     }
 
