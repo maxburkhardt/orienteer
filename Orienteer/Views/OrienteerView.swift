@@ -88,7 +88,6 @@ struct OrienteerView: View {
                     duplicateFetch.predicate = NSPredicate(format: "name == %@ && latitude == %@ && longitude == %@", place.name, String(place.coordinates.coordinate.latitude), String(place.coordinates.coordinate.longitude))
                     do {
                         let duplicates = try viewContext.fetch(duplicateFetch)
-                        print("Duplicates found: \(duplicates.count)")
                         if let duplicate = duplicates.first {
                             // There was a previous place with the same name and coordinates, so just use that
                             duplicate.timestamp = Date()
