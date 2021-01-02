@@ -34,11 +34,12 @@ class WatchConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
 
-    func sendPlaceInformation(place: NavigablePlace) {
+    func sendPlaceInformation(place: NavigablePlace, settings: UserSettings) {
         let message = [
             "name": place.name!,
             "latitude": place.latitude,
             "longitude": place.longitude,
+            "units": settings.units.rawValue,
         ] as [String: Any]
         sendQueue.append(message)
         if isConnected {

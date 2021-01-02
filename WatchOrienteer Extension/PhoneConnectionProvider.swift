@@ -11,7 +11,6 @@ import WatchConnectivity
 class PhoneConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
     private let session: WCSession
     @Published var lastMessage: [String: Any]? = nil
-    private var sendQueue: [[String: Any]] = []
 
     init(session: WCSession = .default) {
         self.session = session
@@ -19,16 +18,7 @@ class PhoneConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
         self.session.delegate = self
     }
 
-    private func sendMessagesInQueue() {
-        for message in sendQueue {
-            session.sendMessage(message, replyHandler: nil, errorHandler: { error in
-                print("Send error: \(error.localizedDescription)")
-            })
-        }
-    }
-
     func connect() {
-        print("Connecting to phone")
         guard WCSession.isSupported() else {
             print("WCSession is not supported")
             return
@@ -36,10 +26,7 @@ class PhoneConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
 
-    func session(_: WCSession, activationDidCompleteWith _: WCSessionActivationState, error _: Error?) {
-        print("Watch session activate, sending message queue")
-        sendMessagesInQueue()
-    }
+    func session(_: WCSession, activationDidCompleteWith _: WCSessionActivationState, error _: Error?) {}
 
     func session(_: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {

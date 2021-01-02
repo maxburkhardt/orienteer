@@ -22,8 +22,8 @@ struct OrienteerCompassView: View {
     var body: some View {
         Image(systemName: "location.circle")
             .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
-            .font(.system(size: scale == .large ? 200 : 50))
-            .padding(.bottom, 20.0)
+            .font(.system(size: scale == .large ? 200 : 72))
+            .padding(.bottom, scale == .large ? 20.0 : 0.0)
     }
 }
 

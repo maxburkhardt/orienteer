@@ -21,7 +21,7 @@ struct OrienteerView: View {
     @State private var destinationPlace: NavigablePlace? = nil {
         didSet {
             if let place = destinationPlace {
-                watchConnectionProvider.sendPlaceInformation(place: place)
+                watchConnectionProvider.sendPlaceInformation(place: place, settings: userSettings)
             }
         }
     }

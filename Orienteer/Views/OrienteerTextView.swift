@@ -18,13 +18,13 @@ struct OrienteerTextView: View {
             Text(bearing != nil ? bearing!.toCardinalOrdinal() : "")
                 .font(.largeTitle)
                 .bold()
-            Text(distance != nil ? distance!.convertToHumanReadable(settings: userSettings) : "")
+            Text(distance != nil ? distance!.convertToHumanReadable(units: userSettings.units) : "")
                 .font(.title)
             HStack {
                 Text("Location accuracy:")
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text("±\(userLocation.lastLocation?.horizontalAccuracy.convertToHumanReadable(settings: userSettings) ?? "Not available")")
+                Text("±\(userLocation.lastLocation?.horizontalAccuracy.convertToHumanReadable(units: userSettings.units) ?? "Not available")")
                     .font(.caption)
                     .foregroundColor(Color.gray)
             }
