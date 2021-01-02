@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ReadyView: View {
+    @Environment(\.scenePhase) var scenePhase
     @State private var searchInput = ""
     @EnvironmentObject var phoneConnectionProvider: PhoneConnectionProvider
     @EnvironmentObject var userLocation: UserLocation
+
+    private func attemptToGetPlace() {
+        if !phoneConnectionProvider.isConnected {
+            phoneConnectionProvider.connect()
+        } else {
+            phoneConnectionProvider.requestPlace()
+        }
+    }
 
     var body: some View {
         let shouldStartOrienteering = Binding<Bool>(
@@ -41,8 +50,15 @@ struct ReadyView: View {
                 .frame(width: 1, height: 1, alignment: .center)
         }
         .onAppear {
-            if !phoneConnectionProvider.isConnected {
-                phoneConnectionProvider.connect()
+            attemptToGetPlace()
+        }
+        .onChange(of: scenePhase) { newScenePhase in
+            switch newScenePhase {
+            case .active:
+                attemptToGetPlace()
+            default:
+                // Do nothing
+                do {}
             }
         }
     }

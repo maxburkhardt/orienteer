@@ -21,7 +21,7 @@ struct OrienteerView: View {
     @State private var destinationPlace: NavigablePlace? = nil {
         didSet {
             if let place = destinationPlace {
-                watchConnectionProvider.sendPlaceInformation(place: place, settings: userSettings)
+                watchConnectionProvider.synchronizedPlace = place
             }
         }
     }
@@ -88,7 +88,7 @@ struct OrienteerView: View {
                 UIApplication.shared.isIdleTimerDisabled = true
             }
             if !watchConnectionProvider.isConnected {
-                watchConnectionProvider.connect()
+                watchConnectionProvider.connect(userSettings: userSettings)
             }
             switch destinationPlaceType {
             case "googleplace":
@@ -147,6 +147,7 @@ struct OrienteerView: View {
         .onDisappear {
             geocoder.popErrorHandler()
             UIApplication.shared.isIdleTimerDisabled = false
+            watchConnectionProvider.synchronizedPlace = nil
         }
         .alert(isPresented: showAlertBinding) {
             Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))

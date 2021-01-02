@@ -26,7 +26,16 @@ class PhoneConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
 
-    func session(_: WCSession, activationDidCompleteWith _: WCSessionActivationState, error _: Error?) {}
+    func requestPlace() {
+        session.sendMessage(["type": "sendPlace"], replyHandler: nil, errorHandler: { error in
+            print("Send error: \(error.localizedDescription)")
+        })
+    }
+
+    func session(_: WCSession, activationDidCompleteWith _: WCSessionActivationState, error _: Error?) {
+        // Request a location from the app on channel open
+        requestPlace()
+    }
 
     func session(_: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
