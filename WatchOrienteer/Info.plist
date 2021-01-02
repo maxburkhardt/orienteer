@@ -29,7 +29,5 @@
 	<string>maxb.fm.Orienteer</string>
 	<key>WKWatchKitApp</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Orienteer needs to know your location to guide you.</string>
 </dict>
 </plist>

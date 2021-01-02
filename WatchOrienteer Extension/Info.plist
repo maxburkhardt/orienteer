@@ -32,9 +32,9 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
-	<key>WKRunsIndependentlyOfCompanionApp</key>
-	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Orienteer needs to know your location to guide you.</string>
+	<key>WKRunsIndependentlyOfCompanionApp</key>
+	<false/>
 </dict>
 </plist>

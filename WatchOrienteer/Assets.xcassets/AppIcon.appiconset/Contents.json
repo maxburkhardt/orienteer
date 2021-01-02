@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Watch-Notifications-38mm-2x.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -8,6 +9,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "Watch-Notifications-42mm-2x.png",
       "idiom" : "watch",
       "role" : "notificationCenter",
       "scale" : "2x",
@@ -15,6 +17,7 @@
       "subtype" : "42mm"
     },
     {
+      "filename" : "iPhone-Settings-2x.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "2x",
@@ -52,6 +55,7 @@
       "subtype" : "44mm"
     },
     {
+      "filename" : "Watch-38mm-ShortLook.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -59,6 +63,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "Watch-42mm-ShortLook.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
@@ -66,6 +71,7 @@
       "subtype" : "42mm"
     },
     {
+      "filename" : "Watch-44mm-ShortLook.png",
       "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
