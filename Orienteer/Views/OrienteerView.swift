@@ -17,7 +17,15 @@ struct OrienteerView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.verticalSizeClass) private var sizeClass
     @EnvironmentObject var userSettings: UserSettings
-    @State private var destinationPlace: NavigablePlace? = nil
+    @EnvironmentObject var watchConnectionProvider: WatchConnectionProvider
+    @State private var destinationPlace: NavigablePlace? = nil {
+        didSet {
+            if let place = destinationPlace {
+                watchConnectionProvider.sendPlaceInformation(place: place)
+            }
+        }
+    }
+
     @State private var orientation = UIDevice.current.orientation
     @State private var alertMessage = ""
 
@@ -61,12 +69,12 @@ struct OrienteerView: View {
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
-                OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
                     .padding(.bottom, 40.0)
                 OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
             } else {
                 HStack {
-                    OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                    OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
                         .padding(.trailing, 40.0)
                     OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
                 }
@@ -78,6 +86,9 @@ struct OrienteerView: View {
             userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
             if userSettings.disableScreenDim {
                 UIApplication.shared.isIdleTimerDisabled = true
+            }
+            if !watchConnectionProvider.isConnected {
+                watchConnectionProvider.connect()
             }
             switch destinationPlaceType {
             case "googleplace":

@@ -13,12 +13,14 @@ struct OrienteerApp: App {
     @StateObject var userLocation = UserLocation()
     let persistenceController = PersistenceController.shared
     let geocoder = Geocoder()
+    let watchConnectionProvider = WatchConnectionProvider()
 
     var body: some Scene {
         WindowGroup {
             SearchView(userLocation: userLocation, geocoder: geocoder)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(userSettings)
+                .environmentObject(watchConnectionProvider)
         }
     }
 }

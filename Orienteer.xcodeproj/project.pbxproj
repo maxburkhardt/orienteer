@@ -41,6 +41,8 @@
 		D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */; };
 		D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
+		D03AABDC25A010C5004C4C99 /* PhoneConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */; };
+		D03AABE825A012A6004C4C99 /* WatchOrienteerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */; };
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */; };
@@ -140,6 +142,8 @@
 		D03AAB4A259FC3F0004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrienteerApp.swift; path = ../../../.Trash/OrienteerApp.swift; sourceTree = "<group>"; };
 		D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionProvider.swift; sourceTree = "<group>"; };
+		D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionProvider.swift; sourceTree = "<group>"; };
+		D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOrienteerView.swift; sourceTree = "<group>"; };
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		D07E01B82592B074007BC9A6 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
@@ -215,9 +219,11 @@
 				D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */,
 				D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */,
 				D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */,
+				D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */,
 				D03AAB45259FC3F0004C4C99 /* Assets.xcassets */,
 				D03AAB4A259FC3F0004C4C99 /* Info.plist */,
 				D03AAB47259FC3F0004C4C99 /* Preview Content */,
+				D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */,
 			);
 			path = "WatchOrienteer Extension";
 			sourceTree = "<group>";
@@ -541,7 +547,9 @@
 				D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */,
 				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
 				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
+				D03AABDC25A010C5004C4C99 /* PhoneConnectionProvider.swift in Sources */,
 				D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */,
+				D03AABE825A012A6004C4C99 /* WatchOrienteerView.swift in Sources */,
 				D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */,
 				D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */,
 				D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */,
@@ -634,6 +642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				IBSC_MODULE = WatchOrienteer_Extension;
 				INFOPLIST_FILE = WatchOrienteer/Info.plist;
@@ -654,6 +663,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				IBSC_MODULE = WatchOrienteer_Extension;
 				INFOPLIST_FILE = WatchOrienteer/Info.plist;
@@ -672,6 +682,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
@@ -696,6 +707,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;

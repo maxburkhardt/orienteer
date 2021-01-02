@@ -1,6 +1,6 @@
 //
-//  WatchConnectionProvider.swift
-//  Orienteer
+//  PhoneConnectionProvider.swift
+//  WatchOrienteer Extension
 //
 //  Created by Maximilian Burkhardt on 1/1/21.
 //
@@ -8,8 +8,9 @@
 import Foundation
 import WatchConnectivity
 
-class WatchConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
+class PhoneConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
     private let session: WCSession
+    @Published var lastMessage: [String: Any]? = nil
     private var sendQueue: [[String: Any]] = []
 
     init(session: WCSession = .default) {
@@ -27,6 +28,7 @@ class WatchConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
     }
 
     func connect() {
+        print("Connecting to phone")
         guard WCSession.isSupported() else {
             print("WCSession is not supported")
             return
@@ -34,27 +36,18 @@ class WatchConnectionProvider: NSObject, WCSessionDelegate, ObservableObject {
         session.activate()
     }
 
-    func sendPlaceInformation(place: NavigablePlace) {
-        let message = [
-            "name": place.name!,
-            "latitude": place.latitude,
-            "longitude": place.longitude,
-        ] as [String: Any]
-        sendQueue.append(message)
-        if isConnected {
-            sendMessagesInQueue()
-        }
-    }
-
     func session(_: WCSession, activationDidCompleteWith _: WCSessionActivationState, error _: Error?) {
+        print("Watch session activate, sending message queue")
         sendMessagesInQueue()
     }
 
-    func sessionDidBecomeInactive(_: WCSession) {}
-
-    func sessionDidDeactivate(_: WCSession) {}
+    func session(_: WCSession, didReceiveMessage message: [String: Any]) {
+        DispatchQueue.main.async {
+            self.lastMessage = message
+        }
+    }
 
     var isConnected: Bool {
-        session.isPaired && session.isReachable
+        session.isReachable
     }
 }

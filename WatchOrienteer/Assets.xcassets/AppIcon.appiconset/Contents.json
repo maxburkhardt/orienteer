@@ -21,12 +21,14 @@
       "size" : "29x29"
     },
     {
+      "filename" : "iPhone-Settings-3x.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
+      "filename" : "iPhone-Spotlight-2x.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -34,6 +36,7 @@
       "subtype" : "38mm"
     },
     {
+      "filename" : "Watch-40mm-Home.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -41,6 +44,7 @@
       "subtype" : "40mm"
     },
     {
+      "filename" : "Watch-44mm-Home.png",
       "idiom" : "watch",
       "role" : "appLauncher",
       "scale" : "2x",
@@ -69,6 +73,7 @@
       "subtype" : "44mm"
     },
     {
+      "filename" : "App Store.png",
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
