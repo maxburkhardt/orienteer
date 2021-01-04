@@ -132,6 +132,9 @@ struct OrienteerView: View {
                 }
             case "coordinates":
                 destinationPlace = savePlace(name: destinationPlaceId, address: nil, latitude: Double(destinationPlaceId.split(separator: ",").first!)!, longitude: Double(destinationPlaceId.split(separator: ",").last!)!)
+            case "appclip":
+                // Do nothing: this will be handled by a different lifecycle handler
+                do {}
             default:
                 alertMessage = "Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView"
             }
@@ -149,6 +152,36 @@ struct OrienteerView: View {
             UIApplication.shared.isIdleTimerDisabled = false
             watchConnectionProvider.synchronizedPlace = nil
         }
+        .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in
+            guard activity.activityType == NSUserActivityTypeBrowsingWeb else { return }
+            guard let incomingURL = activity.webpageURL else { return }
+            guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            guard let name = components.queryItems?.first(where: { $0.name == "name" })?.value else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            guard let latitudeStr = components.queryItems?.first(where: { $0.name == "latitude" })?.value else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            guard let longitudeStr = components.queryItems?.first(where: { $0.name == "longitude" })?.value else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            guard let latitude = Double(latitudeStr) else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            guard let longitude = Double(longitudeStr) else {
+                alertMessage = "Could not load destination info from App Clip."
+                return
+            }
+            destinationPlace = savePlace(name: name, address: nil, latitude: latitude, longitude: longitude)
+
+        })
         .alert(isPresented: showAlertBinding) {
             Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }

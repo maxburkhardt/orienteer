@@ -37,7 +37,6 @@
 		D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
 		D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
-		D03AAB81259FC6AE004C4C99 /* PlaceHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BBE0259171F200061E0F /* PlaceHistory.xcdatamodeld */; };
 		D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */; };
 		D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
@@ -49,6 +48,29 @@
 		D07E01BE2592BB55007BC9A6 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01BD2592BB55007BC9A6 /* ActivityIndicator.swift */; };
 		D07E01C32592BF04007BC9A6 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D08D4EA525A292C400711E02 /* OrienteerAppClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D4EA425A292C400711E02 /* OrienteerAppClipApp.swift */; };
+		D08D4EA925A292C400711E02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08D4EA825A292C400711E02 /* Assets.xcassets */; };
+		D08D4EAC25A292C400711E02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */; };
+		D08D4EB625A292C400711E02 /* OrienteerAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D08D4EA225A292C400711E02 /* OrienteerAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D08D4EC725A297DE00711E02 /* PlaceHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BBE0259171F200061E0F /* PlaceHistory.xcdatamodeld */; };
+		D08D4EDA25A297F700711E02 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BC282591736D00061E0F /* Persistence.swift */; };
+		D08D4EE125A298E100711E02 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
+		D08D4EE825A298E600711E02 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
+		D08D4EEF25A298F100711E02 /* OrienteerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D7F258FC6F000CD9B6A /* OrienteerView.swift */; };
+		D08D4EFC25A2993000711E02 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
+		D08D4F0325A299F100711E02 /* OrienteerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */; };
+		D08D4F0A25A299F500711E02 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
+		D08D4F1125A29A1A00711E02 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
+		D08D4F1825A29A2D00711E02 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
+		D08D4F1925A29A2D00711E02 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
+		D08D4F1A25A29A2D00711E02 /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
+		D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
+		D08D4F1C25A29A2D00711E02 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
+		D08D4F1D25A29A2D00711E02 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
+		D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
+		D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
+		D08D4F3325A29A8700711E02 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
 		D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */; };
 		D0A1889A25930BE300A57E42 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
@@ -79,6 +101,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D03AAB30259FC3EE004C4C99;
 			remoteInfo = WatchOrienteer;
+		};
+		D08D4EB425A292C400711E02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D08D4EA125A292C400711E02;
+			remoteInfo = OrienteerAppClip;
 		};
 		D0C547D02589C0D20073F292 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -119,6 +148,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D08D4EB725A292C400711E02 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				D08D4EB625A292C400711E02 /* OrienteerAppClip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +190,12 @@
 		D07E01BD2592BB55007BC9A6 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedCounter.swift; sourceTree = "<group>"; };
 		D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPlaceResponse.swift; sourceTree = "<group>"; };
+		D08D4EA225A292C400711E02 /* OrienteerAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrienteerAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08D4EA425A292C400711E02 /* OrienteerAppClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerAppClipApp.swift; sourceTree = "<group>"; };
+		D08D4EA825A292C400711E02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D08D4EB225A292C400711E02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D08D4EB325A292C400711E02 /* OrienteerAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrienteerAppClip.entitlements; sourceTree = "<group>"; };
 		D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientation.swift; sourceTree = "<group>"; };
 		D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerTextView.swift; sourceTree = "<group>"; };
 		D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerCompassView.swift; sourceTree = "<group>"; };
@@ -174,6 +220,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		D03AAB37259FC3EF004C4C99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08D4E9F25A292C400711E02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,6 +302,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D08D4EA325A292C400711E02 /* OrienteerAppClip */ = {
+			isa = PBXGroup;
+			children = (
+				D08D4EA425A292C400711E02 /* OrienteerAppClipApp.swift */,
+				D08D4EA825A292C400711E02 /* Assets.xcassets */,
+				D08D4EB225A292C400711E02 /* Info.plist */,
+				D08D4EB325A292C400711E02 /* OrienteerAppClip.entitlements */,
+				D08D4EAA25A292C400711E02 /* Preview Content */,
+			);
+			path = OrienteerAppClip;
+			sourceTree = "<group>";
+		};
+		D08D4EAA25A292C400711E02 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D0C547B52589C0D10073F292 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +331,7 @@
 				D0C547DD2589C0D20073F292 /* OrienteerUITests */,
 				D03AAB32259FC3EE004C4C99 /* WatchOrienteer */,
 				D03AAB3E259FC3EF004C4C99 /* WatchOrienteer Extension */,
+				D08D4EA325A292C400711E02 /* OrienteerAppClip */,
 				D0C547BF2589C0D10073F292 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -270,6 +344,7 @@
 				D0C547DA2589C0D20073F292 /* OrienteerUITests.xctest */,
 				D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */,
 				D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */,
+				D08D4EA225A292C400711E02 /* OrienteerAppClip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,6 +458,23 @@
 			productReference = D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		D08D4EA125A292C400711E02 /* OrienteerAppClip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D08D4EBA25A292C400711E02 /* Build configuration list for PBXNativeTarget "OrienteerAppClip" */;
+			buildPhases = (
+				D08D4E9E25A292C400711E02 /* Sources */,
+				D08D4E9F25A292C400711E02 /* Frameworks */,
+				D08D4EA025A292C400711E02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OrienteerAppClip;
+			productName = OrienteerAppClip;
+			productReference = D08D4EA225A292C400711E02 /* OrienteerAppClip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
+		};
 		D0C547BD2589C0D10073F292 /* Orienteer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0C547E32589C0D20073F292 /* Build configuration list for PBXNativeTarget "Orienteer" */;
@@ -391,11 +483,13 @@
 				D0C547BB2589C0D10073F292 /* Frameworks */,
 				D0C547BC2589C0D10073F292 /* Resources */,
 				D03AAB4E259FC3F0004C4C99 /* Embed Watch Content */,
+				D08D4EB725A292C400711E02 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				D03AAB4C259FC3F0004C4C99 /* PBXTargetDependency */,
+				D08D4EB525A292C400711E02 /* PBXTargetDependency */,
 			);
 			name = Orienteer;
 			productName = Orienteer;
@@ -453,6 +547,9 @@
 					D03AAB39259FC3EF004C4C99 = {
 						CreatedOnToolsVersion = 12.3;
 					};
+					D08D4EA125A292C400711E02 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 					D0C547BD2589C0D10073F292 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -484,6 +581,7 @@
 				D0C547D92589C0D20073F292 /* OrienteerUITests */,
 				D03AAB30259FC3EE004C4C99 /* WatchOrienteer */,
 				D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */,
+				D08D4EA125A292C400711E02 /* OrienteerAppClip */,
 			);
 		};
 /* End PBXProject section */
@@ -505,6 +603,16 @@
 				D03AAB49259FC3F0004C4C99 /* Preview Assets.xcassets in Resources */,
 				D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */,
 				D03AAB46259FC3F0004C4C99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08D4EA025A292C400711E02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08D4EAC25A292C400711E02 /* Preview Assets.xcassets in Resources */,
+				D08D4F3325A29A8700711E02 /* Secrets.plist in Resources */,
+				D08D4EA925A292C400711E02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,7 +651,6 @@
 				D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */,
 				D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */,
 				D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */,
-				D03AAB81259FC6AE004C4C99 /* PlaceHistory.xcdatamodeld in Sources */,
 				D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */,
 				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
 				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
@@ -558,6 +665,32 @@
 				D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */,
 				D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */,
 				D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08D4E9E25A292C400711E02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08D4EC725A297DE00711E02 /* PlaceHistory.xcdatamodeld in Sources */,
+				D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */,
+				D08D4EFC25A2993000711E02 /* Geocoder.swift in Sources */,
+				D08D4F1A25A29A2D00711E02 /* NavigablePlace.swift in Sources */,
+				D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */,
+				D08D4F1C25A29A2D00711E02 /* PlacesAutocompleteResponse.swift in Sources */,
+				D08D4F1125A29A1A00711E02 /* URLSession.swift in Sources */,
+				D08D4EE825A298E600711E02 /* UserSettings.swift in Sources */,
+				D08D4EDA25A297F700711E02 /* Persistence.swift in Sources */,
+				D08D4F0A25A299F500711E02 /* OrienteerCompassView.swift in Sources */,
+				D08D4F1925A29A2D00711E02 /* CLLocationDistance.swift in Sources */,
+				D08D4EEF25A298F100711E02 /* OrienteerView.swift in Sources */,
+				D08D4EA525A292C400711E02 /* OrienteerAppClipApp.swift in Sources */,
+				D08D4EE125A298E100711E02 /* UserLocation.swift in Sources */,
+				D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */,
+				D08D4F1825A29A2D00711E02 /* Double.swift in Sources */,
+				D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */,
+				D08D4F1D25A29A2D00711E02 /* UIDeviceOrientation.swift in Sources */,
+				D08D4F0325A299F100711E02 /* OrienteerTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +754,11 @@
 			isa = PBXTargetDependency;
 			target = D03AAB30259FC3EE004C4C99 /* WatchOrienteer */;
 			targetProxy = D03AAB4B259FC3F0004C4C99 /* PBXContainerItemProxy */;
+		};
+		D08D4EB525A292C400711E02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D08D4EA125A292C400711E02 /* OrienteerAppClip */;
+			targetProxy = D08D4EB425A292C400711E02 /* PBXContainerItemProxy */;
 		};
 		D0C547D12589C0D20073F292 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -724,6 +862,52 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+			};
+			name = Release;
+		};
+		D08D4EB825A292C400711E02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OrienteerAppClip/OrienteerAppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OrienteerAppClip/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = OrienteerAppClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D08D4EB925A292C400711E02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = OrienteerAppClip/OrienteerAppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"OrienteerAppClip/Preview Content\"";
+				DEVELOPMENT_TEAM = T4W2ZKZP9N;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = OrienteerAppClip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.Clip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -846,6 +1030,7 @@
 		D0C547E42589C0D20073F292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -870,6 +1055,7 @@
 		D0C547E52589C0D20073F292 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -988,6 +1174,15 @@
 			buildConfigurations = (
 				D03AAB4F259FC3F0004C4C99 /* Debug */,
 				D03AAB50259FC3F0004C4C99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D08D4EBA25A292C400711E02 /* Build configuration list for PBXNativeTarget "OrienteerAppClip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08D4EB825A292C400711E02 /* Debug */,
+				D08D4EB925A292C400711E02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
