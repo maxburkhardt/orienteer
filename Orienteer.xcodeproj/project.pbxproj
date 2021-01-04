@@ -196,6 +196,7 @@
 		D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D08D4EB225A292C400711E02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D08D4EB325A292C400711E02 /* OrienteerAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrienteerAppClip.entitlements; sourceTree = "<group>"; };
+		D08D4F3A25A2C81600711E02 /* Orienteer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Orienteer.entitlements; sourceTree = "<group>"; };
 		D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientation.swift; sourceTree = "<group>"; };
 		D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerTextView.swift; sourceTree = "<group>"; };
 		D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerCompassView.swift; sourceTree = "<group>"; };
@@ -352,6 +353,7 @@
 		D0C547C02589C0D10073F292 /* Orienteer */ = {
 			isa = PBXGroup;
 			children = (
+				D08D4F3A25A2C81600711E02 /* Orienteer.entitlements */,
 				D0C547C12589C0D10073F292 /* OrienteerApp.swift */,
 				D0C548032589DC990073F292 /* Geocoder.swift */,
 				D05A023B258B1CFB00289F0A /* UserLocation.swift */,
@@ -1033,6 +1035,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Orienteer/Orienteer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Orienteer/Preview Content\"";
@@ -1058,6 +1061,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Orienteer/Orienteer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Orienteer/Preview Content\"";
