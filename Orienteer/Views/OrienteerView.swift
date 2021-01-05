@@ -159,27 +159,25 @@ struct OrienteerView: View {
                 alertMessage = "Could not load destination info from App Clip."
                 return
             }
-            guard let name = components.queryItems?.first(where: { $0.name == "name" })?.value else {
+            guard let latitudeStr = components.queryItems?.first(where: { $0.name == "p" })?.value else {
                 alertMessage = "Could not load destination info from App Clip."
                 return
             }
-            guard let latitudeStr = components.queryItems?.first(where: { $0.name == "latitude" })?.value else {
+            guard let longitudeStr = components.queryItems?.first(where: { $0.name == "p1" })?.value else {
                 alertMessage = "Could not load destination info from App Clip."
                 return
             }
-            guard let longitudeStr = components.queryItems?.first(where: { $0.name == "longitude" })?.value else {
+            guard let latitudeUnconverted = Double(latitudeStr) else {
                 alertMessage = "Could not load destination info from App Clip."
                 return
             }
-            guard let latitude = Double(latitudeStr) else {
+            guard let longitudeUnconverted = Double(longitudeStr) else {
                 alertMessage = "Could not load destination info from App Clip."
                 return
             }
-            guard let longitude = Double(longitudeStr) else {
-                alertMessage = "Could not load destination info from App Clip."
-                return
-            }
-            destinationPlace = savePlace(name: name, address: nil, latitude: latitude, longitude: longitude)
+            let latitude = (latitudeUnconverted / pow(10, 6)) - 90.0
+            let longitude = (longitudeUnconverted / pow(10, 6)) - 180.0
+            destinationPlace = savePlace(name: "App Clip Destination", address: nil, latitude: latitude, longitude: longitude)
 
         })
         .alert(isPresented: showAlertBinding) {

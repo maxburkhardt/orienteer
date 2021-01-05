@@ -53,7 +53,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCAppClipURL"
-            value = "https://orienteer.app/clip?name=Clip%20Destination&amp;latitude=37.7844661&amp;longitude=-122.5030306"
+            value = "https://orienteer.app/?p=127784466&amp;p1=57496969"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
