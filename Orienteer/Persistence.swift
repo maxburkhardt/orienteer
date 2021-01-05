@@ -36,6 +36,10 @@ struct PersistenceController {
         container = NSPersistentContainer(name: "PlaceHistory")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            let storeURL = URL.storeURL(for: "group.maxb.fm.Orienteer", databaseName: "PlaceHistory")
+            let storeDescription = NSPersistentStoreDescription(url: storeURL)
+            container.persistentStoreDescriptions = [storeDescription]
         }
         container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {

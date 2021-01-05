@@ -25,13 +25,11 @@
 		D03AAB4D259FC3F0004C4C99 /* WatchOrienteer.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D03AAB66259FC51E004C4C99 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
 		D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
-		D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BC282591736D00061E0F /* Persistence.swift */; };
 		D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
 		D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
 		D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C547C52589C0D20073F292 /* Assets.xcassets */; };
 		D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
 		D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
-		D03AAB71259FC51E004C4C99 /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
 		D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
 		D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
@@ -85,6 +83,8 @@
 		D0E8BBE2259171F200061E0F /* PlaceHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BBE0259171F200061E0F /* PlaceHistory.xcdatamodeld */; };
 		D0E8BC292591736D00061E0F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BC282591736D00061E0F /* Persistence.swift */; };
 		D0E8BC31259193C000061E0F /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8BC30259193C000061E0F /* HistoryView.swift */; };
+		D0F5C65C25A3F87300ACF209 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F5C65B25A3F87300ACF209 /* URL.swift */; };
+		D0F5C65D25A3F87300ACF209 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F5C65B25A3F87300ACF209 /* URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +217,7 @@
 		D0E8BBE1259171F200061E0F /* PlaceHistory.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlaceHistory.xcdatamodel; sourceTree = "<group>"; };
 		D0E8BC282591736D00061E0F /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D0E8BC30259193C000061E0F /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		D0F5C65B25A3F87300ACF209 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +300,7 @@
 				D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */,
 				D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */,
 				D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */,
+				D0F5C65B25A3F87300ACF209 /* URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -649,11 +651,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03AAB71259FC51E004C4C99 /* NavigablePlace.swift in Sources */,
 				D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */,
 				D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */,
 				D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */,
-				D03AAB6A259FC51E004C4C99 /* Persistence.swift in Sources */,
 				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
 				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
 				D03AABDC25A010C5004C4C99 /* PhoneConnectionProvider.swift in Sources */,
@@ -689,6 +689,7 @@
 				D08D4EA525A292C400711E02 /* OrienteerAppClipApp.swift in Sources */,
 				D08D4EE125A298E100711E02 /* UserLocation.swift in Sources */,
 				D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */,
+				D0F5C65D25A3F87300ACF209 /* URL.swift in Sources */,
 				D08D4F1825A29A2D00711E02 /* Double.swift in Sources */,
 				D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */,
 				D08D4F1D25A29A2D00711E02 /* UIDeviceOrientation.swift in Sources */,
@@ -705,6 +706,7 @@
 				D07E01C32592BF04007BC9A6 /* SynchronizedCounter.swift in Sources */,
 				D0E8BC292591736D00061E0F /* Persistence.swift in Sources */,
 				D0C548042589DC990073F292 /* Geocoder.swift in Sources */,
+				D0F5C65C25A3F87300ACF209 /* URL.swift in Sources */,
 				D0C547C42589C0D10073F292 /* SearchView.swift in Sources */,
 				D01F2EF725913E250042E091 /* Double.swift in Sources */,
 				D0037D6D258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift in Sources */,
