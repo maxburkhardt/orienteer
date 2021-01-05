@@ -177,7 +177,15 @@ struct OrienteerView: View {
             }
             let latitude = (latitudeUnconverted / pow(10, 6)) - 90.0
             let longitude = (longitudeUnconverted / pow(10, 6)) - 180.0
-            destinationPlace = savePlace(name: "App Clip Destination", address: nil, latitude: latitude, longitude: longitude)
+            if let units = components.queryItems?.first(where: { $0.name == "p2" })?.value {
+                if units == "0" {
+                    userSettings.units = DistanceUnits.metric
+                } else if units == "1" {
+                    userSettings.units = DistanceUnits.imperial
+                }
+            }
+            let name = components.queryItems?.first(where: { $0.name == "p3" })?.value
+            destinationPlace = savePlace(name: name ?? "App Clip Destination", address: nil, latitude: latitude, longitude: longitude)
 
         })
         .alert(isPresented: showAlertBinding) {

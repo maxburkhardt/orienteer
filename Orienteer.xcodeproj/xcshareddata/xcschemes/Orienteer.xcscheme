@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D08D4EA125A292C400711E02"
-               BuildableName = "OrienteerAppClip.app"
-               BlueprintName = "OrienteerAppClip"
+               BlueprintIdentifier = "D0C547BD2589C0D10073F292"
+               BuildableName = "Orienteer.app"
+               BlueprintName = "Orienteer"
                ReferencedContainer = "container:Orienteer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0C547CE2589C0D20073F292"
+               BuildableName = "OrienteerTests.xctest"
+               BlueprintName = "OrienteerTests"
+               ReferencedContainer = "container:Orienteer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D0C547D92589C0D20073F292"
+               BuildableName = "OrienteerUITests.xctest"
+               BlueprintName = "OrienteerUITests"
+               ReferencedContainer = "container:Orienteer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -44,19 +64,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D08D4EA125A292C400711E02"
-            BuildableName = "OrienteerAppClip.app"
-            BlueprintName = "OrienteerAppClip"
+            BlueprintIdentifier = "D0C547BD2589C0D10073F292"
+            BuildableName = "Orienteer.app"
+            BlueprintName = "Orienteer"
             ReferencedContainer = "container:Orienteer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "_XCAppClipURL"
-            value = "https://orienteer.app/?p=127784466&amp;p1=57496969&amp;p2=0&amp;p3=Magic"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -68,9 +81,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D08D4EA125A292C400711E02"
-            BuildableName = "OrienteerAppClip.app"
-            BlueprintName = "OrienteerAppClip"
+            BlueprintIdentifier = "D0C547BD2589C0D10073F292"
+            BuildableName = "Orienteer.app"
+            BlueprintName = "Orienteer"
             ReferencedContainer = "container:Orienteer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
