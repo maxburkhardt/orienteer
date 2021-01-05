@@ -7,6 +7,7 @@
 
 import CoreData
 import CoreLocation
+import StoreKit
 import SwiftUI
 
 struct OrienteerView: View {
@@ -28,6 +29,7 @@ struct OrienteerView: View {
 
     @State private var orientation = UIDevice.current.orientation
     @State private var alertMessage = ""
+    @State private var appStoreOverlayPresented = false
 
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
@@ -72,6 +74,15 @@ struct OrienteerView: View {
                 OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
                     .padding(.bottom, 40.0)
                 OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                #if APPCLIP
+                    Button(action: { appStoreOverlayPresented = true }) {
+                        Text("Get Orienteer")
+                    }
+                    .padding(.top, 20.0)
+                    .appStoreOverlay(isPresented: $appStoreOverlayPresented) {
+                        SKOverlay.AppClipConfiguration(position: .bottom)
+                    }
+                #endif
             } else {
                 HStack {
                     OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
@@ -198,6 +209,7 @@ struct OrienteerView_Previews: PreviewProvider {
     static var previews: some View {
         OrienteerView(destinationPlaceType: "history", destinationPlaceId: "F8CDB8FA-84C5-4CB1-9651-118D44D5BEE0", geocoder: Geocoder(), userLocation: UserLocation())
             .environmentObject(UserSettings())
+            .environmentObject(WatchConnectionProvider())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
