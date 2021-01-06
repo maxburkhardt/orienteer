@@ -22,7 +22,9 @@ struct OrienteerView: View {
     @State private var destinationPlace: NavigablePlace? = nil {
         didSet {
             if let place = destinationPlace {
-                watchConnectionProvider.synchronizedPlace = place
+                #if !APPCLIP
+                    watchConnectionProvider.synchronizedPlace = place
+                #endif
             }
         }
     }
@@ -98,9 +100,11 @@ struct OrienteerView: View {
             if userSettings.disableScreenDim {
                 UIApplication.shared.isIdleTimerDisabled = true
             }
-            if !watchConnectionProvider.isConnected {
-                watchConnectionProvider.connect(userSettings: userSettings)
-            }
+            #if !APPCLIP
+                if !watchConnectionProvider.isConnected {
+                    watchConnectionProvider.connect(userSettings: userSettings)
+                }
+            #endif
             switch destinationPlaceType {
             case "googleplace":
                 geocoder.placeDetails(placeId: destinationPlaceId, callback: { (placeResponse: PlaceDetailsResponse) -> Void in
@@ -161,29 +165,32 @@ struct OrienteerView: View {
         .onDisappear {
             geocoder.popErrorHandler()
             UIApplication.shared.isIdleTimerDisabled = false
-            watchConnectionProvider.synchronizedPlace = nil
+            #if !APPCLIP
+                watchConnectionProvider.synchronizedPlace = nil
+            #endif
         }
         .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in
+            let errorMessage = "Could not load destination info from App Clip."
             guard activity.activityType == NSUserActivityTypeBrowsingWeb else { return }
             guard let incomingURL = activity.webpageURL else { return }
             guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
-                alertMessage = "Could not load destination info from App Clip."
+                alertMessage = errorMessage
                 return
             }
             guard let latitudeStr = components.queryItems?.first(where: { $0.name == "p" })?.value else {
-                alertMessage = "Could not load destination info from App Clip."
+                alertMessage = errorMessage
                 return
             }
             guard let longitudeStr = components.queryItems?.first(where: { $0.name == "p1" })?.value else {
-                alertMessage = "Could not load destination info from App Clip."
+                alertMessage = errorMessage
                 return
             }
             guard let latitudeUnconverted = Double(latitudeStr) else {
-                alertMessage = "Could not load destination info from App Clip."
+                alertMessage = errorMessage
                 return
             }
             guard let longitudeUnconverted = Double(longitudeStr) else {
-                alertMessage = "Could not load destination info from App Clip."
+                alertMessage = errorMessage
                 return
             }
             let latitude = (latitudeUnconverted / pow(10, 6)) - 90.0
