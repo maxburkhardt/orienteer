@@ -27,6 +27,7 @@ struct SearchView: View {
     @State private var historyDisplayed = false
     @State private var historySelectedEntryId: UUID? = nil
     @State private var historyNavigationActive = false
+    @State private var appclipNavigationLink: String? = nil
     private var autocompleteRequestCount = SynchronizedCounter()
     private let coordinateRegex = try! NSRegularExpression(pattern: "^(-?[0-9]+\\.?[0-9]*)\\s*,\\s*(-?[0-9]+\\.?[0-9]*)$")
 
@@ -66,6 +67,13 @@ struct SearchView: View {
                 userSettings: userSettings
             )
         })
+        let appclipNavigationBinding = Binding<Bool>(get: {
+            appclipNavigationLink != nil
+        }, set: { val in
+            if !val {
+                appclipNavigationLink = nil
+            }
+        })
         NavigationView {
             if let locationAuthStatus = userLocation.locationStatus {
                 if locationAuthStatus == CLAuthorizationStatus.authorizedWhenInUse {
@@ -79,6 +87,7 @@ struct SearchView: View {
                                 .padding(.trailing, 7.0)
                         }
                         NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
+                        NavigationLink(destination: OrienteerView(destinationPlaceType: "appclip", destinationPlaceId: appclipNavigationLink ?? "", geocoder: geocoder, userLocation: userLocation), isActive: appclipNavigationBinding) {}
                         List(searchResults) { result in
                             NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
                                 SearchResultView(name: result.name, subtitle: result.subtitle)
@@ -137,6 +146,11 @@ struct SearchView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in
+            guard activity.activityType == NSUserActivityTypeBrowsingWeb else { return }
+            guard let incomingURL = activity.webpageURL else { return }
+            appclipNavigationLink = incomingURL.absoluteString
+        })
     }
 }
 

@@ -64,6 +64,41 @@ struct OrienteerView: View {
         return savedPlace
     }
 
+    private func parseOrienteerUrl(url: URL) {
+        let errorMessage = "Could not load destination info from App Clip."
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            alertMessage = errorMessage
+            return
+        }
+        guard let latitudeStr = components.queryItems?.first(where: { $0.name == "p" })?.value else {
+            alertMessage = errorMessage
+            return
+        }
+        guard let longitudeStr = components.queryItems?.first(where: { $0.name == "p1" })?.value else {
+            alertMessage = errorMessage
+            return
+        }
+        guard let latitudeUnconverted = Double(latitudeStr) else {
+            alertMessage = errorMessage
+            return
+        }
+        guard let longitudeUnconverted = Double(longitudeStr) else {
+            alertMessage = errorMessage
+            return
+        }
+        let latitude = (latitudeUnconverted / pow(10, 6)) - 90.0
+        let longitude = (longitudeUnconverted / pow(10, 6)) - 180.0
+        if let units = components.queryItems?.first(where: { $0.name == "p2" })?.value {
+            if units == "0" {
+                userSettings.units = DistanceUnits.metric
+            } else if units == "1" {
+                userSettings.units = DistanceUnits.imperial
+            }
+        }
+        let name = components.queryItems?.first(where: { $0.name == "p3" })?.value
+        destinationPlace = savePlace(name: name ?? "App Clip Destination", address: nil, latitude: latitude, longitude: longitude)
+    }
+
     var body: some View {
         let showAlertBinding = Binding<Bool>(get: {
             alertMessage != ""
@@ -148,8 +183,11 @@ struct OrienteerView: View {
             case "coordinates":
                 destinationPlace = savePlace(name: destinationPlaceId, address: nil, latitude: Double(destinationPlaceId.split(separator: ",").first!)!, longitude: Double(destinationPlaceId.split(separator: ",").last!)!)
             case "appclip":
-                // Do nothing: this will be handled by a different lifecycle handler
-                do {}
+                if destinationPlaceId != "" {
+                    if let constructedUrl = URL(string: destinationPlaceId) {
+                        parseOrienteerUrl(url: constructedUrl)
+                    }
+                }
             default:
                 alertMessage = "Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView"
             }
@@ -170,41 +208,9 @@ struct OrienteerView: View {
             #endif
         }
         .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in
-            let errorMessage = "Could not load destination info from App Clip."
             guard activity.activityType == NSUserActivityTypeBrowsingWeb else { return }
             guard let incomingURL = activity.webpageURL else { return }
-            guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
-                alertMessage = errorMessage
-                return
-            }
-            guard let latitudeStr = components.queryItems?.first(where: { $0.name == "p" })?.value else {
-                alertMessage = errorMessage
-                return
-            }
-            guard let longitudeStr = components.queryItems?.first(where: { $0.name == "p1" })?.value else {
-                alertMessage = errorMessage
-                return
-            }
-            guard let latitudeUnconverted = Double(latitudeStr) else {
-                alertMessage = errorMessage
-                return
-            }
-            guard let longitudeUnconverted = Double(longitudeStr) else {
-                alertMessage = errorMessage
-                return
-            }
-            let latitude = (latitudeUnconverted / pow(10, 6)) - 90.0
-            let longitude = (longitudeUnconverted / pow(10, 6)) - 180.0
-            if let units = components.queryItems?.first(where: { $0.name == "p2" })?.value {
-                if units == "0" {
-                    userSettings.units = DistanceUnits.metric
-                } else if units == "1" {
-                    userSettings.units = DistanceUnits.imperial
-                }
-            }
-            let name = components.queryItems?.first(where: { $0.name == "p3" })?.value
-            destinationPlace = savePlace(name: name ?? "App Clip Destination", address: nil, latitude: latitude, longitude: longitude)
-
+            parseOrienteerUrl(url: incomingURL)
         })
         .alert(isPresented: showAlertBinding) {
             Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
