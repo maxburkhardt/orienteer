@@ -73,8 +73,8 @@ struct HistoryView: View {
 
 private let visitedFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .short
     return formatter
 }()
 
