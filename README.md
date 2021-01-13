@@ -16,7 +16,7 @@ Key features of Orienteer include:
   use of your location in search queries
 - Landscape and portrait orientation support
 
-![Find a destination screenshot](/screenshots/screenshot-1.png)
-![Navigation screenshot](/screenshots/screenshot-2.png)
-![History screenshot](/screenshots/screenshot-3.png)
-![Coordinates screenshot](/screenshots/screenshot-4.png)
+<img src="https://github.com/maxburkhardt/orienteer/raw/main/screenshots/screenshot-1.png" alt="Find a destination screenshot" width=100 />
+<img src="https://github.com/maxburkhardt/orienteer/raw/main/screenshots/screenshot-2.png" alt="Navigation screenshot" width=100 />
+<img src="https://github.com/maxburkhardt/orienteer/raw/main/screenshots/screenshot-3.png" alt="History screenshot" width=100 />
+<img src="https://github.com/maxburkhardt/orienteer/raw/main/screenshots/screenshot-4.png" alt="Coordinates screenshot" width=100 />
