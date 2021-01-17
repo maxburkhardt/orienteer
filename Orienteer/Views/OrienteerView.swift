@@ -121,10 +121,17 @@ struct OrienteerView: View {
                     }
                 #endif
             } else {
-                HStack {
-                    OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
-                        .padding(.trailing, 40.0)
-                    OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                VStack {
+                    HStack {
+                        OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
+                            .padding(.trailing, 40.0)
+                        OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                    }
+                    Text("device orientation: \(orientation.rawValue)")
+                    if let heading = userLocation.lastHeading {
+                        Text("heading: [true: \(heading.trueHeading), magnetic: \(heading.magneticHeading)]")
+                        Text("heading orientation: \(userLocation.getOrientation().rawValue)")
+                    }
                 }
             }
         }
@@ -194,10 +201,13 @@ struct OrienteerView: View {
         }
         .onReceive(orientationChanged, perform: { _ in
             let newOrientation = UIDevice.current.orientation
-            // We support "fully inverted" on iPad, but not on iPhone, where it's disabled
-            if newOrientation != UIDeviceOrientation.portraitUpsideDown || UIDevice.current.userInterfaceIdiom == .pad {
-                self.orientation = newOrientation
-                userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
+            self.orientation = newOrientation
+            // These orientations do not have a meaning for the location manager, so don't send them along.
+            if newOrientation != UIDeviceOrientation.faceUp && newOrientation != UIDeviceOrientation.faceDown && newOrientation != UIDeviceOrientation.unknown {
+                // We support "fully inverted" on iPad, but not on iPhone, where it's disabled
+                if newOrientation != UIDeviceOrientation.portraitUpsideDown || UIDevice.current.userInterfaceIdiom == .pad {
+                    userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
+                }
             }
         })
         .onDisappear {

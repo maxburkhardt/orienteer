@@ -15,7 +15,7 @@ struct OrienteerTextView: View {
 
     var body: some View {
         VStack {
-            Text(bearing != nil ? bearing!.toCardinalOrdinal() : "")
+            Text(bearing != nil ? "\(bearing!.toCardinalOrdinal()): \(bearing!, specifier: "%.2f")" : "")
                 .font(.largeTitle)
                 .bold()
             Text(distance != nil ? distance!.convertToHumanReadable(units: userSettings.units) : "")
