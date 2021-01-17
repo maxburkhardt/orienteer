@@ -21,14 +21,6 @@ class UserLocation: NSObject, ObservableObject {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
-        
-        print("portrait: \(CLDeviceOrientation.portrait.rawValue)")
-        print("left: \(CLDeviceOrientation.landscapeLeft.rawValue)")
-        print("right: \(CLDeviceOrientation.landscapeRight.rawValue)")
-        print("upside down: \(CLDeviceOrientation.portraitUpsideDown.rawValue)")
-        print("faceup: \(CLDeviceOrientation.faceUp.rawValue)")
-        print("facedown: \(CLDeviceOrientation.faceDown.rawValue)")
-        print("unknown: \(CLDeviceOrientation.unknown.rawValue)")
     }
 
     @Published var locationStatus: CLAuthorizationStatus? {
@@ -72,7 +64,7 @@ class UserLocation: NSObject, ObservableObject {
     func updateOrientation(newOrientation: CLDeviceOrientation) {
         locationManager.headingOrientation = newOrientation
     }
-    
+
     func getOrientation() -> CLDeviceOrientation {
         return locationManager.headingOrientation
     }

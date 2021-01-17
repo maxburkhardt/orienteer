@@ -29,7 +29,6 @@ struct OrienteerView: View {
         }
     }
 
-    @State private var orientation = UIDevice.current.orientation
     @State private var alertMessage = ""
     @State private var appStoreOverlayPresented = false
 
@@ -40,10 +39,6 @@ struct OrienteerView: View {
     private var distance: CLLocationDistance? {
         destinationPlace != nil ? userLocation.distanceTo(destination: destinationPlace!.coordinates) : nil
     }
-
-    private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
-        .makeConnectable()
-        .autoconnect()
 
     private func savePlace(name: String, address: String?, latitude: Double, longitude: Double) -> NavigablePlace {
         let savedPlace = NavigablePlace(context: viewContext)
@@ -108,7 +103,7 @@ struct OrienteerView: View {
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
-                OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
+                OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
                     .padding(.bottom, 40.0)
                 OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
                 #if APPCLIP
@@ -123,14 +118,9 @@ struct OrienteerView: View {
             } else {
                 VStack {
                     HStack {
-                        OrienteerCompassView(bearing: bearing, scale: .large).environmentObject(userLocation)
+                        OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
                             .padding(.trailing, 40.0)
                         OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
-                    }
-                    Text("device orientation: \(orientation.rawValue)")
-                    if let heading = userLocation.lastHeading {
-                        Text("heading: [true: \(heading.trueHeading), magnetic: \(heading.magneticHeading)]")
-                        Text("heading orientation: \(userLocation.getOrientation().rawValue)")
                     }
                 }
             }
@@ -138,7 +128,7 @@ struct OrienteerView: View {
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
             geocoder.pushErrorHandler(handler: { message in alertMessage = message })
-            userLocation.updateOrientation(newOrientation: self.orientation.convertToCLDeviceOrientation())
+            // userLocation.updateOrientation(newOrientation: CLDeviceOrientation.portrait)
             if userSettings.disableScreenDim {
                 UIApplication.shared.isIdleTimerDisabled = true
             }
@@ -199,17 +189,6 @@ struct OrienteerView: View {
                 alertMessage = "Unknown place ID (\(destinationPlaceId)) passed to the OrienteerView"
             }
         }
-        .onReceive(orientationChanged, perform: { _ in
-            let newOrientation = UIDevice.current.orientation
-            self.orientation = newOrientation
-            // These orientations do not have a meaning for the location manager, so don't send them along.
-            if newOrientation != UIDeviceOrientation.faceUp && newOrientation != UIDeviceOrientation.faceDown && newOrientation != UIDeviceOrientation.unknown {
-                // We support "fully inverted" on iPad, but not on iPhone, where it's disabled
-                if newOrientation != UIDeviceOrientation.portraitUpsideDown || UIDevice.current.userInterfaceIdiom == .pad {
-                    userLocation.updateOrientation(newOrientation: newOrientation.convertToCLDeviceOrientation())
-                }
-            }
-        })
         .onDisappear {
             geocoder.popErrorHandler()
             UIApplication.shared.isIdleTimerDisabled = false
