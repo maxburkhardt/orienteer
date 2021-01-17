@@ -11,6 +11,7 @@ struct OrienteerCompassView: View {
     var bearing: Double?
     @EnvironmentObject var userLocation: UserLocation
     @State private var orientationAdjustment = 0.0
+    @State private var orientationIsUnknown = false
 
     private func computeCompassAngle() -> Angle {
         guard let bearingValue = bearing else { return .zero }
@@ -18,17 +19,23 @@ struct OrienteerCompassView: View {
     }
 
     #if os(iOS)
+        @Environment(\.verticalSizeClass) private var sizeClass
         private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
             .autoconnect()
 
         private func updateOrientationAdjustment(newOrientation: UIDeviceOrientation) {
             if newOrientation == .portrait {
+                orientationIsUnknown = false
                 orientationAdjustment = 0.0
             } else if newOrientation == .landscapeLeft {
+                orientationIsUnknown = false
                 orientationAdjustment = -90.0
             } else if newOrientation == .landscapeRight {
+                orientationIsUnknown = false
                 orientationAdjustment = 90.0
+            } else if newOrientation == .unknown {
+                orientationIsUnknown = true
             }
         }
     #endif
@@ -36,10 +43,18 @@ struct OrienteerCompassView: View {
     var body: some View {
         #if os(iOS)
             VStack {
-                Image(systemName: "location.circle")
-                    .rotationEffect(computeCompassAngle())
-                    .font(.system(size: 200))
-                    .padding(.bottom, 20.0)
+                if orientationIsUnknown && sizeClass == .compact {
+                    Image(systemName: "questionmark.circle")
+                        .font(.system(size: 200))
+                    Text("Device orientation unknown")
+                        .font(.caption)
+                        .foregroundColor(Color.gray)
+                } else {
+                    Image(systemName: "location.circle")
+                        .rotationEffect(computeCompassAngle())
+                        .font(.system(size: 200))
+                        .padding(.bottom, 20.0)
+                }
                 if let heading = userLocation.lastHeading {
                     Text("heading: \(heading.trueHeading)")
                     Text("orientation: \(userLocation.getOrientation().rawValue)")
