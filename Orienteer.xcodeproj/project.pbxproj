@@ -68,6 +68,9 @@
 		D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
 		D08D4F3325A29A8700711E02 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
+		D09A31E825B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
+		D09A31E925B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
+		D09A31EA25B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
 		D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
 		D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */; };
 		D0A1889A25930BE300A57E42 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
@@ -196,6 +199,7 @@
 		D08D4EB225A292C400711E02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D08D4EB325A292C400711E02 /* OrienteerAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrienteerAppClip.entitlements; sourceTree = "<group>"; };
 		D08D4F3A25A2C81600711E02 /* Orienteer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Orienteer.entitlements; sourceTree = "<group>"; };
+		D09A31E725B61F7D00557B5D /* CourseInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInformation.swift; sourceTree = "<group>"; };
 		D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientation.swift; sourceTree = "<group>"; };
 		D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerTextView.swift; sourceTree = "<group>"; };
 		D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerCompassView.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 			children = (
 				D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */,
 				D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */,
+				D09A31E725B61F7D00557B5D /* CourseInformation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */,
 				D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */,
 				D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */,
+				D09A31E925B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D03AAB66259FC51E004C4C99 /* OrienteerCompassView.swift in Sources */,
 				D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */,
 				D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */,
@@ -672,6 +678,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D09A31EA25B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D08D4EC725A297DE00711E02 /* PlaceHistory.xcdatamodeld in Sources */,
 				D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */,
 				D08D4EFC25A2993000711E02 /* Geocoder.swift in Sources */,
@@ -714,6 +721,7 @@
 				D0E8BBE2259171F200061E0F /* PlaceHistory.xcdatamodeld in Sources */,
 				D01F2EF225913C3C0042E091 /* CLLocationDistance.swift in Sources */,
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
+				D09A31E825B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */,
 				D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,

@@ -53,6 +53,14 @@ struct SettingsView: View {
                     .font(.caption)
                     .foregroundColor(Color.gray)
             }
+            Group {
+                Toggle(isOn: $userSettings.debugMode) {
+                    Text("Debug mode")
+                }
+                Text("Enable additional data display that can help resolve internal magnetometer issues.")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+            }
             Spacer()
             HStack {
                 Spacer()

@@ -103,9 +103,9 @@ struct OrienteerView: View {
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
-                OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                OrienteerCompassView(bearing: bearing, userLocation: userLocation)
                     .padding(.bottom, 40.0)
-                OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                 #if APPCLIP
                     Button(action: { appStoreOverlayPresented = true }) {
                         Text("Get Orienteer")
@@ -118,9 +118,9 @@ struct OrienteerView: View {
             } else {
                 VStack {
                     HStack {
-                        OrienteerCompassView(bearing: bearing).environmentObject(userLocation)
+                        OrienteerCompassView(bearing: bearing, userLocation: userLocation)
                             .padding(.trailing, 40.0)
-                        OrienteerTextView(bearing: bearing, distance: distance, userSettings: userSettings).environmentObject(userLocation)
+                        OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                     }
                 }
             }

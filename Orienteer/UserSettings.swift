@@ -18,6 +18,7 @@ class UserSettings: ObservableObject {
     private let HISTORY_STORAGE_KEY = "history"
     private let LOCATION_SEARCH_KEY = "locationsearch"
     private let SCREEN_DIM_KEY = "screendim"
+    private let DEBUG_MODE_KEY = "debug"
 
     @Published var units = DistanceUnits.metric {
         didSet {
@@ -43,6 +44,12 @@ class UserSettings: ObservableObject {
         }
     }
 
+    @Published var debugMode = false {
+        didSet {
+            userDefaults.set(debugMode, forKey: DEBUG_MODE_KEY)
+        }
+    }
+
     init() {
         userDefaults = UserDefaults()
         if let savedUnits = userDefaults.value(forKey: UNITS_STORAGE_KEY) as? String {
@@ -56,6 +63,9 @@ class UserSettings: ObservableObject {
         }
         if let savedDisableScreenDim = userDefaults.value(forKey: SCREEN_DIM_KEY) as? Bool {
             disableScreenDim = savedDisableScreenDim
+        }
+        if let savedDebugMode = userDefaults.value(forKey: DEBUG_MODE_KEY) as? Bool {
+            debugMode = savedDebugMode
         }
     }
 }

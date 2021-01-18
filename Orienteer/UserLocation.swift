@@ -41,6 +41,18 @@ class UserLocation: NSObject, ObservableObject {
         }
     }
 
+    @Published var lastCourse: CourseInformation? {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+
+    @Published var lastSpeed: CLLocationSpeed? {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+
     // Returns distance to a location in meters
     func distanceTo(destination: CLLocation) -> CLLocationDistance {
         return lastLocation?.distance(from: destination) ?? 0
@@ -84,6 +96,8 @@ extension UserLocation: CLLocationManagerDelegate {
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         lastLocation = location
+        lastCourse = CourseInformation(course: location.course, accuracy: location.courseAccuracy)
+        lastSpeed = location.speed
     }
 
     func locationManager(_: CLLocationManager, didUpdateHeading heading: CLHeading) {

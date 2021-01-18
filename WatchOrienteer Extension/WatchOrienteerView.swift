@@ -17,9 +17,9 @@ struct WatchOrienteerView: View {
     var body: some View {
         VStack {
             OrienteerCompassView(
-                bearing: userLocation.bearingTo(destination: destinationCoordinates)
+                bearing: userLocation.bearingTo(destination: destinationCoordinates),
+                userLocation: userLocation
             )
-            .environmentObject(userLocation)
             Text(userLocation.distanceTo(destination: destinationCoordinates).convertToHumanReadable(units: units))
                 .font(.title)
                 .fontWeight(.bold)
