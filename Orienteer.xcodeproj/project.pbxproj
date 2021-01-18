@@ -71,6 +71,8 @@
 		D09A31E825B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
 		D09A31E925B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
 		D09A31EA25B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
+		D09A31F225B6355200557B5D /* AdjustmentHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */; };
+		D09A31F325B6355200557B5D /* AdjustmentHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */; };
 		D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
 		D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */; };
 		D0A1889A25930BE300A57E42 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
@@ -200,6 +202,7 @@
 		D08D4EB325A292C400711E02 /* OrienteerAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrienteerAppClip.entitlements; sourceTree = "<group>"; };
 		D08D4F3A25A2C81600711E02 /* Orienteer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Orienteer.entitlements; sourceTree = "<group>"; };
 		D09A31E725B61F7D00557B5D /* CourseInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInformation.swift; sourceTree = "<group>"; };
+		D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentHelpView.swift; sourceTree = "<group>"; };
 		D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientation.swift; sourceTree = "<group>"; };
 		D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerTextView.swift; sourceTree = "<group>"; };
 		D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerCompassView.swift; sourceTree = "<group>"; };
@@ -424,6 +427,7 @@
 				D07E01BD2592BB55007BC9A6 /* ActivityIndicator.swift */,
 				D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */,
 				D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */,
+				D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -686,6 +690,7 @@
 				D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */,
 				D08D4F1C25A29A2D00711E02 /* PlacesAutocompleteResponse.swift in Sources */,
 				D08D4F1125A29A1A00711E02 /* URLSession.swift in Sources */,
+				D09A31F325B6355200557B5D /* AdjustmentHelpView.swift in Sources */,
 				D08D4EE825A298E600711E02 /* UserSettings.swift in Sources */,
 				D08D4EDA25A297F700711E02 /* Persistence.swift in Sources */,
 				D08D4F0A25A299F500711E02 /* OrienteerCompassView.swift in Sources */,
@@ -724,6 +729,7 @@
 				D09A31E825B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */,
 				D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */,
+				D09A31F225B6355200557B5D /* AdjustmentHelpView.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
 				D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */,
 				D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */,

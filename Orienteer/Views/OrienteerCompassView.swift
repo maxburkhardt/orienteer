@@ -7,16 +7,32 @@
 
 import SwiftUI
 
+enum NavigationAdjustmentMode {
+    case heading
+    case course
+    case unadjusted
+}
+
 struct OrienteerCompassView: View {
     var bearing: Double?
     @ObservedObject var userLocation: UserLocation
     @EnvironmentObject var userSettings: UserSettings
     @State private var orientationAdjustment = 0.0
     @State private var orientationIsUnknown = false
+    @State private var adjustmentMode = NavigationAdjustmentMode.heading
 
-    private func computeCompassAngle() -> Angle {
+    private func computeHeadingAngle() -> Angle {
         guard let bearingValue = bearing else { return .zero }
         return Angle(degrees: bearingValue - (userLocation.lastHeading?.trueHeading ?? 0) + orientationAdjustment)
+    }
+
+    private func isHeadingUsable() -> Bool {
+        guard let headingAccuracy = userLocation.lastHeading?.headingAccuracy else { return false }
+        if headingAccuracy >= 0.0 && headingAccuracy <= 30 {
+            return true
+        } else {
+            return false
+        }
     }
 
     private func computeCourseAngle() -> Angle {
@@ -26,7 +42,7 @@ struct OrienteerCompassView: View {
 
     private func isCourseUsable() -> Bool {
         guard let courseAccuracy = userLocation.lastCourse?.accuracy else { return false }
-        if courseAccuracy > 0 && courseAccuracy < 30 {
+        if courseAccuracy >= 0 && courseAccuracy <= 30 {
             return true
         } else {
             return false
@@ -63,50 +79,50 @@ struct OrienteerCompassView: View {
     var body: some View {
         #if os(iOS)
             VStack {
-                TabView {
-                    VStack {
-                        Text("Heading-Adjusted Direction")
-                            .font(Font.system(.body).smallCaps())
-                            .bold()
-                            .foregroundColor(Color.gray)
-                        if orientationIsUnknown && sizeClass == .compact {
-                            Image(systemName: "questionmark.circle")
-                                .font(.system(size: 200))
-                            Text("Device orientation unknown")
-                                .font(.caption)
-                                .foregroundColor(Color.gray)
-                        } else {
-                            Image(systemName: "location.circle")
-                                .rotationEffect(computeCompassAngle())
-                                .font(.system(size: 200))
-                        }
+                HStack {
+                    Picker("Adjustment Mode", selection: $adjustmentMode) {
+                        Image(systemName: "figure.walk").tag(NavigationAdjustmentMode.heading)
+                        Image(systemName: "bicycle").tag(NavigationAdjustmentMode.course)
+                        Image(systemName: "location.north.line").tag(NavigationAdjustmentMode.unadjusted)
                     }
-                    VStack {
-                        Text("Course-Adjusted Direction")
-                            .font(Font.system(.body).smallCaps())
-                            .bold()
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal, 10.0)
+                    AdjustmentHelpView().padding(.trailing, 10.0)
+                }
+                if adjustmentMode == .heading {
+                    if orientationIsUnknown && sizeClass == .compact {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 200))
+                        Text("Device orientation unknown")
+                            .font(.caption)
                             .foregroundColor(Color.gray)
-                        if !isCourseUsable() {
-                            Image(systemName: "questionmark.circle")
-                                .font(.system(size: 200))
-                            Text("Course information unavailable")
-                                .font(.caption)
-                                .foregroundColor(Color.gray)
-                        } else {
-                            Image(systemName: "location.circle")
-                                .rotationEffect(computeCourseAngle())
-                                .font(.system(size: 200))
-                        }
-                    }
-                    VStack {
-                        Text("Non-Adjusted Direction")
-                            .font(Font.system(.body).smallCaps())
-                            .bold()
+                    } else if !isHeadingUsable() {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 200))
+                        Text("Heading information unavailable")
+                            .font(.caption)
                             .foregroundColor(Color.gray)
+                    } else {
                         Image(systemName: "location.circle")
-                            .rotationEffect(computeBearingAngle())
+                            .rotationEffect(computeHeadingAngle())
                             .font(.system(size: 200))
                     }
+                } else if adjustmentMode == .course {
+                    if !isCourseUsable() {
+                        Image(systemName: "questionmark.circle")
+                            .font(.system(size: 200))
+                        Text("Course information unavailable")
+                            .font(.caption)
+                            .foregroundColor(Color.gray)
+                    } else {
+                        Image(systemName: "location.circle")
+                            .rotationEffect(computeCourseAngle())
+                            .font(.system(size: 200))
+                    }
+                } else if adjustmentMode == .unadjusted {
+                    Image(systemName: "location.circle")
+                        .rotationEffect(computeBearingAngle())
+                        .font(.system(size: 200))
                 }
             }
             .onAppear {
@@ -115,8 +131,6 @@ struct OrienteerCompassView: View {
             .onReceive(orientationChanged, perform: { _ in
                 updateOrientationAdjustment(newOrientation: UIDevice.current.orientation)
             })
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         #else
             Image(systemName: "location.circle")
                 .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
