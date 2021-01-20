@@ -54,8 +54,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/Orienteer">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D03AAB30259FC3EE004C4C99"
@@ -63,7 +65,7 @@
             BlueprintName = "WatchOrienteer"
             ReferencedContainer = "container:Orienteer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -71,8 +73,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/Orienteer">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D03AAB30259FC3EE004C4C99"
@@ -80,7 +84,16 @@
             BlueprintName = "WatchOrienteer"
             ReferencedContainer = "container:Orienteer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D03AAB30259FC3EE004C4C99"
+            BuildableName = "WatchOrienteer.app"
+            BlueprintName = "WatchOrienteer"
+            ReferencedContainer = "container:Orienteer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

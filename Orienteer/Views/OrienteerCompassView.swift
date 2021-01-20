@@ -17,13 +17,12 @@ struct OrienteerCompassView: View {
     var bearing: Double?
     @ObservedObject var userLocation: UserLocation
     @EnvironmentObject var userSettings: UserSettings
-    @State private var orientationAdjustment = 0.0
     @State private var orientationIsUnknown = false
     @State private var adjustmentMode = NavigationAdjustmentMode.heading
 
     private func computeHeadingAngle() -> Angle {
         guard let bearingValue = bearing else { return .zero }
-        return Angle(degrees: bearingValue - (userLocation.lastHeading?.trueHeading ?? 0) + orientationAdjustment)
+        return Angle(degrees: bearingValue - (userLocation.lastHeading?.trueHeading ?? 0))
     }
 
     private func isHeadingUsable() -> Bool {
@@ -42,7 +41,7 @@ struct OrienteerCompassView: View {
 
     private func isCourseUsable() -> Bool {
         guard let courseAccuracy = userLocation.lastCourse?.accuracy else { return false }
-        if courseAccuracy >= 0 && courseAccuracy <= 30 {
+        if courseAccuracy >= 0 && courseAccuracy <= 180 {
             return true
         } else {
             return false
@@ -59,21 +58,6 @@ struct OrienteerCompassView: View {
         private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
             .autoconnect()
-
-        private func updateOrientationAdjustment(newOrientation: UIDeviceOrientation) {
-            if newOrientation == .portrait {
-                orientationIsUnknown = false
-                orientationAdjustment = 0.0
-            } else if newOrientation == .landscapeLeft {
-                orientationIsUnknown = false
-                orientationAdjustment = -90.0
-            } else if newOrientation == .landscapeRight {
-                orientationIsUnknown = false
-                orientationAdjustment = 90.0
-            } else if newOrientation == .unknown {
-                orientationIsUnknown = true
-            }
-        }
     #endif
 
     var body: some View {
@@ -106,6 +90,9 @@ struct OrienteerCompassView: View {
                         Image(systemName: "location.circle")
                             .rotationEffect(computeHeadingAngle())
                             .font(.system(size: 200))
+                        // Placeholder to prevent elements from moving around
+                        Text("")
+                            .font(.caption)
                     }
                 } else if adjustmentMode == .course {
                     if !isCourseUsable() {
@@ -118,18 +105,24 @@ struct OrienteerCompassView: View {
                         Image(systemName: "location.circle")
                             .rotationEffect(computeCourseAngle())
                             .font(.system(size: 200))
+                        // Placeholder to prevent elements from moving around
+                        Text("")
+                            .font(.caption)
                     }
                 } else if adjustmentMode == .unadjusted {
                     Image(systemName: "location.circle")
                         .rotationEffect(computeBearingAngle())
                         .font(.system(size: 200))
+                    // Placeholder to prevent elements from moving around
+                    Text("")
+                        .font(.caption)
                 }
             }
             .onAppear {
-                updateOrientationAdjustment(newOrientation: UIDevice.current.orientation)
+                userLocation.updateOrientation(newOrientation: UIDevice.current.orientation.convertToCLDeviceOrientation())
             }
             .onReceive(orientationChanged, perform: { _ in
-                updateOrientationAdjustment(newOrientation: UIDevice.current.orientation)
+                userLocation.updateOrientation(newOrientation: UIDevice.current.orientation.convertToCLDeviceOrientation())
             })
         #else
             Image(systemName: "location.circle")

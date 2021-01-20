@@ -36,7 +36,10 @@ struct OrienteerTextView: View {
                 Text("Heading: \(userLocation.lastHeading?.trueHeading ?? 0.0, specifier: "%.1f")±\(userLocation.lastHeading?.headingAccuracy ?? 0.0, specifier: "%.1f")°")
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text("Course: \(userLocation.lastCourse?.course ?? 0.0, specifier: "%.1f")°±\(userLocation.lastCourse?.accuracy ?? 0.0, specifier: "%.1f")°\n")
+                Text("Course: \(userLocation.lastCourse?.course ?? 0.0, specifier: "%.1f")°±\(userLocation.lastCourse?.accuracy ?? 0.0, specifier: "%.1f")°")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+                Text("Orientation: \(userLocation.getOrientation().rawValue)")
                     .font(.caption)
                     .foregroundColor(Color.gray)
             }

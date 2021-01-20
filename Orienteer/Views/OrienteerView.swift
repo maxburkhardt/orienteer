@@ -128,7 +128,6 @@ struct OrienteerView: View {
         .navigationTitle(destinationPlace?.name ?? "Loading...")
         .onAppear {
             geocoder.pushErrorHandler(handler: { message in alertMessage = message })
-            userLocation.updateOrientation(newOrientation: CLDeviceOrientation.portrait)
             if userSettings.disableScreenDim {
                 UIApplication.shared.isIdleTimerDisabled = true
             }
