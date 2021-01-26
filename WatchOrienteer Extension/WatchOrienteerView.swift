@@ -13,12 +13,14 @@ struct WatchOrienteerView: View {
     var destinationName: String
     var destinationCoordinates: CLLocation
     var units: DistanceUnits
+    @State var adjustmentMode = NavigationAdjustmentMode.heading
 
     var body: some View {
         VStack {
             OrienteerCompassView(
                 bearing: userLocation.bearingTo(destination: destinationCoordinates),
-                userLocation: userLocation
+                userLocation: userLocation,
+                adjustmentMode: $adjustmentMode
             )
             Text(userLocation.distanceTo(destination: destinationCoordinates).convertToHumanReadable(units: units))
                 .font(.title)

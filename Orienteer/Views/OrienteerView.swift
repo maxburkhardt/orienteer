@@ -31,6 +31,7 @@ struct OrienteerView: View {
 
     @State private var alertMessage = ""
     @State private var appStoreOverlayPresented = false
+    @State private var adjustmentMode = NavigationAdjustmentMode.heading
 
     private var bearing: DegreesFromNorth? {
         destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
@@ -103,7 +104,7 @@ struct OrienteerView: View {
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
-                OrienteerCompassView(bearing: bearing, userLocation: userLocation)
+                OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: $adjustmentMode)
                     .padding(.bottom, 40.0)
                 OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                 #if APPCLIP
@@ -118,7 +119,7 @@ struct OrienteerView: View {
             } else {
                 VStack {
                     HStack {
-                        OrienteerCompassView(bearing: bearing, userLocation: userLocation)
+                        OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: $adjustmentMode)
                             .padding(.trailing, 40.0)
                         OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                     }

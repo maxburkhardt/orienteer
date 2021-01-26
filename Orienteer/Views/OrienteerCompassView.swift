@@ -7,18 +7,12 @@
 
 import SwiftUI
 
-enum NavigationAdjustmentMode {
-    case heading
-    case course
-    case unadjusted
-}
-
 struct OrienteerCompassView: View {
     var bearing: Double?
     @ObservedObject var userLocation: UserLocation
+    @Binding var adjustmentMode: NavigationAdjustmentMode
     @EnvironmentObject var userSettings: UserSettings
     @State private var orientationIsUnknown = false
-    @State private var adjustmentMode = NavigationAdjustmentMode.heading
 
     private func computeHeadingAngle() -> Angle {
         guard let bearingValue = bearing else { return .zero }
@@ -135,6 +129,6 @@ struct OrienteerCompassView: View {
 
 struct OrienteerCompassView_Previews: PreviewProvider {
     static var previews: some View {
-        OrienteerCompassView(bearing: 0, userLocation: UserLocation()).environmentObject(UserSettings())
+        OrienteerCompassView(bearing: 0, userLocation: UserLocation(), adjustmentMode: Binding<NavigationAdjustmentMode>(get: { NavigationAdjustmentMode.heading }, set: { _ in do {} })).environmentObject(UserSettings())
     }
 }
