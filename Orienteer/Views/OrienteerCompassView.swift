@@ -66,7 +66,7 @@ struct OrienteerCompassView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal, 10.0)
                     AdjustmentHelpView().padding(.trailing, 10.0)
-                }
+                }.frame(minWidth: nil, idealWidth: nil, maxWidth: 500.0, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)
                 if adjustmentMode == .heading {
                     if orientationIsUnknown && sizeClass == .compact {
                         Image(systemName: "questionmark.circle")

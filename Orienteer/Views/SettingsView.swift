@@ -55,7 +55,7 @@ struct SettingsView: View {
             }
             Group {
                 Toggle(isOn: $userSettings.debugMode) {
-                    Text("Debug mode")
+                    Text("Detailed information")
                 }
                 Text("Enable additional data display that can help resolve internal magnetometer issues.")
                     .font(.caption)
