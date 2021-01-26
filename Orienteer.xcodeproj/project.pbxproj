@@ -285,10 +285,10 @@
 				D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */,
 				D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */,
 				D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */,
+				D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */,
 				D03AAB45259FC3F0004C4C99 /* Assets.xcassets */,
 				D03AAB4A259FC3F0004C4C99 /* Info.plist */,
 				D03AAB47259FC3F0004C4C99 /* Preview Content */,
-				D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */,
 			);
 			path = "WatchOrienteer Extension";
 			sourceTree = "<group>";

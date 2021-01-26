@@ -10,8 +10,8 @@ import SwiftUI
 struct ReadyView: View {
     @Environment(\.scenePhase) var scenePhase
     @State private var searchInput = ""
-    @EnvironmentObject var phoneConnectionProvider: PhoneConnectionProvider
-    @EnvironmentObject var userLocation: UserLocation
+    @ObservedObject var phoneConnectionProvider: PhoneConnectionProvider
+    @ObservedObject var userLocation: UserLocation
 
     private func attemptToGetPlace() {
         if !phoneConnectionProvider.isConnected {
@@ -39,6 +39,7 @@ struct ReadyView: View {
                 .multilineTextAlignment(.center)
             NavigationLink(
                 destination: WatchOrienteerView(
+                    userLocation: userLocation,
                     destinationName: name,
                     destinationCoordinates: destination,
                     units: units
@@ -66,6 +67,6 @@ struct ReadyView: View {
 
 struct ReadyView_Previews: PreviewProvider {
     static var previews: some View {
-        ReadyView().environmentObject(UserLocation()).environmentObject(PhoneConnectionProvider())
+        ReadyView(phoneConnectionProvider: PhoneConnectionProvider(), userLocation: UserLocation())
     }
 }
