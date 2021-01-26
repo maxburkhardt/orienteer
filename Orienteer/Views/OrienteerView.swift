@@ -101,10 +101,11 @@ struct OrienteerView: View {
         }, set: { _ in
             alertMessage = ""
         })
+        let adjustment = userSettings.speedAdjustment ? userLocation.getAdjustmentBinding() : $adjustmentMode
         VStack {
             if sizeClass != .compact {
                 // Portrait layout
-                OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: $adjustmentMode)
+                OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: adjustment)
                     .padding(.bottom, 40.0)
                 OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                 #if APPCLIP
@@ -119,7 +120,7 @@ struct OrienteerView: View {
             } else {
                 VStack {
                     HStack {
-                        OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: $adjustmentMode)
+                        OrienteerCompassView(bearing: bearing, userLocation: userLocation, adjustmentMode: adjustment)
                             .padding(.trailing, 40.0)
                         OrienteerTextView(bearing: bearing, distance: distance, userLocation: userLocation)
                     }

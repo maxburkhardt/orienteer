@@ -19,6 +19,7 @@ class UserSettings: ObservableObject {
     private let LOCATION_SEARCH_KEY = "locationsearch"
     private let SCREEN_DIM_KEY = "screendim"
     private let DEBUG_MODE_KEY = "debug"
+    private let SPEED_ADJUST_KEY = "speedadjust"
 
     @Published var units = DistanceUnits.metric {
         didSet {
@@ -50,6 +51,12 @@ class UserSettings: ObservableObject {
         }
     }
 
+    @Published var speedAdjustment = false {
+        didSet {
+            userDefaults.set(speedAdjustment, forKey: SPEED_ADJUST_KEY)
+        }
+    }
+
     init() {
         userDefaults = UserDefaults()
         if let savedUnits = userDefaults.value(forKey: UNITS_STORAGE_KEY) as? String {
@@ -66,6 +73,9 @@ class UserSettings: ObservableObject {
         }
         if let savedDebugMode = userDefaults.value(forKey: DEBUG_MODE_KEY) as? Bool {
             debugMode = savedDebugMode
+        }
+        if let savedSpeedAdustment = userDefaults.value(forKey: SPEED_ADJUST_KEY) as? Bool {
+            speedAdjustment = savedSpeedAdustment
         }
     }
 }

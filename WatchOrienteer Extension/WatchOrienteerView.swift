@@ -15,17 +15,7 @@ struct WatchOrienteerView: View {
     var units: DistanceUnits
 
     var body: some View {
-        let adjustmentMode = Binding<NavigationAdjustmentMode>(get: {
-            if let speed = userLocation.lastSpeed {
-                if speed > 4.0 {
-                    return NavigationAdjustmentMode.course
-                } else {
-                    return NavigationAdjustmentMode.heading
-                }
-            } else {
-                return NavigationAdjustmentMode.heading
-            }
-        }, set: { _ in do {} })
+        let adjustmentMode = userLocation.getAdjustmentBinding()
         VStack {
             OrienteerCompassView(
                 bearing: userLocation.bearingTo(destination: destinationCoordinates),

@@ -64,6 +64,7 @@ struct OrienteerCompassView: View {
                         Image(systemName: "location.north.line").tag(NavigationAdjustmentMode.unadjusted)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .disabled(userSettings.speedAdjustment)
                     .padding(.horizontal, 10.0)
                     AdjustmentHelpView().padding(.trailing, 10.0)
                 }.frame(minWidth: nil, idealWidth: nil, maxWidth: 500.0, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)

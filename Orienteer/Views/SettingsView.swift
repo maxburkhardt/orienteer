@@ -54,6 +54,14 @@ struct SettingsView: View {
                     .foregroundColor(Color.gray)
             }
             Group {
+                Toggle(isOn: $userSettings.speedAdjustment) {
+                    Text("Speed-based mode adjust")
+                }
+                Text("Orienteer can automatically select heading adjustment modes based on what is most likely to be accurate for your current speed.")
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+            }
+            Group {
                 Toggle(isOn: $userSettings.debugMode) {
                     Text("Detailed information")
                 }

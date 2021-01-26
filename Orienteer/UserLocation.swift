@@ -8,6 +8,7 @@
 import Combine
 import CoreLocation
 import Foundation
+import SwiftUI
 
 class UserLocation: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
@@ -79,6 +80,20 @@ class UserLocation: NSObject, ObservableObject {
 
     func getOrientation() -> CLDeviceOrientation {
         return locationManager.headingOrientation
+    }
+
+    func getAdjustmentBinding() -> Binding<NavigationAdjustmentMode> {
+        return Binding<NavigationAdjustmentMode>(get: {
+            if let speed = self.lastSpeed {
+                if speed > 4.0 {
+                    return NavigationAdjustmentMode.course
+                } else {
+                    return NavigationAdjustmentMode.heading
+                }
+            } else {
+                return NavigationAdjustmentMode.heading
+            }
+        }, set: { _ in do {} })
     }
 
     let objectWillChange = PassthroughSubject<Void, Never>()
