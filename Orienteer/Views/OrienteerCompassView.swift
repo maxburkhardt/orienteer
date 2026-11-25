@@ -5,7 +5,6 @@
 //  Created by Maximilian Burkhardt on 12/22/20.
 //
 
-import Combine
 import SwiftUI
 
 struct OrienteerCompassView: View {
@@ -13,47 +12,45 @@ struct OrienteerCompassView: View {
     @ObservedObject var userLocation: UserLocation
     @Binding var adjustmentMode: NavigationAdjustmentMode
     @EnvironmentObject var userSettings: UserSettings
-    @State private var orientationIsUnknown = false
 
-    private func computeHeadingAngle() -> Angle {
-        guard let bearingValue = bearing else { return .zero }
-        return Angle(degrees: bearingValue - (userLocation.lastHeading?.trueHeading ?? 0))
-    }
+    // Must be an arrow that points straight up when unrotated: the angles below are measured from the top of the screen.
+    private let arrowSymbol = "location.north.circle"
 
     private func isHeadingUsable() -> Bool {
-        guard let headingAccuracy = userLocation.lastHeading?.headingAccuracy else { return false }
-        if headingAccuracy >= 0.0 && headingAccuracy <= 30 {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    private func computeCourseAngle() -> Angle {
-        guard let bearingValue = bearing else { return .zero }
-        return Angle(degrees: bearingValue - (userLocation.lastCourse?.course ?? 0))
+        guard let heading = userLocation.lastHeading else { return false }
+        return heading.trueHeading >= 0 && heading.headingAccuracy >= 0 && heading.headingAccuracy <= 30
     }
 
     private func isCourseUsable() -> Bool {
-        guard let courseAccuracy = userLocation.lastCourse?.accuracy else { return false }
-        if courseAccuracy >= 0 && courseAccuracy <= 180 {
-            return true
-        } else {
-            return false
+        guard let course = userLocation.lastCourse else { return false }
+        return course.course >= 0 && course.accuracy >= 0 && course.accuracy <= 45
+    }
+
+    /// How far to rotate the arrow from straight up, or nil if the data this mode relies on isn't usable.
+    private func arrowAngle(for mode: NavigationAdjustmentMode) -> Angle? {
+        guard let bearing else { return nil }
+        switch mode {
+        case .heading:
+            guard isHeadingUsable(), let heading = userLocation.lastHeading else { return nil }
+            return .degrees(bearing - heading.trueHeading)
+        case .course:
+            guard isCourseUsable(), let course = userLocation.lastCourse else { return nil }
+            return .degrees(bearing - course.course)
+        case .unadjusted:
+            return .degrees(bearing)
         }
     }
 
-    private func computeBearingAngle() -> Angle {
-        guard let bearingValue = bearing else { return .zero }
-        return Angle(degrees: bearingValue)
+    private func unavailableMessage(for mode: NavigationAdjustmentMode) -> String {
+        if bearing == nil {
+            return "Waiting for your location"
+        }
+        switch mode {
+        case .heading: return "Heading information unavailable"
+        case .course: return "Course information unavailable"
+        case .unadjusted: return ""
+        }
     }
-
-    #if os(iOS)
-        @Environment(\.verticalSizeClass) private var sizeClass
-        private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
-            .makeConnectable()
-            .autoconnect()
-    #endif
 
     var body: some View {
         #if os(iOS)
@@ -69,62 +66,36 @@ struct OrienteerCompassView: View {
                     .padding(.horizontal, 10.0)
                     AdjustmentHelpView().padding(.trailing, 10.0)
                 }.frame(minWidth: nil, idealWidth: nil, maxWidth: 500.0, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)
-                if adjustmentMode == .heading {
-                    if orientationIsUnknown && sizeClass == .compact {
-                        Image(systemName: "questionmark.circle")
-                            .font(.system(size: 200))
-                        Text("Device orientation unknown")
-                            .font(.caption)
-                            .foregroundStyle(Color.gray)
-                    } else if !isHeadingUsable() {
-                        Image(systemName: "questionmark.circle")
-                            .font(.system(size: 200))
-                        Text("Heading information unavailable")
-                            .font(.caption)
-                            .foregroundStyle(Color.gray)
-                    } else {
-                        Image(systemName: "location.circle")
-                            .rotationEffect(computeHeadingAngle())
-                            .font(.system(size: 200))
-                        // Placeholder to prevent elements from moving around
-                        Text("")
-                            .font(.caption)
-                    }
-                } else if adjustmentMode == .course {
-                    if !isCourseUsable() {
-                        Image(systemName: "questionmark.circle")
-                            .font(.system(size: 200))
-                        Text("Course information unavailable")
-                            .font(.caption)
-                            .foregroundStyle(Color.gray)
-                    } else {
-                        Image(systemName: "location.circle")
-                            .rotationEffect(computeCourseAngle())
-                            .font(.system(size: 200))
-                        // Placeholder to prevent elements from moving around
-                        Text("")
-                            .font(.caption)
-                    }
-                } else if adjustmentMode == .unadjusted {
-                    Image(systemName: "location.circle")
-                        .rotationEffect(computeBearingAngle())
+                if let angle = arrowAngle(for: adjustmentMode) {
+                    Image(systemName: arrowSymbol)
+                        .rotationEffect(angle)
                         .font(.system(size: 200))
                     // Placeholder to prevent elements from moving around
                     Text("")
                         .font(.caption)
+                } else {
+                    Image(systemName: "questionmark.circle")
+                        .font(.system(size: 200))
+                    Text(unavailableMessage(for: adjustmentMode))
+                        .font(.caption)
+                        .foregroundStyle(Color.gray)
                 }
             }
-            .onAppear {
-                userLocation.updateOrientation(newOrientation: UIDevice.current.orientation.convertToCLDeviceOrientation())
-            }
-            .onReceive(orientationChanged, perform: { _ in
-                userLocation.updateOrientation(newOrientation: UIDevice.current.orientation.convertToCLDeviceOrientation())
+            // Headings must be measured from the top of the screen as drawn, which is not always the top of the device.
+            .background(InterfaceOrientationReader { orientation in
+                if let headingOrientation = orientation.headingOrientation {
+                    userLocation.updateOrientation(newOrientation: headingOrientation)
+                }
             })
         #else
-            Image(systemName: "location.circle")
-                .rotationEffect(bearing != nil ? Angle(degrees: bearing! - (userLocation.lastHeading?.trueHeading ?? 0)) : .zero)
-                .font(.system(size: 72))
-                .padding(.bottom, 0.0)
+            if let angle = arrowAngle(for: adjustmentMode) {
+                Image(systemName: arrowSymbol)
+                    .rotationEffect(angle)
+                    .font(.system(size: 72))
+            } else {
+                Image(systemName: "questionmark.circle")
+                    .font(.system(size: 72))
+            }
         #endif
     }
 }

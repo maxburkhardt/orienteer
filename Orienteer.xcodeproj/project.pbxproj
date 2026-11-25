@@ -61,7 +61,7 @@
 		D08D4F1A25A29A2D00711E02 /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
 		D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D08D4F1C25A29A2D00711E02 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
-		D08D4F1D25A29A2D00711E02 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
+		D08D4F1D25A29A2D00711E02 /* InterfaceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* InterfaceOrientation.swift */; };
 		D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
 		D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
@@ -71,7 +71,7 @@
 		D09A31EA25B61F7D00557B5D /* CourseInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31E725B61F7D00557B5D /* CourseInformation.swift */; };
 		D09A31F225B6355200557B5D /* AdjustmentHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */; };
 		D09A31F325B6355200557B5D /* AdjustmentHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */; };
-		D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */; };
+		D0A1888A2592CC2800A57E42 /* InterfaceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* InterfaceOrientation.swift */; };
 		D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */; };
 		D0A1889A25930BE300A57E42 /* OrienteerCompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */; };
 		D0A50C6325927A5E008DE0FA /* NavigablePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */; };
@@ -188,7 +188,7 @@
 		D08D4F3A25A2C81600711E02 /* Orienteer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Orienteer.entitlements; sourceTree = "<group>"; };
 		D09A31E725B61F7D00557B5D /* CourseInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInformation.swift; sourceTree = "<group>"; };
 		D09A31F125B6355200557B5D /* AdjustmentHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentHelpView.swift; sourceTree = "<group>"; };
-		D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientation.swift; sourceTree = "<group>"; };
+		D0A188892592CC2800A57E42 /* InterfaceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceOrientation.swift; sourceTree = "<group>"; };
 		D0A1889425930AFB00A57E42 /* OrienteerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerTextView.swift; sourceTree = "<group>"; };
 		D0A1889925930BE300A57E42 /* OrienteerCompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerCompassView.swift; sourceTree = "<group>"; };
 		D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigablePlace.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 				D01F2EF625913E250042E091 /* Double.swift */,
 				D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */,
 				D0A50C6225927A5E008DE0FA /* NavigablePlace.swift */,
-				D0A188892592CC2800A57E42 /* UIDeviceOrientation.swift */,
+				D0A188892592CC2800A57E42 /* InterfaceOrientation.swift */,
 				D0F5C65B25A3F87300ACF209 /* URL.swift */,
 			);
 			path = Extensions;
@@ -669,7 +669,7 @@
 				D0F5C65D25A3F87300ACF209 /* URL.swift in Sources */,
 				D08D4F1825A29A2D00711E02 /* Double.swift in Sources */,
 				D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */,
-				D08D4F1D25A29A2D00711E02 /* UIDeviceOrientation.swift in Sources */,
+				D08D4F1D25A29A2D00711E02 /* InterfaceOrientation.swift in Sources */,
 				D08D4F0325A299F100711E02 /* OrienteerTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,7 +695,7 @@
 				D0037D72258FC11800CD9B6A /* SearchResultView.swift in Sources */,
 				D09A31E825B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */,
-				D0A1888A2592CC2800A57E42 /* UIDeviceOrientation.swift in Sources */,
+				D0A1888A2592CC2800A57E42 /* InterfaceOrientation.swift in Sources */,
 				D09A31F225B6355200557B5D /* AdjustmentHelpView.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
 				D07E01B92592B074007BC9A6 /* TextFieldClearButton.swift in Sources */,

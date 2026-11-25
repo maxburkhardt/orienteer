@@ -22,7 +22,7 @@ struct WatchOrienteerView: View {
                 userLocation: userLocation,
                 adjustmentMode: adjustmentMode
             )
-            Text(userLocation.distanceTo(destination: destinationCoordinates).convertToHumanReadable(units: units))
+            Text(userLocation.distanceTo(destination: destinationCoordinates)?.convertToHumanReadable(units: units) ?? "Locating…")
                 .font(.title)
                 .fontWeight(.bold)
             HStack {

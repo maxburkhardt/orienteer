@@ -34,11 +34,11 @@ struct OrienteerView: View {
     @State private var adjustmentMode = NavigationAdjustmentMode.heading
 
     private var bearing: DegreesFromNorth? {
-        destinationPlace != nil ? userLocation.bearingTo(destination: destinationPlace!.coordinates) : nil
+        destinationPlace.flatMap { userLocation.bearingTo(destination: $0.coordinates) }
     }
 
     private var distance: CLLocationDistance? {
-        destinationPlace != nil ? userLocation.distanceTo(destination: destinationPlace!.coordinates) : nil
+        destinationPlace.flatMap { userLocation.distanceTo(destination: $0.coordinates) }
     }
 
     private func savePlace(name: String, address: String?, latitude: Double, longitude: Double) -> NavigablePlace {

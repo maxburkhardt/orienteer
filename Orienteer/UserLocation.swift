@@ -54,18 +54,16 @@ class UserLocation: NSObject, ObservableObject {
         }
     }
 
-    // Returns distance to a location in meters
-    func distanceTo(destination: CLLocation) -> CLLocationDistance {
-        return lastLocation?.distance(from: destination) ?? 0
+    // Returns distance to a location in meters, or nil if the user's location isn't known yet
+    func distanceTo(destination: CLLocation) -> CLLocationDistance? {
+        return lastLocation?.distance(from: destination)
     }
 
-    // Returns a bearing to a destination in degrees from true north
-    func bearingTo(destination: CLLocation) -> DegreesFromNorth {
-        if lastLocation == nil {
-            return 0
-        }
+    // Returns a bearing to a destination in degrees from true north, or nil if the user's location isn't known yet
+    func bearingTo(destination: CLLocation) -> DegreesFromNorth? {
+        guard let lastLocation else { return nil }
         let dest = (destination.coordinate.latitude, destination.coordinate.longitude)
-        let src = (lastLocation!.coordinate.latitude, lastLocation!.coordinate.longitude)
+        let src = (lastLocation.coordinate.latitude, lastLocation.coordinate.longitude)
         let x = cos(dest.0.toRadians()) * sin((dest.1 - src.1).toRadians())
         let y = cos(src.0.toRadians()) * sin(dest.0.toRadians()) - sin(src.0.toRadians()) * cos(dest.0.toRadians()) * cos((dest.1 - src.1).toRadians())
         let radiansBearing = atan2(x, y)
