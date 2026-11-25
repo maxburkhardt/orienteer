@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,6 @@
 		D01F2EFC2591502D0042E091 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D023AF34258D754D00DDC691 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D03AAB34259FC3EF004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03AAB33259FC3EF004C4C99 /* Assets.xcassets */; };
-		D03AAB3B259FC3EF004C4C99 /* WatchOrienteer Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */; };
 		D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */; };
 		D03AAB46259FC3F0004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03AAB45259FC3F0004C4C99 /* Assets.xcassets */; };
@@ -27,7 +26,6 @@
 		D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF125913C3C0042E091 /* CLLocationDistance.swift */; };
 		D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
 		D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
-		D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C547C52589C0D20073F292 /* Assets.xcassets */; };
 		D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
 		D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
@@ -36,7 +34,7 @@
 		D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
 		D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
-		D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */; };
+		D03AAB9D259FC765004C4C99 /* WatchOrienteerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AAB9C259FC765004C4C99 /* WatchOrienteerApp.swift */; };
 		D03AABAE259FCF8B004C4C99 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
 		D03AABDC25A010C5004C4C99 /* PhoneConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */; };
 		D03AABE825A012A6004C4C99 /* WatchOrienteerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */; };
@@ -96,13 +94,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D03AAB3C259FC3EF004C4C99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D03AAB39259FC3EF004C4C99;
-			remoteInfo = "WatchOrienteer Extension";
-		};
 		D03AAB4B259FC3F0004C4C99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0C547B62589C0D10073F292 /* Project object */;
@@ -145,17 +136,6 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D03AAB51259FC3F0004C4C99 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				D03AAB3B259FC3EF004C4C99 /* WatchOrienteer Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D08D4EB725A292C400711E02 /* Embed App Clips */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,13 +162,12 @@
 		D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchOrienteer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03AAB33259FC3EF004C4C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03AAB35259FC3EF004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchOrienteer Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyView.swift; sourceTree = "<group>"; };
 		D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		D03AAB45259FC3F0004C4C99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03AAB48259FC3F0004C4C99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03AAB4A259FC3F0004C4C99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrienteerApp.swift; path = ../../../.Trash/OrienteerApp.swift; sourceTree = "<group>"; };
+		D03AAB9C259FC765004C4C99 /* WatchOrienteerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchOrienteerApp.swift; sourceTree = "<group>"; };
 		D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectionProvider.swift; sourceTree = "<group>"; };
 		D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConnectionProvider.swift; sourceTree = "<group>"; };
 		D03AABE725A012A6004C4C99 /* WatchOrienteerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchOrienteerView.swift; sourceTree = "<group>"; };
@@ -281,7 +260,7 @@
 		D03AAB3E259FC3EF004C4C99 /* WatchOrienteer Extension */ = {
 			isa = PBXGroup;
 			children = (
-				D03AAB9C259FC765004C4C99 /* OrienteerApp.swift */,
+				D03AAB9C259FC765004C4C99 /* WatchOrienteerApp.swift */,
 				D03AAB3F259FC3EF004C4C99 /* ReadyView.swift */,
 				D03AAB43259FC3EF004C4C99 /* ComplicationController.swift */,
 				D03AABDB25A010C5004C4C99 /* PhoneConnectionProvider.swift */,
@@ -355,7 +334,6 @@
 				D0C547CF2589C0D20073F292 /* OrienteerTests.xctest */,
 				D0C547DA2589C0D20073F292 /* OrienteerUITests.xctest */,
 				D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */,
-				D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */,
 				D08D4EA225A292C400711E02 /* OrienteerAppClip.app */,
 			);
 			name = Products;
@@ -445,34 +423,17 @@
 			buildConfigurationList = D03AAB55259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer" */;
 			buildPhases = (
 				D03AAB2F259FC3EE004C4C99 /* Resources */,
-				D03AAB51259FC3F0004C4C99 /* Embed App Extensions */,
+				D03AAB36259FC3EF004C4C99 /* Sources */,
+				D03AAB37259FC3EF004C4C99 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D03AAB3D259FC3EF004C4C99 /* PBXTargetDependency */,
 			);
 			name = WatchOrienteer;
 			productName = WatchOrienteer;
 			productReference = D03AAB31259FC3EE004C4C99 /* WatchOrienteer.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D03AAB54259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer Extension" */;
-			buildPhases = (
-				D03AAB36259FC3EF004C4C99 /* Sources */,
-				D03AAB37259FC3EF004C4C99 /* Frameworks */,
-				D03AAB38259FC3EF004C4C99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "WatchOrienteer Extension";
-			productName = "WatchOrienteer Extension";
-			productReference = D03AAB3A259FC3EF004C4C99 /* WatchOrienteer Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productType = "com.apple.product-type.application";
 		};
 		D08D4EA125A292C400711E02 /* OrienteerAppClip */ = {
 			isa = PBXNativeTarget;
@@ -554,13 +515,11 @@
 		D0C547B62589C0D10073F292 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					D03AAB30259FC3EE004C4C99 = {
-						CreatedOnToolsVersion = 12.3;
-					};
-					D03AAB39259FC3EF004C4C99 = {
 						CreatedOnToolsVersion = 12.3;
 					};
 					D08D4EA125A292C400711E02 = {
@@ -596,7 +555,6 @@
 				D0C547CE2589C0D20073F292 /* OrienteerTests */,
 				D0C547D92589C0D20073F292 /* OrienteerUITests */,
 				D03AAB30259FC3EE004C4C99 /* WatchOrienteer */,
-				D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */,
 				D08D4EA125A292C400711E02 /* OrienteerAppClip */,
 			);
 		};
@@ -607,17 +565,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03AAB34259FC3EF004C4C99 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D03AAB38259FC3EF004C4C99 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */,
 				D03AAB49259FC3F0004C4C99 /* Preview Assets.xcassets in Resources */,
-				D03AAB6E259FC51E004C4C99 /* Assets.xcassets in Resources */,
+				D03AAB34259FC3EF004C4C99 /* Assets.xcassets in Resources */,
 				D03AAB46259FC3F0004C4C99 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,7 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */,
-				D03AAB9D259FC765004C4C99 /* OrienteerApp.swift in Sources */,
+				D03AAB9D259FC765004C4C99 /* WatchOrienteerApp.swift in Sources */,
 				D03AAB76259FC51E004C4C99 /* UserLocation.swift in Sources */,
 				D03AAB69259FC51E004C4C99 /* CLLocationDistance.swift in Sources */,
 				D03AAB91259FC70A004C4C99 /* SynchronizedCounter.swift in Sources */,
@@ -769,11 +719,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D03AAB3D259FC3EF004C4C99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D03AAB39259FC3EF004C4C99 /* WatchOrienteer Extension */;
-			targetProxy = D03AAB3C259FC3EF004C4C99 /* PBXContainerItemProxy */;
-		};
 		D03AAB4C259FC3F0004C4C99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D03AAB30259FC3EE004C4C99 /* WatchOrienteer */;
@@ -800,14 +745,19 @@
 		D03AAB4F259FC3F0004C4C99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
-				IBSC_MODULE = WatchOrienteer_Extension;
 				INFOPLIST_FILE = WatchOrienteer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -815,21 +765,26 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+				WATCHOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_WATCHOS_DEPLOYMENT_TARGET)";
 			};
 			name = Debug;
 		};
 		D03AAB50259FC3F0004C4C99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 14;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
-				IBSC_MODULE = WatchOrienteer_Extension;
 				INFOPLIST_FILE = WatchOrienteer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -837,59 +792,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.2;
-			};
-			name = Release;
-		};
-		D03AAB52259FC3F0004C4C99 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = T4W2ZKZP9N;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "WatchOrienteer Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.2;
-			};
-			name = Debug;
-		};
-		D03AAB53259FC3F0004C4C99 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_ASSET_PATHS = "\"WatchOrienteer Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = T4W2ZKZP9N;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "WatchOrienteer Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = maxb.fm.Orienteer.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.2;
+				WATCHOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_WATCHOS_DEPLOYMENT_TARGET)";
 			};
 			name = Release;
 		};
@@ -905,7 +808,7 @@
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OrienteerAppClip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -931,7 +834,7 @@
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = OrienteerAppClip/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -982,6 +885,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1001,6 +905,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1043,6 +948,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1055,6 +961,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1064,7 +971,6 @@
 		D0C547E42589C0D20073F292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Orienteer/Orienteer.entitlements;
@@ -1074,7 +980,7 @@
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Orienteer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1090,7 +996,6 @@
 		D0C547E52589C0D20073F292 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Orienteer/Orienteer.entitlements;
@@ -1100,7 +1005,7 @@
 				DEVELOPMENT_TEAM = T4W2ZKZP9N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Orienteer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1116,11 +1021,10 @@
 		D0C547E72589C0D20073F292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OrienteerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1137,11 +1041,10 @@
 		D0C547E82589C0D20073F292 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OrienteerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1158,9 +1061,9 @@
 		D0C547EA2589C0D20073F292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OrienteerUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1177,9 +1080,9 @@
 		D0C547EB2589C0D20073F292 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = OrienteerUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1196,15 +1099,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D03AAB54259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D03AAB52259FC3F0004C4C99 /* Debug */,
-				D03AAB53259FC3F0004C4C99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D03AAB55259FC3F0004C4C99 /* Build configuration list for PBXNativeTarget "WatchOrienteer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
