@@ -1,0 +1,14 @@
+{
+  "app": "npx tsx bin/website.ts",
+  "profile": "forge",
+  "watch": {
+    "include": [
+      "bin/**",
+      "lib/**",
+      "public/**"
+    ]
+  },
+  "context": {
+    "@aws-cdk/core:defaultCrossStackReferences": "strong"
+  }
+}
