@@ -5,6 +5,7 @@
 //  Created by Maximilian Burkhardt on 12/15/20.
 //
 
+import CoreData
 import CoreLocation
 import SwiftUI
 
@@ -74,7 +75,7 @@ struct SearchView: View {
                 appclipNavigationLink = nil
             }
         })
-        NavigationView {
+        NavigationStack {
             if let locationAuthStatus = userLocation.locationStatus {
                 if locationAuthStatus == CLAuthorizationStatus.authorizedWhenInUse {
                     VStack {
@@ -86,8 +87,6 @@ struct SearchView: View {
                             ActivityIndicator(shouldAnimate: autocompleteRequestCount.value != 0)
                                 .padding(.trailing, 7.0)
                         }
-                        NavigationLink(destination: OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation), isActive: $historyNavigationActive) {}
-                        NavigationLink(destination: OrienteerView(destinationPlaceType: "appclip", destinationPlaceId: appclipNavigationLink ?? "", geocoder: geocoder, userLocation: userLocation), isActive: appclipNavigationBinding) {}
                         List(searchResults) { result in
                             NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
                                 SearchResultView(name: result.name, subtitle: result.subtitle)
@@ -126,6 +125,12 @@ struct SearchView: View {
                         }
                     }
                     .navigationTitle("Find a destination")
+                    .navigationDestination(isPresented: $historyNavigationActive) {
+                        OrienteerView(destinationPlaceType: "history", destinationPlaceId: historySelectedEntryId?.uuidString ?? "", geocoder: geocoder, userLocation: userLocation)
+                    }
+                    .navigationDestination(isPresented: appclipNavigationBinding) {
+                        OrienteerView(destinationPlaceType: "appclip", destinationPlaceId: appclipNavigationLink ?? "", geocoder: geocoder, userLocation: userLocation)
+                    }
                 } else if locationAuthStatus == CLAuthorizationStatus.notDetermined {
                     VStack {
                         Image(systemName: "mappin.and.ellipse")
@@ -145,7 +150,6 @@ struct SearchView: View {
                 Text("Could not load location authorization status.")
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in
             guard activity.activityType == NSUserActivityTypeBrowsingWeb else { return }
             guard let incomingURL = activity.webpageURL else { return }

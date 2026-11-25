@@ -35,7 +35,7 @@ struct SettingsView: View {
                 }
                 Text("Orienteer can keep your device's screen on while in the navigation view.")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
             Group {
                 Toggle(isOn: $userSettings.history) {
@@ -43,7 +43,7 @@ struct SettingsView: View {
                 }
                 Text("If saving is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. Without location history, Orienteer will be more reliant on network access to load destination data.")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
             Group {
                 Toggle(isOn: $userSettings.locationSearch) {
@@ -51,7 +51,7 @@ struct SettingsView: View {
                 }
                 Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
             Group {
                 Toggle(isOn: $userSettings.speedAdjustment) {
@@ -59,7 +59,7 @@ struct SettingsView: View {
                 }
                 Text("Orienteer can automatically select heading adjustment modes based on what is most likely to be accurate for your current speed.")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
             Group {
                 Toggle(isOn: $userSettings.debugMode) {
@@ -67,7 +67,7 @@ struct SettingsView: View {
                 }
                 Text("Enable additional data display that can help resolve internal magnetometer issues.")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
             Spacer()
             HStack {

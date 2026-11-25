@@ -18,7 +18,7 @@ struct OrienteerAppClipApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationStack {
                 if let locationAuthStatus = userLocation.locationStatus {
                     if locationAuthStatus == CLAuthorizationStatus.restricted || locationAuthStatus == CLAuthorizationStatus.denied {
                         VStack {

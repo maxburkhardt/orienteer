@@ -14,7 +14,7 @@ struct WatchOrienteerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationStack {
                 ReadyView(phoneConnectionProvider: phoneConnectionProvider, userLocation: userLocation)
             }
             .environmentObject(userSettings)

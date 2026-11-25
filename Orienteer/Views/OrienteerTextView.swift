@@ -31,17 +31,17 @@ struct OrienteerTextView: View {
                 .font(.title)
             Text("Location accuracy: ±\(userLocation.lastLocation?.horizontalAccuracy.convertToHumanReadable(units: userSettings.units) ?? "Not available")")
                 .font(.caption)
-                .foregroundColor(Color.gray)
+                .foregroundStyle(Color.gray)
             if userSettings.debugMode {
                 Text("Heading: \(userLocation.lastHeading?.trueHeading ?? 0.0, specifier: "%.1f")±\(userLocation.lastHeading?.headingAccuracy ?? 0.0, specifier: "%.1f")°")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
                 Text("Course: \(userLocation.lastCourse?.course ?? 0.0, specifier: "%.1f")°±\(userLocation.lastCourse?.accuracy ?? 0.0, specifier: "%.1f")°")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
                 Text("Orientation: \(userLocation.getOrientation().rawValue)")
                     .font(.caption)
-                    .foregroundColor(Color.gray)
+                    .foregroundStyle(Color.gray)
             }
         }
     }

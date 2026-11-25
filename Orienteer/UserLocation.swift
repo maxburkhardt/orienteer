@@ -100,9 +100,9 @@ class UserLocation: NSObject, ObservableObject {
 }
 
 extension UserLocation: CLLocationManagerDelegate {
-    func locationManager(_: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if !previewMode {
-            locationStatus = status
+            locationStatus = manager.authorizationStatus
         } else {
             locationStatus = CLAuthorizationStatus.authorizedWhenInUse
         }

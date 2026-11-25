@@ -202,8 +202,10 @@ struct OrienteerView: View {
             guard let incomingURL = activity.webpageURL else { return }
             parseOrienteerUrl(url: incomingURL)
         })
-        .alert(isPresented: showAlertBinding) {
-            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        .alert("Error", isPresented: showAlertBinding) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
         }
     }
 }

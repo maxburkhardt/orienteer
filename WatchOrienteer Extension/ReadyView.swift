@@ -37,23 +37,20 @@ struct ReadyView: View {
                 .font(.system(size: 50))
             Text("Please load an Orienteer destination on your phone.")
                 .multilineTextAlignment(.center)
-            NavigationLink(
-                destination: WatchOrienteerView(
-                    userLocation: userLocation,
-                    destinationName: name,
-                    destinationCoordinates: destination,
-                    units: units
-                )
-                .environmentObject(userLocation),
-                isActive: shouldStartOrienteering
-            ) {}
-                .hidden()
-                .frame(width: 1, height: 1, alignment: .center)
+        }
+        .navigationDestination(isPresented: shouldStartOrienteering) {
+            WatchOrienteerView(
+                userLocation: userLocation,
+                destinationName: name,
+                destinationCoordinates: destination,
+                units: units
+            )
+            .environmentObject(userLocation)
         }
         .onAppear {
             attemptToGetPlace()
         }
-        .onChange(of: scenePhase) { newScenePhase in
+        .onChange(of: scenePhase) { _, newScenePhase in
             switch newScenePhase {
             case .active:
                 attemptToGetPlace()

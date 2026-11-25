@@ -5,6 +5,7 @@
 //  Created by Maximilian Burkhardt on 12/22/20.
 //
 
+import Combine
 import SwiftUI
 
 struct OrienteerCompassView: View {
@@ -74,13 +75,13 @@ struct OrienteerCompassView: View {
                             .font(.system(size: 200))
                         Text("Device orientation unknown")
                             .font(.caption)
-                            .foregroundColor(Color.gray)
+                            .foregroundStyle(Color.gray)
                     } else if !isHeadingUsable() {
                         Image(systemName: "questionmark.circle")
                             .font(.system(size: 200))
                         Text("Heading information unavailable")
                             .font(.caption)
-                            .foregroundColor(Color.gray)
+                            .foregroundStyle(Color.gray)
                     } else {
                         Image(systemName: "location.circle")
                             .rotationEffect(computeHeadingAngle())
@@ -95,7 +96,7 @@ struct OrienteerCompassView: View {
                             .font(.system(size: 200))
                         Text("Course information unavailable")
                             .font(.caption)
-                            .foregroundColor(Color.gray)
+                            .foregroundStyle(Color.gray)
                     } else {
                         Image(systemName: "location.circle")
                             .rotationEffect(computeCourseAngle())

@@ -19,7 +19,7 @@ struct TextFieldClearButton: ViewModifier {
                     action: { self.text = "" },
                     label: {
                         Image(systemName: "delete.left")
-                            .foregroundColor(Color(UIColor.opaqueSeparator))
+                            .foregroundStyle(Color(UIColor.opaqueSeparator))
                     }
                 )
             }

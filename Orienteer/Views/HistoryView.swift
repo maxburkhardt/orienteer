@@ -47,13 +47,18 @@ struct HistoryView: View {
             }
         }
         .padding(10.0)
-        .alert(isPresented: showAlertBinding) {
-            Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        .alert("Error", isPresented: showAlertBinding) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
         }
-        .alert(isPresented: $showingConfirmation) {
-            Alert(title: Text("Are you sure you want to clear history?"), message: Text("This action cannot be undone."), primaryButton: .destructive(Text("Yes, clear")) {
+        .alert("Are you sure you want to clear history?", isPresented: $showingConfirmation) {
+            Button("Yes, clear", role: .destructive) {
                 deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex))
-            }, secondaryButton: .cancel())
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This action cannot be undone.")
         }
     }
 
