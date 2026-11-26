@@ -65,11 +65,24 @@ struct OrienteerCompassView: View {
                     .foregroundStyle(.secondary)
             }
             // Headings must be measured from the top of the screen as drawn, which is not always the top of the device.
-            .background(InterfaceOrientationReader { orientation in
-                if let headingOrientation = orientation.headingOrientation {
-                    userLocation.updateOrientation(newOrientation: headingOrientation)
+            // From iOS 27, Core Location can measure from this view directly, which also handles which display it's on
+            // (e.g. iPhone Duo); before that, tell it the device orientation that matches the interface.
+            .background(InterfaceOrientationReader(
+                onChange: { orientation in
+                    if let headingOrientation = orientation.headingOrientation {
+                        userLocation.updateOrientation(newOrientation: headingOrientation)
+                    }
+                },
+                onWindowChange: { view, isInWindow in
+                    if #available(iOS 27, *) {
+                        if isInWindow {
+                            userLocation.attachHeadingBody(view)
+                        } else {
+                            userLocation.detachHeadingBody(view)
+                        }
+                    }
                 }
-            })
+            ))
         #else
             arrow(angle: angle, size: 72)
         #endif

@@ -80,6 +80,24 @@ class UserLocation: NSObject, ObservableObject {
         return locationManager.headingOrientation
     }
 
+    #if os(iOS)
+        /// Measures headings from the top of `view` instead of from `headingOrientation`. Core Location follows the view
+        /// as it rotates, and knows which display it's on, which an orientation alone can't express (e.g. iPhone Duo
+        /// unfolded, whose display is turned 90° from the folded one).
+        @available(iOS 27, *)
+        func attachHeadingBody(_ view: UIView) {
+            locationManager.headingBody = view
+        }
+
+        /// Goes back to measuring headings from `headingOrientation`, unless another view has since been attached.
+        @available(iOS 27, *)
+        func detachHeadingBody(_ view: UIView) {
+            if locationManager.headingBody === view {
+                locationManager.headingBody = nil
+            }
+        }
+    #endif
+
     func getAdjustmentBinding() -> Binding<NavigationAdjustmentMode> {
         return Binding<NavigationAdjustmentMode>(get: {
             if let speed = self.lastSpeed {
