@@ -30,36 +30,36 @@ class Geocoder {
         errorHandlerStack = [{ message in print(message) }]
     }
 
-    private func makePlacesApiCall<T: Decodable>(urlBase: String, params: [String: String], callback: @escaping (T) -> Void, requestCounter: SynchronizedCounter? = nil) {
-        let authorizedParams = params.merging(["key": apiKey]) { _, new in new }
-        var params = [String]()
-        for (paramKey, paramValue) in authorizedParams {
-            params.append("\(paramKey.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "k")=\(paramValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "v")")
-        }
-        let queryString = params.joined(separator: "&")
-        guard let url = URL(string: "\(urlBase)?\(queryString)") else {
-            errorHandler("Failed to construct Places query to \(urlBase)")
-            return
-        }
+    /// Sends a Places API (New) request and decodes the response. The callback and any error are delivered on the main queue.
+    private func makePlacesApiCall<T: Decodable>(url: URL, method: String = "GET", body: [String: Any]? = nil, fieldMask: String, callback: @escaping (T) -> Void, requestCounter: SynchronizedCounter? = nil) {
         var request = URLRequest(url: url)
-        request.setValue(Bundle.main.bundleIdentifier, forHTTPHeaderField: "x-ios-bundle-identifier")
+        request.httpMethod = method
+        request.setValue(apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
+        request.setValue(fieldMask, forHTTPHeaderField: "X-Goog-FieldMask")
+        // Lets a key restricted to iOS apps accept the request.
+        request.setValue(Bundle.main.bundleIdentifier, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
+        if let body {
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        }
         let task = URLSession.shared.dataTask(with: request) { result in
             requestCounter?.decrement()
-            switch result {
-            case let .success((_, data)):
-                var response: T?
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    response = try decoder.decode(T.self, from: data)
-                } catch {
-                    self.errorHandler("Geocoding API decode error: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                switch result {
+                case let .success((response, data)):
+                    if let status = (response as? HTTPURLResponse)?.statusCode, !(200 ..< 300).contains(status) {
+                        let apiError = try? JSONDecoder().decode(GoogleAPIErrorResponse.self, from: data)
+                        self.errorHandler("Places API error (\(status)): \(apiError?.error.message ?? "no details")")
+                        return
+                    }
+                    do {
+                        callback(try JSONDecoder().decode(T.self, from: data))
+                    } catch {
+                        self.errorHandler("Places API decode error: \(error.localizedDescription)")
+                    }
+                case let .failure(error):
+                    self.errorHandler(error.localizedDescription)
                 }
-                if let decodedResponse = response {
-                    callback(decodedResponse)
-                }
-            case let .failure(error):
-                self.errorHandler(error.localizedDescription)
             }
         }
         requestCounter?.increment()
@@ -67,27 +67,51 @@ class Geocoder {
     }
 
     func placesAutocomplete(search: String, userLocation: CLLocation?, callback: @escaping (PlacesAutocompleteResponse) -> Void, requestCounter: SynchronizedCounter, userSettings: UserSettings) {
-        var params = [
+        var body: [String: Any] = [
             "input": search,
-            "sessiontoken": autocompleteSession,
+            "sessionToken": autocompleteSession,
         ]
-        if userSettings.locationSearch {
-            if let location = userLocation {
-                params["location"] = "\(location.coordinate.latitude.rounded(toPlaces: 1)),\(location.coordinate.longitude.rounded(toPlaces: 1))"
-            }
+        if userSettings.locationSearch, let location = userLocation {
+            // Only an approximate location is shared: rounded to about 10 km.
+            body["locationBias"] = [
+                "circle": [
+                    "center": [
+                        "latitude": location.coordinate.latitude.rounded(toPlaces: 1),
+                        "longitude": location.coordinate.longitude.rounded(toPlaces: 1),
+                    ],
+                    "radius": 50000.0,
+                ],
+            ]
         }
-        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/autocomplete/json", params: params, callback: callback, requestCounter: requestCounter)
+        makePlacesApiCall(
+            url: URL(string: "https://places.googleapis.com/v1/places:autocomplete")!,
+            method: "POST",
+            body: body,
+            fieldMask: "suggestions.placePrediction.placeId,suggestions.placePrediction.text.text,suggestions.placePrediction.structuredFormat",
+            callback: callback,
+            requestCounter: requestCounter
+        )
     }
 
-    func placeDetails(placeId: String, callback: @escaping (PlaceDetailsResponse) -> Void) {
-        let params = [
-            "place_id": placeId,
-            "sessiontoken": autocompleteSession,
-            "fields": "name,geometry,formatted_address",
-        ]
-        // Rotate the autocomplete session once the place is looked up
+    /// Looks up a place chosen from autocomplete. The name comes from the autocomplete result rather than the details
+    /// request: asking for the name would bill the session at a much higher rate than address and location alone.
+    func placeDetails(placeId: String, name: String, callback: @escaping (GooglePlacesPlace) -> Void) {
+        var components = URLComponents(string: "https://places.googleapis.com/v1/places/")!
+        components.path += placeId
+        components.queryItems = [URLQueryItem(name: "sessionToken", value: autocompleteSession)]
+        // A details request ends the autocomplete session, so start a new one for the next search.
         autocompleteSession = UUID().uuidString
-        makePlacesApiCall(urlBase: "https://maps.googleapis.com/maps/api/place/details/json", params: params, callback: callback)
+        guard let url = components.url else {
+            errorHandler("Failed to construct Places query for \(placeId)")
+            return
+        }
+        makePlacesApiCall(url: url, fieldMask: "formattedAddress,location", callback: { (response: PlaceDetailsResponse) in
+            callback(GooglePlacesPlace(
+                name: name,
+                formattedAddress: response.formattedAddress,
+                coordinates: CLLocation(latitude: response.location.latitude, longitude: response.location.longitude)
+            ))
+        })
     }
 
     func pushErrorHandler(handler: @escaping (String) -> Void) {

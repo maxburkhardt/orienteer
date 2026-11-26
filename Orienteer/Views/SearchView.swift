@@ -19,7 +19,6 @@ struct SearchResultListEntry: Identifiable {
 struct SearchView: View {
     @ObservedObject var userLocation: UserLocation
     @Environment(\.managedObjectContext) var viewContext
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.openURL) private var openURL
     @EnvironmentObject var userSettings: UserSettings
     var geocoder: Geocoder
@@ -57,7 +56,7 @@ struct SearchView: View {
             results.append(SearchResultListEntry(type: "coordinates", id: "\(latitude),\(longitude)", name: searchInput, subtitle: "Manually entered"))
         }
         return results + autocompleteResults.map { result in
-            SearchResultListEntry(type: "googleplace", id: result.placeId, name: result.structuredFormatting.mainText, subtitle: result.structuredFormatting.secondaryText)
+            SearchResultListEntry(type: "googleplace", id: result.placeId, name: result.mainText, subtitle: result.secondaryText)
         }
     }
 
@@ -115,16 +114,18 @@ struct SearchView: View {
             case .authorizedWhenInUse, .authorizedAlways:
                 List {
                     ForEach(searchResults) { result in
-                        NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, geocoder: geocoder, userLocation: userLocation)) {
+                        NavigationLink(destination: OrienteerView(destinationPlaceType: result.type, destinationPlaceId: result.id, destinationPlaceName: result.name, geocoder: geocoder, userLocation: userLocation)) {
                             SearchResultView(name: result.name, subtitle: result.subtitle)
                         }
                     }
                     if !autocompleteResults.isEmpty {
-                        // Google requires this attribution wherever Places autocomplete results are shown without a map.
-                        Image(colorScheme == .dark ? "PoweredByGoogleDark" : "PoweredByGoogleLight")
+                        // Google requires this attribution wherever Places results are shown without a map: the official
+                        // logo, unmodified, at its native 18pt height, with at least 10pt clear space to the sides and top.
+                        Image("GoogleMapsLogo")
+                            .padding(.top, 10)
                             .frame(maxWidth: .infinity)
                             .listRowSeparator(.hidden)
-                            .accessibilityLabel("Powered by Google")
+                            .accessibilityLabel("Google Maps")
                     }
                 }
                 .listStyle(.plain)
@@ -219,9 +220,9 @@ struct SearchView: View {
         ("Golden Gate Bakery", "Grant Avenue, San Francisco, CA, USA"),
     ].enumerated().map { index, place in
         PlacesAutocompletePrediction(
-            description: "\(place.0), \(place.1)",
             placeId: "preview-\(index)",
-            structuredFormatting: PlacesAutocompleteStructuredFormatting(mainText: place.0, secondaryText: place.1)
+            text: PlacesText(text: "\(place.0), \(place.1)"),
+            structuredFormat: PlacesStructuredFormat(mainText: PlacesText(text: place.0), secondaryText: PlacesText(text: place.1))
         )
     }
     SearchView(userLocation: UserLocation(previewMode: true), geocoder: Geocoder(), previewQuery: "Golden Gate", previewResults: results)

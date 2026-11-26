@@ -13,6 +13,8 @@ import SwiftUI
 struct OrienteerView: View {
     var destinationPlaceType: String
     var destinationPlaceId: String
+    /// The place's name, if it's already known (from a search result).
+    var destinationPlaceName: String? = nil
     var geocoder: Geocoder
     @ObservedObject var userLocation: UserLocation
     @Environment(\.managedObjectContext) private var viewContext
@@ -148,8 +150,7 @@ struct OrienteerView: View {
             #endif
             switch destinationPlaceType {
             case "googleplace":
-                geocoder.placeDetails(placeId: destinationPlaceId, callback: { (placeResponse: PlaceDetailsResponse) -> Void in
-                    let place = placeResponse.result
+                geocoder.placeDetails(placeId: destinationPlaceId, name: destinationPlaceName ?? "Unknown place", callback: { place in
                     // First, check to see if we've been to this place before (to avoid history duplicates)
                     let duplicateFetch = NSFetchRequest<NavigablePlace>(entityName: "NavigablePlace")
                     duplicateFetch.predicate = NSPredicate(format: "name == %@ && latitude == %@ && longitude == %@", place.name, String(place.coordinates.coordinate.latitude), String(place.coordinates.coordinate.longitude))

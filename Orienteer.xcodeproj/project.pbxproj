@@ -28,7 +28,7 @@
 		D03AAB6D259FC51E004C4C99 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EF625913E250042E091 /* Double.swift */; };
 		D03AAB6F259FC51E004C4C99 /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C548032589DC990073F292 /* Geocoder.swift */; };
 		D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
-		D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D03AAB72259FC51E004C4C99 /* PlaceDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* PlaceDetailsResponse.swift */; };
 		D03AAB73259FC51E004C4C99 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D03AAB74259FC51E004C4C99 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
 		D03AAB75259FC51E004C4C99 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EE1259132870042E091 /* UserSettings.swift */; };
@@ -41,7 +41,7 @@
 		D05A0237258B15E200289F0A /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A0236258B15E200289F0A /* URLSession.swift */; };
 		D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05A023B258B1CFB00289F0A /* UserLocation.swift */; };
 		D07E01C32592BF04007BC9A6 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
-		D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D081FA2B258D7DDC00D7876D /* PlaceDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* PlaceDetailsResponse.swift */; };
 		D08D4EA525A292C400711E02 /* OrienteerAppClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D4EA425A292C400711E02 /* OrienteerAppClipApp.swift */; };
 		D08D4EAC25A292C400711E02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */; };
 		D08D4EB625A292C400711E02 /* OrienteerAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = D08D4EA225A292C400711E02 /* OrienteerAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -60,7 +60,7 @@
 		D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01F2EFB2591502D0042E091 /* DegreesFromNorth.swift */; };
 		D08D4F1C25A29A2D00711E02 /* PlacesAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */; };
 		D08D4F1D25A29A2D00711E02 /* InterfaceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A188892592CC2800A57E42 /* InterfaceOrientation.swift */; };
-		D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */; };
+		D08D4F1E25A29A2D00711E02 /* PlaceDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FA2A258D7DDC00D7876D /* PlaceDetailsResponse.swift */; };
 		D08D4F2525A29A4500711E02 /* SynchronizedCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */; };
 		D08D4F2C25A29A7100711E02 /* WatchConnectionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03AABAD259FCF8B004C4C99 /* WatchConnectionProvider.swift */; };
 		D08D4F3325A29A8700711E02 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = D023AF33258D754D00DDC691 /* Secrets.plist */; };
@@ -177,7 +177,7 @@
 		D05A0236258B15E200289F0A /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		D05A023B258B1CFB00289F0A /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		D07E01C22592BF04007BC9A6 /* SynchronizedCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedCounter.swift; sourceTree = "<group>"; };
-		D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPlaceResponse.swift; sourceTree = "<group>"; };
+		D081FA2A258D7DDC00D7876D /* PlaceDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsResponse.swift; sourceTree = "<group>"; };
 		D08D4EA225A292C400711E02 /* OrienteerAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrienteerAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08D4EA425A292C400711E02 /* OrienteerAppClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrienteerAppClipApp.swift; sourceTree = "<group>"; };
 		D08D4EAB25A292C400711E02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -397,7 +397,7 @@
 		D0C547F42589D43C0073F292 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D081FA2A258D7DDC00D7876D /* FindPlaceResponse.swift */,
+				D081FA2A258D7DDC00D7876D /* PlaceDetailsResponse.swift */,
 				D0037D6C258FBD3D00CD9B6A /* PlacesAutocompleteResponse.swift */,
 				D09A31E725B61F7D00557B5D /* CourseInformation.swift */,
 			);
@@ -630,7 +630,7 @@
 				D03AABDC25A010C5004C4C99 /* PhoneConnectionProvider.swift in Sources */,
 				D03AAB6C259FC51E004C4C99 /* PlacesAutocompleteResponse.swift in Sources */,
 				D03AABE825A012A6004C4C99 /* WatchOrienteerView.swift in Sources */,
-				D03AAB72259FC51E004C4C99 /* FindPlaceResponse.swift in Sources */,
+				D03AAB72259FC51E004C4C99 /* PlaceDetailsResponse.swift in Sources */,
 				D03AAB40259FC3EF004C4C99 /* ReadyView.swift in Sources */,
 				D03AAB44259FC3EF004C4C99 /* ComplicationController.swift in Sources */,
 				D03AAB70259FC51E004C4C99 /* URLSession.swift in Sources */,
@@ -648,7 +648,7 @@
 			files = (
 				D09A31EA25B61F7D00557B5D /* CourseInformation.swift in Sources */,
 				D08D4EC725A297DE00711E02 /* PlaceHistory.xcdatamodeld in Sources */,
-				D08D4F1E25A29A2D00711E02 /* FindPlaceResponse.swift in Sources */,
+				D08D4F1E25A29A2D00711E02 /* PlaceDetailsResponse.swift in Sources */,
 				D08D4EFC25A2993000711E02 /* Geocoder.swift in Sources */,
 				D08D4F1A25A29A2D00711E02 /* NavigablePlace.swift in Sources */,
 				D08D4F1B25A29A2D00711E02 /* DegreesFromNorth.swift in Sources */,
@@ -699,7 +699,7 @@
 				D0AA00000000000000000002 /* SheetCloseButton.swift in Sources */,
 				D05A023C258B1CFB00289F0A /* UserLocation.swift in Sources */,
 				D0A1889525930AFB00A57E42 /* OrienteerTextView.swift in Sources */,
-				D081FA2B258D7DDC00D7876D /* FindPlaceResponse.swift in Sources */,
+				D081FA2B258D7DDC00D7876D /* PlaceDetailsResponse.swift in Sources */,
 				D0A1889A25930BE300A57E42 /* OrienteerCompassView.swift in Sources */,
 				D0B2467F25BFC99600F3FB77 /* NavigationAdjustmentMode.swift in Sources */,
 				D0A50C6325927A5E008DE0FA /* NavigablePlace.swift in Sources */,
