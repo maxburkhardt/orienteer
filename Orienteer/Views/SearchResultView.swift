@@ -12,22 +12,23 @@ struct SearchResultView: View {
     var subtitle: String?
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(name)
-                    .fontWeight(.bold)
-                Spacer()
-            }
-            HStack {
-                Text(subtitle ?? "")
+        VStack(alignment: .leading, spacing: 2) {
+            Text(name)
+                .font(.body.weight(.semibold))
+            if let subtitle, !subtitle.isEmpty {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .contentShape(Rectangle())
     }
 }
 
-struct SearchResultView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    List {
         SearchResultView(name: "Test Place", subtitle: "1st St, San Francisco, CA")
+        SearchResultView(name: "No Subtitle", subtitle: nil)
     }
 }
