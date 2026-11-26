@@ -32,11 +32,12 @@ struct ReadyView: View {
         )
         let units = DistanceUnits(rawValue: phoneConnectionProvider.lastMessage?["units"] as? String ?? "metric") ?? DistanceUnits.metric
         let name = phoneConnectionProvider.lastMessage?["name"] as? String ?? "Destination"
-        VStack {
+        ContentUnavailableView {
             Image(systemName: "location.circle")
                 .font(.system(size: 50))
+                .foregroundStyle(.secondary)
+        } description: {
             Text("Please load an Orienteer destination on your phone.")
-                .multilineTextAlignment(.center)
         }
         .navigationDestination(isPresented: shouldStartOrienteering) {
             WatchOrienteerView(

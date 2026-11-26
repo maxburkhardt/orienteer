@@ -25,21 +25,21 @@ struct WatchOrienteerView: View {
             Text(userLocation.distanceTo(destination: destinationCoordinates)?.convertToHumanReadable(units: units) ?? "Locating…")
                 .font(.title)
                 .fontWeight(.bold)
+                .monospacedDigit()
             HStack {
                 Text(destinationName)
                     .font(.caption)
-                if adjustmentMode.wrappedValue == .course {
-                    Image(systemName: "bicycle")
-                } else {
-                    Image(systemName: "figure.walk")
-                }
+                    .lineLimit(2)
+                Image(systemName: adjustmentMode.wrappedValue == .course ? "bicycle" : "figure.walk")
+                    .contentTransition(.symbolEffect(.replace))
+                    .animation(.default, value: adjustmentMode.wrappedValue)
             }
         }
     }
 }
 
-struct WatchOrienteerView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    NavigationStack {
         WatchOrienteerView(
             userLocation: UserLocation(previewMode: true),
             destinationName: "Destination",
