@@ -7,8 +7,59 @@
 
 import SwiftUI
 
+/// The home screen icons to choose from: the current design, and the original one.
+private enum AppIconChoice: String, CaseIterable, Identifiable {
+    case standard
+    case classic
+
+    var id: Self { self }
+
+    /// The icon set's name in the asset catalog, or nil for the primary icon. Alternate sets must also be listed in
+    /// the app target's ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES build setting to be included in the app.
+    var alternateIconName: String? {
+        switch self {
+        case .standard: return nil
+        case .classic: return "AppIcon-Classic"
+        }
+    }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .standard: return "Default"
+        case .classic: return "Classic"
+        }
+    }
+
+    /// A small copy of the icon for display, since app icon sets can't be loaded as images.
+    var previewImage: String {
+        switch self {
+        case .standard: return "AppIconPreview"
+        case .classic: return "AppIconPreview-Classic"
+        }
+    }
+
+    init(alternateIconName: String?) {
+        self = Self.allCases.first { $0.alternateIconName == alternateIconName } ?? .standard
+    }
+}
+
 struct SettingsView: View {
     @EnvironmentObject var userSettings: UserSettings
+    /// The system owns which icon is in use; this mirrors it so the picker can update straight away.
+    @State private var appIcon = AppIconChoice.standard
+
+    private func select(_ choice: AppIconChoice) {
+        guard choice != appIcon else { return }
+        let previous = appIcon
+        appIcon = choice
+        Task {
+            do {
+                try await UIApplication.shared.setAlternateIconName(choice.alternateIconName)
+            } catch {
+                appIcon = previous
+            }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -44,6 +95,27 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable additional data display that can help resolve internal magnetometer issues.")
                 }
+                if UIApplication.shared.supportsAlternateIcons {
+                    Section {
+                        Picker("App Icon", selection: Binding(get: { appIcon }, set: select)) {
+                            ForEach(AppIconChoice.allCases) { choice in
+                                HStack(spacing: 12) {
+                                    Image(choice.previewImage)
+                                        .resizable()
+                                        .frame(width: 44, height: 44)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                        .accessibilityHidden(true)
+                                    Text(choice.title)
+                                }
+                                .tag(choice)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                    }
+                }
+            }
+            .onAppear {
+                appIcon = AppIconChoice(alternateIconName: UIApplication.shared.alternateIconName)
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
