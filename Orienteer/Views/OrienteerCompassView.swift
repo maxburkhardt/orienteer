@@ -11,10 +11,12 @@ struct OrienteerCompassView: View {
     var bearing: Double?
     @ObservedObject var userLocation: UserLocation
     @Binding var adjustmentMode: NavigationAdjustmentMode
-    @EnvironmentObject var userSettings: UserSettings
 
     // Must be an arrow that points straight up when unrotated: the angles below are measured from the top of the screen.
     private let arrowSymbol = "location.north.circle"
+
+    /// The arrow's current rotation in degrees. Not limited to 0–360°, so animations can always take the short way round.
+    @State private var displayedDegrees: Double = 0
 
     private func isHeadingUsable() -> Bool {
         guard let heading = userLocation.lastHeading else { return false }
@@ -53,33 +55,14 @@ struct OrienteerCompassView: View {
     }
 
     var body: some View {
+        let angle = arrowAngle(for: adjustmentMode)
         #if os(iOS)
             VStack {
-                HStack {
-                    Picker("Adjustment Mode", selection: $adjustmentMode) {
-                        Image(systemName: "figure.walk").tag(NavigationAdjustmentMode.heading)
-                        Image(systemName: "bicycle").tag(NavigationAdjustmentMode.course)
-                        Image(systemName: "location.north.line").tag(NavigationAdjustmentMode.unadjusted)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .disabled(userSettings.speedAdjustment)
-                    .padding(.horizontal, 10.0)
-                    AdjustmentHelpView().padding(.trailing, 10.0)
-                }.frame(minWidth: nil, idealWidth: nil, maxWidth: 500.0, minHeight: nil, idealHeight: nil, maxHeight: nil, alignment: .center)
-                if let angle = arrowAngle(for: adjustmentMode) {
-                    Image(systemName: arrowSymbol)
-                        .rotationEffect(angle)
-                        .font(.system(size: 200))
-                    // Placeholder to prevent elements from moving around
-                    Text("")
-                        .font(.caption)
-                } else {
-                    Image(systemName: "questionmark.circle")
-                        .font(.system(size: 200))
-                    Text(unavailableMessage(for: adjustmentMode))
-                        .font(.caption)
-                        .foregroundStyle(Color.gray)
-                }
+                arrow(angle: angle, size: 200)
+                // Always present (even if empty) so the layout doesn't shift when the message appears.
+                Text(angle == nil ? unavailableMessage(for: adjustmentMode) : "")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
             // Headings must be measured from the top of the screen as drawn, which is not always the top of the device.
             .background(InterfaceOrientationReader { orientation in
@@ -88,15 +71,29 @@ struct OrienteerCompassView: View {
                 }
             })
         #else
-            if let angle = arrowAngle(for: adjustmentMode) {
-                Image(systemName: arrowSymbol)
-                    .rotationEffect(angle)
-                    .font(.system(size: 72))
-            } else {
-                Image(systemName: "questionmark.circle")
-                    .font(.system(size: 72))
-            }
+            arrow(angle: angle, size: 72)
         #endif
+    }
+
+    /// The arrow pointing at the destination, or a question mark when the direction isn't known.
+    private func arrow(angle: Angle?, size: CGFloat) -> some View {
+        Image(systemName: angle == nil ? "questionmark.circle" : arrowSymbol)
+            .font(.system(size: size))
+            .contentTransition(.symbolEffect(.replace))
+            .animation(.default, value: angle == nil)
+            .rotationEffect(angle == nil ? .zero : .degrees(displayedDegrees))
+            .onChange(of: angle?.degrees, initial: true) { oldDegrees, newDegrees in
+                guard let newDegrees else { return }
+                if let oldDegrees, oldDegrees != newDegrees {
+                    // Turn the short way round (e.g. 350° to 10° is +20°, not -340°), and ease between readings.
+                    withAnimation(.smooth(duration: 0.3)) {
+                        displayedDegrees += remainder(newDegrees - displayedDegrees, 360)
+                    }
+                } else {
+                    // First reading, or the arrow is reappearing: point straight at it without spinning.
+                    displayedDegrees = newDegrees
+                }
+            }
     }
 }
 

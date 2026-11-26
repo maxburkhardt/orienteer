@@ -112,6 +112,7 @@ struct OrienteerView: View {
                     Button(action: { appStoreOverlayPresented = true }) {
                         Text("Get Orienteer")
                     }
+                    .buttonStyle(.borderedProminent)
                     .padding(.top, 20.0)
                     .appStoreOverlay(isPresented: $appStoreOverlayPresented) {
                         SKOverlay.AppClipConfiguration(position: .bottom)
@@ -128,6 +129,13 @@ struct OrienteerView: View {
             }
         }
         .navigationTitle(destinationPlace?.name ?? "Loading...")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                AdjustmentHelpView()
+            }
+            AdjustmentModeToolbarItem(selection: adjustment, isDisabled: userSettings.speedAdjustment)
+        }
         .onAppear {
             geocoder.pushErrorHandler(handler: { message in alertMessage = message })
             if userSettings.disableScreenDim {
@@ -206,6 +214,39 @@ struct OrienteerView: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text(alertMessage)
+        }
+    }
+}
+
+/// The mode picker, shown in the bottom bar.
+private struct AdjustmentModeToolbarItem: ToolbarContent {
+    @Binding var selection: NavigationAdjustmentMode
+    var isDisabled: Bool
+
+    var body: some ToolbarContent {
+        if #available(iOS 26, *) {
+            // The segmented picker draws its own capsule; without this, iOS 26 puts a second glass capsule around it.
+            item.sharedBackgroundVisibility(.hidden)
+        } else {
+            item
+        }
+    }
+
+    private var item: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            Picker("Adjustment Mode", selection: $selection) {
+                Image(systemName: "figure.walk")
+                    .accessibilityLabel("Walking")
+                    .tag(NavigationAdjustmentMode.heading)
+                Image(systemName: "bicycle")
+                    .accessibilityLabel("Vehicle")
+                    .tag(NavigationAdjustmentMode.course)
+                Image(systemName: "location.north.line")
+                    .accessibilityLabel("North")
+                    .tag(NavigationAdjustmentMode.unadjusted)
+            }
+            .pickerStyle(.segmented)
+            .disabled(isDisabled)
         }
     }
 }
