@@ -8,82 +8,55 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var onDismiss: () -> Void
     @EnvironmentObject var userSettings: UserSettings
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Settings")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.vertical, 10.0)
-            Group {
-                HStack {
-                    Text("Distance Units")
-                    Spacer()
+        NavigationStack {
+            Form {
+                Section {
+                    Picker("Distance Units", selection: $userSettings.units) {
+                        Text("Metric").tag(DistanceUnits.metric)
+                        Text("Imperial").tag(DistanceUnits.imperial)
+                    }
                 }
-                Picker("Distance Units", selection: $userSettings.units) {
-                    Text("Metric").tag(DistanceUnits.metric)
-                    Text("Imperial").tag(DistanceUnits.imperial)
+                Section {
+                    Toggle("Keep Screen On", isOn: $userSettings.disableScreenDim)
+                } footer: {
+                    Text("Orienteer can keep your device's screen on while in the navigation view.")
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.bottom, 10.0)
+                Section {
+                    Toggle("Save History", isOn: $userSettings.history)
+                } footer: {
+                    Text("If saving is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. Without location history, Orienteer will be more reliant on network access to load destination data.")
+                }
+                Section {
+                    Toggle("Location-Based Search", isOn: $userSettings.locationSearch)
+                } footer: {
+                    Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
+                }
+                Section {
+                    Toggle("Speed-Based Mode Adjust", isOn: $userSettings.speedAdjustment)
+                } footer: {
+                    Text("Orienteer can automatically select heading adjustment modes based on what is most likely to be accurate for your current speed.")
+                }
+                Section {
+                    Toggle("Detailed Information", isOn: $userSettings.debugMode)
+                } footer: {
+                    Text("Enable additional data display that can help resolve internal magnetometer issues.")
+                }
             }
-            Group {
-                Toggle(isOn: $userSettings.disableScreenDim) {
-                    Text("Keep screen on")
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    SheetCloseButton()
                 }
-                Text("Orienteer can keep your device's screen on while in the navigation view.")
-                    .font(.caption)
-                    .foregroundStyle(Color.gray)
-            }
-            Group {
-                Toggle(isOn: $userSettings.history) {
-                    Text("Save history")
-                }
-                Text("If saving is disabled, destinations will still show in the History view while the app is open, but will not be permanently saved. Without location history, Orienteer will be more reliant on network access to load destination data.")
-                    .font(.caption)
-                    .foregroundStyle(Color.gray)
-            }
-            Group {
-                Toggle(isOn: $userSettings.locationSearch) {
-                    Text("Location-based search")
-                }
-                Text("By sharing your approximate location with Google, Orienteer can improve the relevance of search results.")
-                    .font(.caption)
-                    .foregroundStyle(Color.gray)
-            }
-            Group {
-                Toggle(isOn: $userSettings.speedAdjustment) {
-                    Text("Speed-based mode adjust")
-                }
-                Text("Orienteer can automatically select heading adjustment modes based on what is most likely to be accurate for your current speed.")
-                    .font(.caption)
-                    .foregroundStyle(Color.gray)
-            }
-            Group {
-                Toggle(isOn: $userSettings.debugMode) {
-                    Text("Detailed information")
-                }
-                Text("Enable additional data display that can help resolve internal magnetometer issues.")
-                    .font(.caption)
-                    .foregroundStyle(Color.gray)
-            }
-            Spacer()
-            HStack {
-                Spacer()
-                Button(action: { onDismiss() }, label: {
-                    Text("Done")
-                })
-                Spacer()
             }
         }
-        .padding(10.0)
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(onDismiss: { do {} }).environmentObject(UserSettings())
-    }
+#Preview {
+    SettingsView()
+        .environmentObject(UserSettings())
 }

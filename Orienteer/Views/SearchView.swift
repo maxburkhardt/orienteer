@@ -74,6 +74,12 @@ struct SearchView: View {
         return .navigationBarDrawer(displayMode: .always)
     }
 
+    private func statusIcon(_ systemName: String) -> some View {
+        Image(systemName: systemName)
+            .font(.system(size: 48))
+            .foregroundStyle(.secondary)
+    }
+
     private func search(for query: String) {
         guard !query.isEmpty else {
             autocompleteResults = []
@@ -123,13 +129,7 @@ struct SearchView: View {
                 }
                 .listStyle(.plain)
                 .overlay {
-                    if searchInput.isEmpty {
-                        ContentUnavailableView(
-                            "Find a destination",
-                            systemImage: "location.magnifyingglass",
-                            description: Text("Search for a place, or enter coordinates like 37.8199, -122.4783.")
-                        )
-                    } else if searchResults.isEmpty {
+                    if !searchInput.isEmpty && searchResults.isEmpty {
                         if isAwaitingResults {
                             ProgressView()
                         } else {
@@ -142,7 +142,7 @@ struct SearchView: View {
                 .onChange(of: searchInput) { _, newValue in
                     search(for: newValue)
                 }
-                .navigationTitle("Orienteer")
+                .navigationTitle("Find a Destination")
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("Settings", systemImage: "gearshape") {
@@ -156,17 +156,14 @@ struct SearchView: View {
                     }
                 }
                 .sheet(isPresented: $settingsDisplayed) {
-                    SettingsView(onDismiss: { settingsDisplayed = false })
+                    SettingsView()
                 }
                 .sheet(isPresented: $historyDisplayed) {
-                    HistoryView(
-                        onDismiss: { historyDisplayed = false },
-                        onSelect: { id in
-                            historySelectedEntryId = id
-                            historyDisplayed = false
-                            historyNavigationActive = true
-                        }
-                    )
+                    HistoryView(onSelect: { id in
+                        historySelectedEntryId = id
+                        historyDisplayed = false
+                        historyNavigationActive = true
+                    })
                     .environment(\.managedObjectContext, viewContext)
                 }
                 .navigationDestination(isPresented: $historyNavigationActive) {
@@ -176,16 +173,16 @@ struct SearchView: View {
                     OrienteerView(destinationPlaceType: "appclip", destinationPlaceId: appclipNavigationLink ?? "", geocoder: geocoder, userLocation: userLocation)
                 }
             case .notDetermined:
-                ContentUnavailableView(
-                    "Location Access Needed",
-                    systemImage: "location.circle",
-                    description: Text("Orienteer uses your location to point you toward your destination.")
-                )
+                ContentUnavailableView {
+                    statusIcon("mappin.and.ellipse")
+                } description: {
+                    Text("Please authorize Orienteer to allow it to use location services.")
+                }
             case .denied, .restricted:
                 ContentUnavailableView {
-                    Label("Location Access Is Off", systemImage: "location.slash")
+                    statusIcon("xmark.octagon")
                 } description: {
-                    Text("Orienteer needs your location to point you toward a destination. You can turn it on in Settings.")
+                    Text("Orienteer requires location access to function.")
                 } actions: {
                     Button("Open Settings") {
                         if let url = URL(string: UIApplication.openSettingsURLString) {
@@ -195,8 +192,11 @@ struct SearchView: View {
                     .buttonStyle(.borderedProminent)
                 }
             default:
-                // Location services report the authorization status almost immediately after launch.
-                ProgressView()
+                ContentUnavailableView {
+                    statusIcon("exclamationmark.triangle")
+                } description: {
+                    Text("Could not load location authorization status.")
+                }
             }
         }
         .onContinueUserActivity("NSUserActivityTypeBrowsingWeb", perform: { activity in

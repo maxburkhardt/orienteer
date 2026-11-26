@@ -9,7 +9,6 @@ import CoreData
 import SwiftUI
 
 struct HistoryView: View {
-    var onDismiss: () -> Void
     var onSelect: (UUID) -> Void
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -26,39 +25,48 @@ struct HistoryView: View {
         }, set: { _ in
             alertMessage = ""
         })
-        VStack(alignment: .leading) {
-            Text("History")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.vertical, 10.0)
+        NavigationStack {
             List {
                 ForEach(places) { place in
-                    SearchResultView(name: place.name ?? "Unknown place", subtitle: visitedFormatter.string(from: place.timestamp ?? Date.distantPast)).onTapGesture { onSelect(place.id!) }
+                    Button {
+                        if let id = place.id {
+                            onSelect(id)
+                        }
+                    } label: {
+                        SearchResultView(name: place.name ?? "Unknown place", subtitle: place.timestamp.map { visitedFormatter.string(from: $0) })
+                    }
+                    .tint(.primary)
                 }
                 .onDelete(perform: deleteItems)
             }
-            .listStyle(PlainListStyle())
-            HStack {
-                Spacer()
-                Button(action: { showingConfirmation = true }, label: {
-                    Text("Clear History")
-                })
-                Spacer()
+            .listStyle(.plain)
+            .navigationTitle("History")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Clear History", role: .destructive) {
+                        showingConfirmation = true
+                    }
+                    .disabled(places.isEmpty)
+                    .confirmationDialog("Are you sure you want to clear history?", isPresented: $showingConfirmation, titleVisibility: .visible) {
+                        Button("Yes, Clear", role: .destructive) {
+                            deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex))
+                        }
+                        Button("Cancel", role: .cancel) {}
+                    } message: {
+                        Text("This action cannot be undone.")
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    SheetCloseButton()
+                }
             }
         }
-        .padding(10.0)
+        .presentationDetents([.medium, .large])
         .alert("Error", isPresented: showAlertBinding) {
             Button("OK", role: .cancel) {}
         } message: {
             Text(alertMessage)
-        }
-        .alert("Are you sure you want to clear history?", isPresented: $showingConfirmation) {
-            Button("Yes, clear", role: .destructive) {
-                deleteItems(offsets: IndexSet(integersIn: 0 ..< places.endIndex))
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("This action cannot be undone.")
         }
     }
 
@@ -83,9 +91,7 @@ private let visitedFormatter: DateFormatter = {
     return formatter
 }()
 
-struct HistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryView(onDismiss: { do {} }, onSelect: { _ in do {} })
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+#Preview {
+    HistoryView(onSelect: { _ in })
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
